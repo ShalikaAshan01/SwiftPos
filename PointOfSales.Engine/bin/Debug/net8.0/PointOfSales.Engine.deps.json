@@ -138,7 +138,10 @@
       },
       "PointOfSales.Common/1.0.0": {
         "runtime": {
-          "PointOfSales.Common.dll": {}
+          "PointOfSales.Common.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "PointOfSales.Core/1.0.0": {
@@ -146,7 +149,10 @@
           "Microsoft.EntityFrameworkCore": "9.0.4"
         },
         "runtime": {
-          "PointOfSales.Core.dll": {}
+          "PointOfSales.Core.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

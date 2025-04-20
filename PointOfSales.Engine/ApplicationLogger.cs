@@ -1,15 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using PointOfSales.Core.Constants;
 using System.Text;
+using PointOfSales.Core.Utils;
 
 namespace PointOfSales.Engine
 {
-    public interface IApplicationLogger
-    {
-        public void LogInfo(string message,params object[] args);
-        public void LogWarning(string message, params object[] args);
-        public void LogError(string message, params object[] args);
-    }
     public class ApplicationLogger : IApplicationLogger
     {
         private readonly string _logFilePath;
@@ -17,8 +12,13 @@ namespace PointOfSales.Engine
 
         public ApplicationLogger()
         {
-            _logFilePath = Path.Combine(LocalConfigurations.LocalFolderPath, LocalConfigurations.LogFileName);
-
+            var today = DateTime.Now.ToString("yyyy-MM-dd");
+            _logFilePath = Path.Combine(LocalConfigurations.LocalFolderPath, "Logs");
+            if (!Directory.Exists(_logFilePath))
+            {
+                Directory.CreateDirectory(_logFilePath);
+            }
+            _logFilePath = Path.Combine(_logFilePath, $"{today}.log");
         }
 
         public void LogInfo(string message, params object[] args)

@@ -1,20 +1,22 @@
-﻿using Avalonia.Controls.ApplicationLifetimes;
+﻿using System.Collections.Generic;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls;
 using System.Threading.Tasks;
 using PointOfSales.Views;
 using PointOfSales.Core.Constants;
-using PointOfSales.Engine;
-using System;
 using System.IO;
+using PointOfSales.Core.IEngines;
+using PointOfSales.Core.Utils;
 
 namespace PointOfSales
 {
     internal class StartupHandler
     {
-        public IApplicationLogger logger { get; set; }
+        private readonly IApplicationLogger _logger;
+        private readonly IIniEngine _iniEngine;
         public static IClassicDesktopStyleApplicationLifetime Desktop = null!;
         //private ApplicationLoaderViewModel viewModel = new ApplicationLoaderViewModel();
-        public StartupHandler(IClassicDesktopStyleApplicationLifetime desktop, IApplicationLogger logger)
+        public StartupHandler(IClassicDesktopStyleApplicationLifetime desktop, IApplicationLogger logger, IIniEngine iniEngine)
         {
             desktop.MainWindow = new SplashScreen();
             desktop.MainWindow.Width = LocalConfigurations.SplashScreenWidth;
@@ -26,22 +28,20 @@ namespace PointOfSales
             desktop.MainWindow.Title = LocalConfigurations.ApplicationName;
             desktop.MainWindow.SystemDecorations = SystemDecorations.None;
             Desktop = desktop;
-            this.logger = logger;
+            _logger = logger;
+            _iniEngine = iniEngine;
         }
 
         public async Task<bool> Init()
         {
-
-            var localPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             if(!Directory.Exists(LocalConfigurations.LocalFolderPath))
             {
                 Directory.CreateDirectory(LocalConfigurations.LocalFolderPath);
-                logger.LogWarning("Creating logging file...");
-
-                //return false;
+                _logger.LogWarning("Creating logging file...");
             }
-            logger.LogInfo("Starting application...");
-
+            _logger.LogInfo("Initializing the application...");
+            
+            
             await Task.Delay(1000);
             return true;
         }

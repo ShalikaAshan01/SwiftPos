@@ -1,10 +1,10 @@
 ﻿namespace PointOfSales.Core.Constants
 {
-    public class LocalConfigurations
+    public static class LocalConfigurations
     {
         public const string ApplicationName = "SwiftPos";
-        public static string LocalFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ApplicationName);
-        public const string LogFileName = "SwiftPos.log";
+        public static readonly string LocalFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ApplicationName);
+        public static readonly string IniFile = ".ini";
 
         public static int SplashScreenWidth = 600;
         public static int SplashScreenHeight = 800;

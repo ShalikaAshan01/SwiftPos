@@ -8,6 +8,8 @@ using PointOfSales.Core.Constants;
 using PointOfSales.Engine;
 using PointOfSales.Utils;
 using System.Threading.Tasks;
+using PointOfSales.Core.IEngines;
+using PointOfSales.Core.Utils;
 
 namespace PointOfSales.Views
 {
@@ -26,7 +28,8 @@ namespace PointOfSales.Views
                 var collection = new ServiceCollection();
                 collection.AddCommonServices();
                 var logger = collection.BuildServiceProvider().GetRequiredService<IApplicationLogger>();
-                var handler = new StartupHandler(desktop, logger);
+                var iniEngine = collection.BuildServiceProvider().GetRequiredService<IIniEngine>();
+                var handler = new StartupHandler(desktop, logger, iniEngine);
 
                 var initStatus = await handler.Init();
                 if (!initStatus)

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PointOfSales.Core.IEngines;
+using PointOfSales.Core.Utils;
 using PointOfSales.Engine;
 
 namespace PointOfSales.Utils
@@ -9,6 +11,7 @@ namespace PointOfSales.Utils
         {
             collection.AddSingleton<IApplicationLogger, ApplicationLogger>();
             collection.AddSingleton<IPluginInitializationEngine, PluginInitializationEngine>();
+            collection.AddSingleton<IIniEngine, IniEngine>();
         }
     }
 }
