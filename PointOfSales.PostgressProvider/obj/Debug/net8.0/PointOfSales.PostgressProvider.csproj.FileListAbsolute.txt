@@ -1,0 +1,15 @@
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\bin\Debug\net8.0\PointOfSales.PostgressProvider.deps.json
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\bin\Debug\net8.0\PointOfSales.PostgressProvider.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\bin\Debug\net8.0\PointOfSales.PostgressProvider.pdb
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\bin\Debug\net8.0\PointOfSales.Core.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\bin\Debug\net8.0\PointOfSales.Core.pdb
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\obj\Debug\net8.0\PointOfSales.PostgressProvider.csproj.AssemblyReference.cache
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\obj\Debug\net8.0\PointOfSales.PostgressProvider.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\obj\Debug\net8.0\PointOfSales.PostgressProvider.AssemblyInfoInputs.cache
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\obj\Debug\net8.0\PointOfSales.PostgressProvider.AssemblyInfo.cs
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\obj\Debug\net8.0\PointOfSales.PostgressProvider.csproj.CoreCompileInputs.cache
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\obj\Debug\net8.0\PointOfSales.PostgressProvider.csproj.CopyComplete
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\obj\Debug\net8.0\PointOfSales.PostgressProvider.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\obj\Debug\net8.0\refint\PointOfSales.PostgressProvider.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\obj\Debug\net8.0\PointOfSales.PostgressProvider.pdb
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.PostgressProvider\obj\Debug\net8.0\ref\PointOfSales.PostgressProvider.dll

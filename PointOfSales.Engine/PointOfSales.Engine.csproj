@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PointOfSales.Common\PointOfSales.Common.csproj" />
+    <ProjectReference Include="..\PointOfSales.Core\PointOfSales.Core.csproj" />
+  </ItemGroup>
+
+</Project>

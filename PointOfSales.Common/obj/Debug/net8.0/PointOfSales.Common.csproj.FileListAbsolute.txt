@@ -1,0 +1,13 @@
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\bin\Debug\net8.0\PointOfSales.Common.deps.json
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\bin\Debug\net8.0\PointOfSales.Common.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\bin\Debug\net8.0\PointOfSales.Common.pdb
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\obj\Debug\net8.0\PointOfSales.Common.Resources.PermissionName.resources
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\obj\Debug\net8.0\PointOfSales.Common.csproj.GenerateResource.cache
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\obj\Debug\net8.0\PointOfSales.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\obj\Debug\net8.0\PointOfSales.Common.AssemblyInfoInputs.cache
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\obj\Debug\net8.0\PointOfSales.Common.AssemblyInfo.cs
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\obj\Debug\net8.0\PointOfSales.Common.csproj.CoreCompileInputs.cache
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\obj\Debug\net8.0\PointOfSales.Common.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\obj\Debug\net8.0\refint\PointOfSales.Common.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\obj\Debug\net8.0\PointOfSales.Common.pdb
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Common\obj\Debug\net8.0\ref\PointOfSales.Common.dll

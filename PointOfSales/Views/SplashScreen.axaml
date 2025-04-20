@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
+        x:Class="PointOfSales.Views.SplashScreen"
+        Title="SplashScreen"
+		xmlns:shared="using:PointOfSales.Views.Shared"
+		xmlns:txt="clr-namespace:PointOfSales.Globalization.Resources;assembly=PointOfSales.Globalization"
+
+>
+	<Window.Background>
+		<ImageBrush Source="/Assets/bg.jpg"
+					Stretch="UniformToFill"
+					/>
+	</Window.Background>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="25"/>
+			<RowDefinition Height="5"/>
+		</Grid.RowDefinitions>
+		<shared:Logo/>
+		
+		<TextBlock 
+			Margin="5" Grid.Row="1"
+			Text="{x:Static txt:Translations.LoadingLabel}"
+			FontWeight="Light" FontSize="10"
+			HorizontalAlignment="Left"/>
+
+
+		<ProgressBar Grid.Row="2" IsIndeterminate="True" Width="600" Height="5"
+			 Background="RosyBrown"
+			 Foreground="BlueViolet"/>
+	</Grid>
+</Window>

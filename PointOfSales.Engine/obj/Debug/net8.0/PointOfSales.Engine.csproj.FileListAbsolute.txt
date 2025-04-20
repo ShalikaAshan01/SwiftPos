@@ -1,0 +1,17 @@
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\bin\Debug\net8.0\PointOfSales.Engine.deps.json
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\bin\Debug\net8.0\PointOfSales.Engine.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\bin\Debug\net8.0\PointOfSales.Engine.pdb
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\obj\Debug\net8.0\PointOfSales.Engine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\obj\Debug\net8.0\PointOfSales.Engine.AssemblyInfoInputs.cache
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\obj\Debug\net8.0\PointOfSales.Engine.AssemblyInfo.cs
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\obj\Debug\net8.0\PointOfSales.Engine.csproj.CoreCompileInputs.cache
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\obj\Debug\net8.0\PointOfSales.Engine.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\obj\Debug\net8.0\refint\PointOfSales.Engine.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\obj\Debug\net8.0\PointOfSales.Engine.pdb
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\obj\Debug\net8.0\ref\PointOfSales.Engine.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\bin\Debug\net8.0\PointOfSales.Common.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\bin\Debug\net8.0\PointOfSales.Core.dll
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\bin\Debug\net8.0\PointOfSales.Common.pdb
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\bin\Debug\net8.0\PointOfSales.Core.pdb
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\obj\Debug\net8.0\PointOfSales.Engine.csproj.AssemblyReference.cache
+C:\Users\shali\source\repos\PointOfSales\PointOfSales.Engine\obj\Debug\net8.0\PointOfSales.Engine.csproj.CopyComplete
