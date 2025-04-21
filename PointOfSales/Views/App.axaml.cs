@@ -29,9 +29,10 @@ namespace PointOfSales.Views
                 collection.AddCommonServices();
                 var logger = collection.BuildServiceProvider().GetRequiredService<IApplicationLogger>();
                 var iniEngine = collection.BuildServiceProvider().GetRequiredService<IIniEngine>();
-                var handler = new StartupHandler(desktop, logger, iniEngine);
+                var pluginLoader = collection.BuildServiceProvider().GetRequiredService<IPluginLoader>();
+                var handler = new StartupHandler(desktop, logger, iniEngine, pluginLoader);
 
-                var initStatus = await handler.Init();
+                var initStatus = await handler.Init(collection);
                 if (!initStatus)
                 {
                     desktop.Shutdown();

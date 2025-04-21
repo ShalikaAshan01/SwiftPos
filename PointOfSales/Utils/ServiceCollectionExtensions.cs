@@ -12,6 +12,7 @@ namespace PointOfSales.Utils
             collection.AddSingleton<IApplicationLogger, ApplicationLogger>();
             collection.AddSingleton<IPluginInitializationEngine, PluginInitializationEngine>();
             collection.AddSingleton<IIniEngine, IniEngine>();
+            collection.AddSingleton<IPluginLoader, PluginLoader>();
         }
     }
 }

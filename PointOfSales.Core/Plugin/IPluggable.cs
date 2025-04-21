@@ -2,6 +2,7 @@
 {
     public interface IPluggable
     {
-        public PluginInfo PluginInfo { get; }
+        public static PluginInfo PluginInfo { get; } = null!;
+        public Task OnInitAsync();
     }
 }

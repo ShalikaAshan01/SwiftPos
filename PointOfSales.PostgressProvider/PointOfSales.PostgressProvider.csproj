@@ -5,9 +5,34 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\PointOfSales.Core\PointOfSales.Core.csproj" />
   </ItemGroup>
+  <Target Name="PostBuildCopyToAppData" AfterTargets="Build">
+    <PropertyGroup>
+      <!-- This resolves to: /Users/shalika/Library/Application Support/SwiftPos -->
+      <AppDataSwitPOS>$(HOME)/Library/Application Support/SwiftPos/Plugins/PointOfSales.PostgressProvider</AppDataSwitPOS>
+    </PropertyGroup>
+
+    <!-- Print target path -->
+    <Message Importance="High" Text="Copying debug files to: $(AppDataSwitPOS)" />
+
+    <!-- Create target folder if it doesn't exist -->
+    <MakeDir Directories="$(AppDataSwitPOS)" />
+
+    <!-- Include files (not folders) -->
+    <ItemGroup>
+      <DebugFiles Include="$(MSBuildProjectDirectory)/bin/Debug/net8.0/**/*.*" />
+    </ItemGroup>
+
+    <!-- Print what was found -->
+    <Message Importance="High" Text="Found DebugFiles: @(DebugFiles)" />
+
+    <!-- Copy files -->
+    <Copy
+            SourceFiles="@(DebugFiles)"
+            DestinationFiles="@(DebugFiles->'$(AppDataSwitPOS)/%(RecursiveDir)%(Filename)%(Extension)')"
+            SkipUnchangedFiles="false" />
+  </Target>
 
 </Project>

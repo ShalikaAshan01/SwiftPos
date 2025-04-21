@@ -5,6 +5,7 @@
         public const string ApplicationName = "SwiftPos";
         public static readonly string LocalFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ApplicationName);
         public static readonly string IniFile = ".ini";
+        public static readonly string PluginFolder = "Plugins";
 
         public static int SplashScreenWidth = 600;
         public static int SplashScreenHeight = 800;

@@ -1,7 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using PointOfSales.Core.Constants;
 
 namespace PointOfSales.Core.Entities.Security
 {
+    [Table(nameof(GroupPermission), Schema = Schemas.SecuritySchema)]
     public class GroupPermission : BaseEntity
     {
         [Key]

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PointOfSales.Common")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af5bca805e0ba9c01848fda24a5fc324888a6ce7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee4eea7dd8e48d3941dc3c07bfb5817c29e807c8")]
 [assembly: System.Reflection.AssemblyProductAttribute("PointOfSales.Common")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PointOfSales.Common")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

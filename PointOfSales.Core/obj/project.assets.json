@@ -194,6 +194,22 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
+      "System.ComponentModel.Composition/10.0.0-preview.3.25171.5": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/System.ComponentModel.Composition.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.ComponentModel.Composition.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      },
       "System.Diagnostics.DiagnosticSource/9.0.4": {
         "type": "package",
         "compile": {
@@ -548,6 +564,32 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "System.ComponentModel.Composition/10.0.0-preview.3.25171.5": {
+      "sha512": "tI+OFMS4K9hUmIl6Yhn09ggT6nGiUEQFoJgj7TlpOHY1Kw/6xh4W3rMjS/x1yKLgUkZJoL8YOnTLTE1IYZwv9g==",
+      "type": "package",
+      "path": "system.componentmodel.composition/10.0.0-preview.3.25171.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/System.ComponentModel.Composition.targets",
+        "lib/net10.0/System.ComponentModel.Composition.dll",
+        "lib/net10.0/System.ComponentModel.Composition.xml",
+        "lib/net462/_._",
+        "lib/net8.0/System.ComponentModel.Composition.dll",
+        "lib/net8.0/System.ComponentModel.Composition.xml",
+        "lib/net9.0/System.ComponentModel.Composition.dll",
+        "lib/net9.0/System.ComponentModel.Composition.xml",
+        "lib/netstandard2.0/System.ComponentModel.Composition.dll",
+        "lib/netstandard2.0/System.ComponentModel.Composition.xml",
+        "system.componentmodel.composition.10.0.0-preview.3.25171.5.nupkg.sha512",
+        "system.componentmodel.composition.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Diagnostics.DiagnosticSource/9.0.4": {
       "sha512": "Be0emq8bRmcK4eeJIFUt9+vYPf7kzuQrFs8Ef1CdGvXpq/uSve22PTSkRF09bF/J7wmYJ2DHf2v7GaT3vMXnwQ==",
       "type": "package",
@@ -578,7 +620,8 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Microsoft.EntityFrameworkCore >= 9.0.4"
+      "Microsoft.EntityFrameworkCore >= 9.0.4",
+      "System.ComponentModel.Composition >= 10.0.0-preview.3.25171.5"
     ]
   },
   "packageFolders": {
@@ -626,6 +669,10 @@
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[9.0.4, )"
+          },
+          "System.ComponentModel.Composition": {
+            "target": "Package",
+            "version": "[10.0.0-preview.3.25171.5, )"
           }
         },
         "imports": [

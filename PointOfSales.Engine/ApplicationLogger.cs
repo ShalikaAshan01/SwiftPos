@@ -36,6 +36,35 @@ namespace PointOfSales.Engine
             WriteLog("ERROR", message, args);
         }
 
+        public void LogError(Exception exception, string message, params object[]? args)
+        {
+            var errorMessage = args != null && args.Length > 0
+                ? string.Format(message, args)
+                : message;
+
+            var fullMessage = new StringBuilder();
+            fullMessage.AppendLine(errorMessage);
+            fullMessage.AppendLine("Exception:");
+            fullMessage.AppendLine(exception.ToString());
+
+            WriteRawLog("ERROR", fullMessage.ToString());
+        }
+        
+        private void WriteRawLog(string level, string fullMessage)
+        {
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            string logEntry = $"[{timestamp}] [{level}] {fullMessage}";
+
+#if DEBUG
+            Console.WriteLine(logEntry);
+#endif
+
+            lock (_lock)
+            {
+                File.AppendAllText(_logFilePath, logEntry + Environment.NewLine, Encoding.UTF8);
+            }
+        }
+
         private void WriteLog(string level, string message, params object[] args)
         {
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -44,7 +73,9 @@ namespace PointOfSales.Engine
                 : message;
 
             string logLine = $"[{timestamp}] [{level}] {formattedMessage}";
-
+            #if DEBUG
+            Console.WriteLine(logLine);
+            #endif
             lock (_lock)
             {
                 File.AppendAllText(_logFilePath, logLine + Environment.NewLine, Encoding.UTF8);

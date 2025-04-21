@@ -127,6 +127,14 @@
           }
         }
       },
+      "System.ComponentModel.Composition/10.0.0-preview.3.25171.5": {
+        "runtime": {
+          "lib/net8.0/System.ComponentModel.Composition.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.17105"
+          }
+        }
+      },
       "System.Diagnostics.DiagnosticSource/9.0.4": {
         "runtime": {
           "lib/net8.0/System.Diagnostics.DiagnosticSource.dll": {
@@ -137,10 +145,14 @@
       },
       "PointOfSales.Core/1.0.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "9.0.4"
+          "Microsoft.EntityFrameworkCore": "9.0.4",
+          "System.ComponentModel.Composition": "10.0.0-preview.3.25171.5"
         },
         "runtime": {
-          "PointOfSales.Core.dll": {}
+          "PointOfSales.Core.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
@@ -227,6 +239,13 @@
       "sha512": "sha512-SPFyMjyku1nqTFFJ928JAMd0QnRe4xjE7KeKnZMWXf3xk+6e0WiOZAluYtLdbJUXtsl2cCRSi8cBquJ408k8RA==",
       "path": "microsoft.extensions.primitives/9.0.4",
       "hashPath": "microsoft.extensions.primitives.9.0.4.nupkg.sha512"
+    },
+    "System.ComponentModel.Composition/10.0.0-preview.3.25171.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tI+OFMS4K9hUmIl6Yhn09ggT6nGiUEQFoJgj7TlpOHY1Kw/6xh4W3rMjS/x1yKLgUkZJoL8YOnTLTE1IYZwv9g==",
+      "path": "system.componentmodel.composition/10.0.0-preview.3.25171.5",
+      "hashPath": "system.componentmodel.composition.10.0.0-preview.3.25171.5.nupkg.sha512"
     },
     "System.Diagnostics.DiagnosticSource/9.0.4": {
       "type": "package",
