@@ -16,5 +16,7 @@ namespace PointOfSales.Core.Entities.Security
         public string? ProfilePicture { get; set; }
         public DateTime? PasswordExpiryDate { get; set; }
         public bool ShouldChangePassword { get; set; }
+        
+        public virtual ICollection<UserPermission> UserPermissions { get; set; } = new List<UserPermission>();
     }
 }

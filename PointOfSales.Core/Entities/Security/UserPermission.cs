@@ -16,5 +16,8 @@ namespace PointOfSales.Core.Entities.Security
         public DateTime EffectiveDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool IsMfaRequired { get; set; } = false;
+        
+        public virtual User User { get; set; } = null!;
+        public virtual Permission Permission { get; set; } = null!;
     }
 }

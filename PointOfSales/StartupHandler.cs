@@ -61,14 +61,20 @@ namespace PointOfSales
                 await _DatabaseProvider.OnInitAsync(collection);
                 
                 _logger.LogInfo("Applying permissions...");
+                Configurations.IniEngine = _iniEngine;
                 var unitOfWork = collection.BuildServiceProvider().GetRequiredService<IUnitOfWork>();
+                var encryptionService = collection.BuildServiceProvider().GetRequiredService<IEncryptionService>();
+                
                 await AddingPermission(unitOfWork);
-                await AddingUser(unitOfWork);
+                await AddingUser(unitOfWork, encryptionService);
                 await unitOfWork.SaveChangesAsync();
                 PermissionCodes.SetPermissions(await unitOfWork.PermissionRepository.GetAllAsync());
-                await AddingRole(unitOfWork);
-                await unitOfWork.SaveChangesAsync();
-                Configurations.IniEngine = _iniEngine;
+
+                if (Configurations.AutoAssignNewPermissionToAdmin == true)
+                {
+                    await AddingRole(unitOfWork);
+                    await unitOfWork.SaveChangesAsync();
+                }
                 await Task.Delay(Configurations.SplashScreenTime);
                 return true;
             }
@@ -94,14 +100,16 @@ namespace PointOfSales
             await unitOfWork.PermissionRepository.SaveListAsync(permissions);
         }
 
-        private async Task AddingUser(IUnitOfWork unitOfWork)
+        private async Task AddingUser(IUnitOfWork unitOfWork, IEncryptionService encryptionService)
         {
             var admin =await unitOfWork.UserRepository.GetByUsernameAsync("Admin");
             if (admin != null)
             {
+                Configurations.AdminUserId = admin.UserId;
                 return;
             }
             _logger.LogInfo("Creating admin user...");
+            var password = encryptionService.EncryptPasswordAsync("Admin", out var salt);
             admin = new User
             {
                 UserId = 1,
@@ -110,22 +118,33 @@ namespace PointOfSales
                 PasswordExpiryDate = DateTime.UtcNow,
                 IsActive = true,
                 CreatedAt = DateTime.UtcNow,
-                Password = "Admin",
-                Salt = "Admin"
+                Password = password,
+                Salt = salt
             };
-            await unitOfWork.UserRepository.SaveAsync(admin);
+            await unitOfWork.GroupRepository.SaveAsync(new Group
+            {
+                Name = "Admin",
+                UserGroups = [
+                new UserGroup
+                {
+                    User = admin
+                }
+                ]
+            });
         }
 
         private async Task AddingRole(IUnitOfWork unitOfWork)
         {
-            var admin = await unitOfWork.UserRepository.GetByUsernameAsync("Admin");
+            var admin = await unitOfWork.GroupRepository.GetByNameAsync("Admin");
             if (admin == null)
             {
-                _logger.LogInfo("The admin user is null and cannot be assigned to any role.");
+                _logger.LogInfo("The admin group is null and cannot be assigned to any role.");
                 return;
             }
-            
+
+            var availablePermissionCodes = admin.GroupPermissions.Select(s => s.Permission.PermissionCode).ToHashSet();
+            var toAdd = (from permission in PermissionCodes.Permissions where !availablePermissionCodes.Contains(permission.Key) select new GroupPermission { PermissionId = permission.Value.PermissionId, GroupId = admin.GroupId, CreatedBy = Configurations.AdminUserId }).ToList();
+            await unitOfWork.GroupPermissionRepository.SaveListAsync(toAdd);
         }
     }
-    
 }

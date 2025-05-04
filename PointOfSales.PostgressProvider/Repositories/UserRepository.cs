@@ -9,7 +9,7 @@ public class UserRepository(MyDbContext context, IEncryptionService encryptionSe
 {
     public Task<User?> GetByUsernameAsync(string username)
     {
-        return _dbSet.FirstOrDefaultAsync(u => string.Equals(u.UserName, username.ToLowerInvariant()));
+        return _dbSet.FirstOrDefaultAsync(u => string.Equals(u.UserName.ToLower(), username.ToLowerInvariant()));
     }
 
     public override Task<User> SaveAsync(User entity)

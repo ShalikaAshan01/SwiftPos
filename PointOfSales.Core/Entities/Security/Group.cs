@@ -12,5 +12,8 @@ namespace PointOfSales.Core.Entities.Security
         public short GroupId { get; set; }
         [Required]
         public required string Name { get; set; }
+        public virtual ICollection<GroupPermission> GroupPermissions { get; set; } = new List<GroupPermission>();
+        public virtual ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
+        
     }
 }

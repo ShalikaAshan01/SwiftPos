@@ -13,7 +13,8 @@ namespace PointOfSales.Core.Entities.Security
         [Required]
         [MaxLength(5)]
         public required string PermissionCode { get; set; }
-
+        public virtual ICollection<GroupPermission> GroupPermissions { get; set; } = new List<GroupPermission>();
+        public virtual ICollection<UserPermission> UserPermissions { get; set; } = new List<UserPermission>();
         public override bool Equals(object? obj)
         {
             if (obj is null) return false;

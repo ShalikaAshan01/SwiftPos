@@ -12,5 +12,9 @@ namespace PointOfSales.Core.Entities.Security
         public short GroupId { get; set; }
         public short PermissionId { get; set; }
         public bool IsMfaRequired { get; set; } = false;
+
+        public virtual Group Group { get; set; } = null!;
+        public virtual Permission Permission { get; set; } = null!;
+
     }
 }
