@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using PointOfSales.Views;
 using PointOfSales.Core.Constants;
 using System.IO;
+using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
+using PointOfSales.Core.Data;
+using PointOfSales.Core.Entities.Security;
 using PointOfSales.Core.IEngines;
-using PointOfSales.Core.Plugin;
 using PointOfSales.Core.Utils;
-using PointOfSales.Utils;
+using PointOfSales.Engine.Utils;
 
 namespace PointOfSales
 {
@@ -18,10 +20,18 @@ namespace PointOfSales
     {
         private readonly IApplicationLogger _logger;
         private readonly IIniEngine _iniEngine;
-        private readonly IPluginLoader _pluginLoader;
+        // private readonly IPluginLoader _pluginLoader;
         public static IClassicDesktopStyleApplicationLifetime Desktop = null!;
+        public readonly IDatabaseProvider _DatabaseProvider;
 
-        public StartupHandler(IClassicDesktopStyleApplicationLifetime desktop, IApplicationLogger logger, IIniEngine iniEngine, IPluginLoader pluginLoader)
+        public StartupHandler(IApplicationLogger logger, IIniEngine iniEngine, IDatabaseProvider databaseProvider)
+        {
+            _logger = logger;
+            _iniEngine = iniEngine;
+            _DatabaseProvider = databaseProvider;
+        }
+
+        public void InitUi(IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new SplashScreen();
             desktop.MainWindow.Width = LocalConfigurations.SplashScreenWidth;
@@ -31,26 +41,91 @@ namespace PointOfSales
             desktop.MainWindow.Title = LocalConfigurations.ApplicationName;
             desktop.MainWindow.SystemDecorations = SystemDecorations.None;
             Desktop = desktop;
-            _logger = logger;
-            _iniEngine = iniEngine;
-            _pluginLoader = pluginLoader;
         }
 
         public async Task<bool> Init(ServiceCollection collection)
         {
-            if(!Directory.Exists(LocalConfigurations.LocalFolderPath))
+            try
             {
-                Directory.CreateDirectory(LocalConfigurations.LocalFolderPath);
-                _logger.LogWarning("Creating logging file...");
+                if (!Directory.Exists(LocalConfigurations.LocalFolderPath))
+                {
+                    Directory.CreateDirectory(LocalConfigurations.LocalFolderPath);
+                    _logger.LogWarning("Creating logging file...");
+                }
+
+                _logger.LogInfo("Initializing the application...");
+                await _iniEngine.InitAsync();
+                // var assemblies = await _pluginLoader.LoadPluginsAsync();
+                // var plugins = await _pluginLoader.InjectPluginsAsync(collection, assemblies);
+                // collection.AddSingleton(typeof(IEnumerable<IPlugin>),plugins);
+                await _DatabaseProvider.OnInitAsync(collection);
+                
+                _logger.LogInfo("Applying permissions...");
+                var unitOfWork = collection.BuildServiceProvider().GetRequiredService<IUnitOfWork>();
+                await AddingPermission(unitOfWork);
+                await AddingUser(unitOfWork);
+                await unitOfWork.SaveChangesAsync();
+                PermissionCodes.SetPermissions(await unitOfWork.PermissionRepository.GetAllAsync());
+                await AddingRole(unitOfWork);
+                await unitOfWork.SaveChangesAsync();
+                Configurations.IniEngine = _iniEngine;
+                await Task.Delay(Configurations.SplashScreenTime);
+                return true;
             }
-            _logger.LogInfo("Initializing the application...");
+            catch (Exception e)
+            {
+                _logger.LogError(e, "{0} application initialization failed", nameof(Init));
+            }
 
-            var assemblies = await _pluginLoader.LoadPluginsAsync();
-            var plugins = await _pluginLoader.InjectPluginsAsync(assemblies);
-            collection.AddSingleton(typeof(IEnumerable<IPlugin>),plugins);
+            return false;
+        }
+        
+        private async Task AddingPermission(IUnitOfWork unitOfWork)
+        {
+            List<Permission> permissions = PermissionCodes.GetPermissions().Select(keyValuePair => new Permission
+            {
+                PermissionName = keyValuePair.Key,
+                PermissionCode = keyValuePair.Value,
+                IsActive = true,
+                CreatedBy = 0,
+                CreatedAt = DateTime.UtcNow
+            }).ToList();
 
-            await Task.Delay(1000);
-            return true;
+            await unitOfWork.PermissionRepository.SaveListAsync(permissions);
+        }
+
+        private async Task AddingUser(IUnitOfWork unitOfWork)
+        {
+            var admin =await unitOfWork.UserRepository.GetByUsernameAsync("Admin");
+            if (admin != null)
+            {
+                return;
+            }
+            _logger.LogInfo("Creating admin user...");
+            admin = new User
+            {
+                UserId = 1,
+                UserName = "Admin",
+                ShouldChangePassword = true,
+                PasswordExpiryDate = DateTime.UtcNow,
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow,
+                Password = "Admin",
+                Salt = "Admin"
+            };
+            await unitOfWork.UserRepository.SaveAsync(admin);
+        }
+
+        private async Task AddingRole(IUnitOfWork unitOfWork)
+        {
+            var admin = await unitOfWork.UserRepository.GetByUsernameAsync("Admin");
+            if (admin == null)
+            {
+                _logger.LogInfo("The admin user is null and cannot be assigned to any role.");
+                return;
+            }
+            
         }
     }
+    
 }

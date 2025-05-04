@@ -9,7 +9,25 @@ namespace PointOfSales.Core.Entities.Security
     {
         [Key]
         public short PermissionId { get; set; }
+        [Required] public required string PermissionName { get; set; }
         [Required]
-        public required string PermissionName { get; set; }
+        [MaxLength(5)]
+        public required string PermissionCode { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            if(obj is not Permission objPermission) return false;
+            return PermissionCode == objPermission.PermissionCode;
+        }
+
+        public override int GetHashCode()
+        {
+            // ReSharper disable once NonReadonlyMemberInGetHashCode
+            return PermissionCode?.GetHashCode() ?? 0;
+        }
+
     }
 }

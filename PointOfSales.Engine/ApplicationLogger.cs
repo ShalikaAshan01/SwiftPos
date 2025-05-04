@@ -38,7 +38,7 @@ namespace PointOfSales.Engine
 
         public void LogError(Exception exception, string message, params object[]? args)
         {
-            var errorMessage = args != null && args.Length > 0
+            var errorMessage = args is { Length: > 0 }
                 ? string.Format(message, args)
                 : message;
 
@@ -68,7 +68,7 @@ namespace PointOfSales.Engine
         private void WriteLog(string level, string message, params object[] args)
         {
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            string formattedMessage = args != null && args.Length > 0
+            string formattedMessage = args.Length > 0
                 ? string.Format(message, args)
                 : message;
 

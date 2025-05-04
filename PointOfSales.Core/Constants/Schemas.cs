@@ -2,6 +2,6 @@
 {
     internal class Schemas
     {
-        public const string SecuritySchema = "sec";
+        public const string SecuritySchema = "Security";
     }
 }

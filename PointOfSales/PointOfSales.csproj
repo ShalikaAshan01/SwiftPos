@@ -31,5 +31,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\PointOfSales.Engine\PointOfSales.Engine.csproj" />
 	  <ProjectReference Include="..\PointOfSales.Globalization\PointOfSales.Globalization.csproj" />
+	  <ProjectReference Include="..\PointOfSales.PostgressProvider\PointOfSales.PostgressProvider.csproj" />
 	</ItemGroup>
 </Project>

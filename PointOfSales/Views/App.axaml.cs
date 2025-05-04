@@ -27,11 +27,8 @@ namespace PointOfSales.Views
                 BindingPlugins.DataValidators.RemoveAt(0);
                 var collection = new ServiceCollection();
                 collection.AddCommonServices();
-                var logger = collection.BuildServiceProvider().GetRequiredService<IApplicationLogger>();
-                var iniEngine = collection.BuildServiceProvider().GetRequiredService<IIniEngine>();
-                var pluginLoader = collection.BuildServiceProvider().GetRequiredService<IPluginLoader>();
-                var handler = new StartupHandler(desktop, logger, iniEngine, pluginLoader);
-
+                var handler = collection.BuildServiceProvider().GetRequiredService<StartupHandler>();
+                handler.InitUi(desktop);
                 var initStatus = await handler.Init(collection);
                 if (!initStatus)
                 {

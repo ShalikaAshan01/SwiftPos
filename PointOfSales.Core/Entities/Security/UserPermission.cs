@@ -11,7 +11,10 @@ namespace PointOfSales.Core.Entities.Security
         public int UserPermissionId { get; set; }
         [Required]
         public int UserId { get; set; }
+        [Required]
+        public short PermissionId { get; set; }
         public DateTime EffectiveDate { get; set; }
+        public DateTime EndDate { get; set; }
         public bool IsMfaRequired { get; set; } = false;
     }
 }
