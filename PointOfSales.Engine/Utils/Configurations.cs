@@ -16,6 +16,8 @@ public static class Configurations
     public static bool? AutoAssignNewPermissionToAdmin => GetValue<bool?>(nameof(AutoAssignNewPermissionToAdmin), null);
     public static string StoreName => GetNotNullValue(nameof(StoreName), string.Empty);
     public static string StoreAddress => GetNotNullValue(nameof(StoreAddress), string.Empty);
+    public static string StoreAddress2 => GetNotNullValue(nameof(StoreAddress2), string.Empty);
+    public static string StoreAddress3 => GetNotNullValue(nameof(StoreAddress3), string.Empty);
     public static string StoreCode => GetNotNullValue(nameof(StoreCode), string.Empty);
     public static string MachineCode => GetNotNullValue(nameof(MachineCode), string.Empty);
 

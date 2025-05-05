@@ -8,7 +8,8 @@
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public int? ModifiedBy { get; set; }
         public DateTime? ModifiedAt { get; set; }
-        public int? CompanyCode {get; set;}
-        public int? LocationCode {get; set;}
+        public short? LocationId {get; set;}
+        public bool IsSyncStarted { set; get; }
+        public bool IsSyncEnd { set; get; }
     }
 }

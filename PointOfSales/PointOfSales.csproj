@@ -20,6 +20,10 @@
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="DeviceId" Version="6.9.0" />
+    <PackageReference Include="DeviceId.Linux" Version="6.9.0" />
+    <PackageReference Include="DeviceId.Mac" Version="6.9.0" />
+    <PackageReference Include="DeviceId.Windows.Wmi" Version="6.9.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
   </ItemGroup>
 	<ItemGroup>

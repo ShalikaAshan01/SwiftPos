@@ -1,4 +1,37 @@
 CREATE SCHEMA IF NOT EXISTS "Security";
+CREATE SCHEMA IF NOT EXISTS "Infrastructure";
+CREATE TABLE IF NOT EXISTS "Infrastructure"."Company"
+(
+    "CompanyId" SMALLSERIAL PRIMARY KEY,
+    "CompanyName" VARCHAR(255) NOT NULL,
+    "IsActive" BOOLEAN NOT NULL DEFAULT TRUE,
+    "IsDeleted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "CreatedBy" INTEGER,
+    "CreatedAt" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "ModifiedBy" INTEGER,
+    "ModifiedAt" TIMESTAMP WITHOUT TIME ZONE,
+    "LocationId" SMALLINT,
+    "IsSyncStarted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "IsSyncEnd" BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE IF NOT EXISTS "Infrastructure"."Location"
+(
+    "LocationId" SMALLSERIAL PRIMARY KEY,
+    "LocationName" VARCHAR(100) NOT NULL,
+    "LocationCode" VARCHAR(5) NOT NULL,
+    "IsActive" BOOLEAN NOT NULL DEFAULT TRUE,
+    "IsDeleted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "CreatedBy" INTEGER,
+    "CreatedAt" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "ModifiedBy" INTEGER,
+    "ModifiedAt" TIMESTAMP WITHOUT TIME ZONE,
+    "CompanyCode" INTEGER,
+    "IsSyncStarted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "IsSyncEnd" BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY ("CompanyCode") REFERENCES "Infrastructure"."Company" ("CompanyId")
+);
+
 
 CREATE TABLE IF NOT EXISTS "Security"."Permission"
 (
@@ -11,9 +44,12 @@ CREATE TABLE IF NOT EXISTS "Security"."Permission"
     "CreatedAt"      TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     "ModifiedBy"     INTEGER,
     "ModifiedAt"     TIMESTAMP WITHOUT TIME ZONE,
-    "CompanyCode"    INTEGER,
-    "LocationCode"   INTEGER
+    "LocationId" SMALLINT,
+    "IsSyncStarted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "IsSyncEnd" BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY ("LocationId") REFERENCES "Infrastructure"."Location" ("LocationId")
 );
+
 CREATE TABLE IF NOT EXISTS "Security"."User"
 (
     "UserId"               SERIAL PRIMARY KEY,
@@ -29,8 +65,11 @@ CREATE TABLE IF NOT EXISTS "Security"."User"
     "CreatedAt"            TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     "ModifiedBy"           INTEGER,
     "ModifiedAt"           TIMESTAMP WITHOUT TIME ZONE,
-    "CompanyCode"          INTEGER,
-    "LocationCode"         INTEGER
+    "LocationId" SMALLINT,
+    "IsSyncStarted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "IsSyncEnd" BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY ("LocationId") REFERENCES "Infrastructure"."Location" ("LocationId")
+
 );
 CREATE TABLE IF NOT EXISTS "Security"."UserPermission"
 (
@@ -46,8 +85,10 @@ CREATE TABLE IF NOT EXISTS "Security"."UserPermission"
     "CreatedAt"        TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     "ModifiedBy"       INTEGER,
     "ModifiedAt"       TIMESTAMP WITHOUT TIME ZONE,
-    "CompanyCode"      INTEGER,
-    "LocationCode"     INTEGER,
+    "LocationId" SMALLINT,
+    "IsSyncStarted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "IsSyncEnd" BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY ("LocationId") REFERENCES "Infrastructure"."Location" ("LocationId"),
     UNIQUE ("UserId", "PermissionId"),
     FOREIGN KEY ("UserId") REFERENCES "Security"."User" ("UserId"),
     FOREIGN KEY ("UserId") REFERENCES "Security"."Permission" ("PermissionId")
@@ -62,8 +103,10 @@ CREATE TABLE IF NOT EXISTS "Security"."Group"
     "CreatedAt"    TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     "ModifiedBy"   INTEGER,
     "ModifiedAt"   TIMESTAMP WITHOUT TIME ZONE,
-    "CompanyCode"  INTEGER,
-    "LocationCode" INTEGER
+    "LocationId" SMALLINT,
+    "IsSyncStarted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "IsSyncEnd" BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY ("LocationId") REFERENCES "Infrastructure"."Location" ("LocationId")
 );
 
 CREATE TABLE IF NOT EXISTS "Security"."GroupPermission"
@@ -78,8 +121,10 @@ CREATE TABLE IF NOT EXISTS "Security"."GroupPermission"
     "CreatedAt"         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     "ModifiedBy"        INTEGER,
     "ModifiedAt"        TIMESTAMP WITHOUT TIME ZONE,
-    "CompanyCode"       INTEGER,
-    "LocationCode"      INTEGER,
+    "LocationId" SMALLINT,
+    "IsSyncStarted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "IsSyncEnd" BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY ("LocationId") REFERENCES "Infrastructure"."Location" ("LocationId"),
     UNIQUE ("GroupId", "PermissionId"),
     FOREIGN KEY ("GroupId") REFERENCES "Security"."Group" ("GroupId"),
     FOREIGN KEY ("PermissionId") REFERENCES "Security"."Permission" ("PermissionId")
@@ -96,9 +141,47 @@ CREATE TABLE IF NOT EXISTS "Security"."UserGroup"
     "CreatedAt"    TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     "ModifiedBy"   INTEGER,
     "ModifiedAt"   TIMESTAMP WITHOUT TIME ZONE,
-    "CompanyCode"  INTEGER,
-    "LocationCode" INTEGER,
+    "LocationId" SMALLINT,
+    "IsSyncStarted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "IsSyncEnd" BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY ("LocationId") REFERENCES "Infrastructure"."Location" ("LocationId"),
     UNIQUE ("UserId", "GroupId"),
     FOREIGN KEY ("UserId") REFERENCES "Security"."User" ("UserId"),
     FOREIGN KEY ("GroupId") REFERENCES "Security"."Group" ("GroupId")
+);
+
+CREATE TABLE IF NOT EXISTS "Infrastructure"."Device"
+(
+    "DeviceId" SMALLSERIAL PRIMARY KEY,
+    "DeviceCode" VARCHAR(5) NOT NULL,
+    "MachineCode" VARCHAR(255) NOT NULL,
+    "LastActiveTime" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "IsActive" BOOLEAN NOT NULL DEFAULT FALSE,
+    "IsDeleted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "CreatedBy" INTEGER,
+    "CreatedAt" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "ModifiedBy" INTEGER,
+    "ModifiedAt" TIMESTAMP WITHOUT TIME ZONE,
+    "LocationId" SMALLINT,
+    "IsSyncStarted" BOOLEAN NOT NULL DEFAULT FALSE,
+    "IsSyncEnd" BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY ("LocationId") REFERENCES "Infrastructure"."Location" ("LocationId")
+);
+
+CREATE TABLE IF NOT EXISTS "Security"."ActivityLog"
+(
+    "ActivityLogId" UUID PRIMARY KEY,
+    "PermissionId" SMALLINT NOT NULL,
+    "UserId" INTEGER default null,
+    "IsSuccess" BOOLEAN NOT NULL,
+    "AccessedAt" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "OverrideUserId" INTEGER DEFAULT null,
+    "Message" TEXT,
+    "LocationId" SMALLINT NOT NULL,
+    "DeviceId" SMALLINT NOT NULL,
+    FOREIGN KEY ("PermissionId") REFERENCES "Security"."Permission" ("PermissionId"),
+    FOREIGN KEY ("UserId") REFERENCES "Security"."User" ("UserId"),
+    FOREIGN KEY ("OverrideUserId") REFERENCES "Security"."User" ("UserId"),
+    FOREIGN KEY ("LocationId") REFERENCES "Infrastructure"."Location" ("LocationId"),
+    FOREIGN KEY ("DeviceId") REFERENCES "Infrastructure"."Device" ("DeviceId")
 );
