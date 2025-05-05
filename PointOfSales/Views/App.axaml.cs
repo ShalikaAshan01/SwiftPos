@@ -34,6 +34,7 @@ namespace PointOfSales.Views
                 {
                     desktop.Shutdown();
                 }
+                Utils.Common.Logger = collection.BuildServiceProvider().GetRequiredService<IApplicationLogger>();
                 var window = new LandingScreen();
                 window.Width = LocalConfigurations.MainScreenWidth;
                 window.Height = LocalConfigurations.MainScreenHeight;

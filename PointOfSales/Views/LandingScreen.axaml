@@ -5,5 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="PointOfSales.Views.LandingScreen"
         Title="LandingScreen">
-  Welcome to Avalonia!
+    <Grid x:Name="ContentArea">
+        <TextBlock Text="Welcome to Avalonia!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
 </Window>

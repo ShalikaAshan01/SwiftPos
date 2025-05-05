@@ -14,6 +14,7 @@ using PointOfSales.Core.IEngines;
 using PointOfSales.Core.Utils;
 using PointOfSales.Engine.Utils;
 using PointOfSales.Utils;
+using PointOfSales.Views.Shared;
 
 namespace PointOfSales
 {
@@ -65,7 +66,6 @@ namespace PointOfSales
                 Configurations.IniEngine = _iniEngine;
                 var unitOfWork = collection.BuildServiceProvider().GetRequiredService<IUnitOfWork>();
                 var encryptionService = collection.BuildServiceProvider().GetRequiredService<IEncryptionService>();
-                
                 await AddingPermission(unitOfWork);
                 await AddingUser(unitOfWork, encryptionService);
                 await unitOfWork.SaveChangesAsync();
@@ -76,10 +76,6 @@ namespace PointOfSales
                     await AddingRole(unitOfWork);
                     await unitOfWork.SaveChangesAsync();
                 }
-
-                ISystemInformation systemInformation = new SystemInformation();
-                systemInformation.GetMachineUniqueCodeAsync();
-                
                 await Task.Delay(Configurations.SplashScreenTime);
                 return true;
             }
