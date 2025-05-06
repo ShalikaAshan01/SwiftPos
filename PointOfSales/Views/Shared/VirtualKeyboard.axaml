@@ -1,0 +1,49 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PointOfSales.Views.Shared.VirtualKeyboard"
+        Title="Popup Keyboard" Width="400" Height="300">
+    <Grid>
+        <!-- Popup Keyboard -->
+            <StackPanel Background="White" Margin="5">
+                <!-- Row 1 -->
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Q" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="W" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="E" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="R" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="T" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="Y" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="U" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="I" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="O" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="P" Width="40" Height="40" Click="OnKeyClick"/>
+                </StackPanel>
+                <!-- Row 2 -->
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="A" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="S" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="D" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="F" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="G" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="H" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="J" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="K" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="L" Width="40" Height="40" Click="OnKeyClick"/>
+                </StackPanel>
+                <!-- Row 3 -->
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Z" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="X" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="C" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="V" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="B" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="N" Width="40" Height="40" Click="OnKeyClick"/>
+                    <Button Content="M" Width="40" Height="40" Click="OnKeyClick"/>
+                </StackPanel>
+                <!-- Row 4 -->
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Space" Width="200" Height="40" Click="OnKeyClick"/>
+                </StackPanel>
+            </StackPanel>
+    </Grid>
+</Window>

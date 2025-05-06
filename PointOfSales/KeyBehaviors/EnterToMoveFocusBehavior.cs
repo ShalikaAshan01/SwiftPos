@@ -1,9 +1,11 @@
+using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.VisualTree;
-using System;
-using System.Linq;
+
+namespace PointOfSales.KeyBehaviors;
 
 public static class EnterToMoveFocusBehavior
 {
@@ -33,37 +35,31 @@ public static class EnterToMoveFocusBehavior
 
         public void OnNext(AvaloniaPropertyChangedEventArgs<bool> e)
         {
-            if (e.Sender is Control control)
-            {
-                control.KeyDown -= OnKeyDown;
+            if (e.Sender is not Control control) return;
+            control.KeyDown -= OnKeyDown;
 
-                if (e.NewValue.Value)
-                {
-                    control.KeyDown += OnKeyDown;
-                }
+            if (e.NewValue.Value)
+            {
+                control.KeyDown += OnKeyDown;
             }
         }
     }
 
     private static void OnKeyDown(object? sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Enter && sender is Control control)
-        {
-            var root = control.GetVisualRoot();
-            if (root is not Visual visualRoot) return;
+        if (e.Key != Key.Enter || sender is not Control control) return;
+        var root = control.GetVisualRoot();
+        if (root is not Visual visualRoot) return;
 
-            var focusables = visualRoot
-                .GetVisualDescendants()
-                .OfType<Control>()
-                .Where(x => x.Focusable && x.IsEffectivelyEnabled && x.IsVisible)
-                .ToList();
+        var focusables = visualRoot
+            .GetVisualDescendants()
+            .OfType<Control>()
+            .Where(x => x is { Focusable: true, IsEffectivelyEnabled: true, IsVisible: true })
+            .ToList();
 
-            var currentIndex = focusables.IndexOf(control);
-            if (currentIndex >= 0 && currentIndex < focusables.Count - 1)
-            {
-                focusables[currentIndex + 1].Focus();
-                e.Handled = true;
-            }
-        }
+        var currentIndex = focusables.IndexOf(control);
+        if (currentIndex < 0 || currentIndex >= focusables.Count - 1) return;
+        focusables[currentIndex + 1].Focus();
+        e.Handled = true;
     }
 }

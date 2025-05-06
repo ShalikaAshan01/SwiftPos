@@ -1,5 +1,5 @@
+using System.ComponentModel;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using PointOfSales.Utils;
@@ -41,16 +41,45 @@ public partial class LoginPopUp : UserControl
         if (sender is Control control)
         {
             control.Focus();
+            OpenVirtualKeyboard();
         }
     }
     
-    private void MoveFocusOnEnter(object? sender, KeyEventArgs e)
+    
+    
+    private void OpenVirtualKeyboard()
     {
-        if (e.Key == Key.Enter && sender is IInputElement current)
-        {
-            var next = KeyboardNavigationHandler.GetNext(current, NavigationDirection.Next);
-            next?.Focus();
-            e.Handled = true;
-        }
+        return;
+        var virtualKeyboard = new VirtualKeyboard();
+        virtualKeyboard.KeyPressed += OnKeyPressed;
+        virtualKeyboard.Show();
+        virtualKeyboard.Closing += OnKeyBoardClosing;
+
     }
+    
+    
+    private void OnKeyPressed(object? sender, string key)
+    {
+        return;
+        var s = this.FindControl<TextBox>("UsernameBox"); // Bind to your TextBox here
+
+        s.Text += key;
+    }
+    
+    private void OnKeyBoardClosing(object? sender, CancelEventArgs e)
+    {
+        // virtualKeyboard.KeyPressed -= OnKeyPressed;  // Unsubscribe from the event
+    }
+    
+    
+    //
+    // private void MoveFocusOnEnter(object? sender, KeyEventArgs e)
+    // {
+    //     if (e.Key == Key.Enter && sender is IInputElement current)
+    //     {
+    //         var next = KeyboardNavigationHandler.GetNext(current, NavigationDirection.Next);
+    //         next?.Focus();
+    //         e.Handled = true;
+    //     }
+    // }
 }
