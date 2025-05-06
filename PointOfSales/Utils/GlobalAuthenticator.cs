@@ -10,11 +10,9 @@ public class GlobalAuthenticator
         get => _isAuthenticated;
         set
         {
-            if (_isAuthenticated != value)
-            {
-                _isAuthenticated = value;
-                AuthChanged?.Invoke(_isAuthenticated);
-            }
+            if (_isAuthenticated == value) return;
+            _isAuthenticated = value;
+            AuthChanged?.Invoke(_isAuthenticated);
         }
     }
     

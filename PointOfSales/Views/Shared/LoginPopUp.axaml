@@ -2,12 +2,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:shared="clr-namespace:PointOfSales.Views.Shared"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              x:Class="PointOfSales.Views.Shared.LoginPopUp">
-    <StackPanel>
-        <TextBlock Text="Please log in" FontWeight="Bold"/>
-        <TextBox x:Name="UsernameBox" Watermark="Username"/>
-        <TextBox x:Name="PasswordBox" Watermark="Password"/>
-        <Button Content="Login" Click="Login_Click"/>
-    </StackPanel>
+    <Border Margin="{StaticResource Margin}" Padding="{StaticResource Padding}"
+            CornerRadius="{StaticResource BorderRadius}" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <StackPanel Spacing="{StaticResource Spacing}">
+            <Border Width="48" Height="48" CornerRadius="12" Background="#E0ECFF" HorizontalAlignment="Center">
+                <shared:CompanyLogo />
+            </Border>
+
+            <TextBlock x:Name="UsernameBox" Text="Welcome to SwiftPOS™" Theme="{StaticResource TitleTextStyle}"
+                       HorizontalAlignment="Center" />
+            <TextBlock Text="Sign in to continue" HorizontalAlignment="Center"
+                       Theme="{StaticResource SubtitleTextStyle}" />
+
+            <TextBox Watermark="Enter your username" Loaded="UsernameBox_Loaded"
+                     KeyDown="MoveFocusOnEnter"
+                     />
+
+            <TextBox Watermark="Enter your password" PasswordChar="*" 
+                     KeyDown="MoveFocusOnEnter"
+                     />
+
+            <!-- Login Button -->
+            <Button Content="Login" />
+            <shared:PoweredBy />
+        </StackPanel>
+    </Border>
 </UserControl>

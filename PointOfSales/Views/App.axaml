@@ -1,10 +1,67 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:utils="clr-namespace:PointOfSales.Utils"
              x:Class="PointOfSales.Views.App"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
+    <Application.Resources>
+        <Color x:Key="PrimaryColor">#006FEF</Color>
+        <Color x:Key="PrimaryColorHover">#1a84ff</Color>
+        <Color x:Key="PrimaryColorPressed">#0056bc</Color>
+
+        <Color x:Key="PrimaryColorForeground">White</Color>
+        <Color x:Key="MutedColor">Gray</Color>
+        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+        <system:Double x:Key="TxtMd">16</system:Double>
+        <system:Double x:Key="TxtLg">22</system:Double>
+        <CornerRadius x:Key="BorderRadius">8</CornerRadius>
+        
+        <ControlTheme x:Key="TitleTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="{StaticResource TxtLg}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </ControlTheme>
+        <ControlTheme x:Key="SubtitleTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="{StaticResource TxtMd}"/>
+            <Setter Property="Foreground" Value="{StaticResource MutedColor}"></Setter>
+        </ControlTheme>
+        <Thickness x:Key="Padding">5</Thickness>
+        <Thickness x:Key="Margin">8</Thickness>
+        <system:Double x:Key="Spacing">16</system:Double>
+    </Application.Resources>
     <Application.Styles>
         <FluentTheme />
+        
+        <Style Selector="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="Foreground" Value="{StaticResource PrimaryColorForeground}" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="CornerRadius" Value="{StaticResource BorderRadius}" />
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
+            <Setter Property="FontSize" Value="{StaticResource TxtMd}" />
+            <Setter Property="Padding" Value="30 15" />
+        </Style>
+        <Style Selector="Button:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource PrimaryColorPressed}"/>
+        </Style>
+
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource PrimaryColorHover}"/>
+        </Style>
+
+        
+        <Style Selector="TextBox">
+            <Setter Property="FontSize" Value="{StaticResource TxtMd}"/>
+            <Setter Property="CornerRadius" Value="{StaticResource BorderRadius}" />
+            <Setter Property="Padding" Value="10 15"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+
+        </Style>
+        <Style Selector="TextBox:pointerover /template/ Border">
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColorHover}"/>
+        </Style>
+
+
     </Application.Styles>
 </Application>

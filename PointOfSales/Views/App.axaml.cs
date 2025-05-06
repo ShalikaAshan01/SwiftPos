@@ -10,11 +10,13 @@ using PointOfSales.Utils;
 using System.Threading.Tasks;
 using PointOfSales.Core.IEngines;
 using PointOfSales.Core.Utils;
+using PointOfSales.Views.UserControls;
 
 namespace PointOfSales.Views
 {
     public partial class App : Application
     {
+        public static MainWindow MainWindowInstance { get; private set; }
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -35,16 +37,16 @@ namespace PointOfSales.Views
                     desktop.Shutdown();
                 }
                 Utils.Common.Logger = collection.BuildServiceProvider().GetRequiredService<IApplicationLogger>();
-                var window = new LandingScreen();
-                window.Width = LocalConfigurations.MainScreenWidth;
-                window.Height = LocalConfigurations.MainScreenHeight;
-                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                window.Title = LocalConfigurations.ApplicationName;
-                window.SystemDecorations = SystemDecorations.None;
+                MainWindowInstance = new MainWindow();
+                MainWindowInstance.Width = LocalConfigurations.MainScreenWidth;
+                MainWindowInstance.Height = LocalConfigurations.MainScreenHeight;
+                MainWindowInstance.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                MainWindowInstance.Title = LocalConfigurations.ApplicationName;
+                MainWindowInstance.SystemDecorations = SystemDecorations.None;
                 desktop.MainWindow?.Hide();
-                desktop.MainWindow = window;
-                window.Show();
-
+                desktop.MainWindow = MainWindowInstance;
+                MainWindowInstance.Show();
+                MainWindowInstance.NavigateTo(new Onboarding());
             }
 
             base.OnFrameworkInitializationCompleted();
