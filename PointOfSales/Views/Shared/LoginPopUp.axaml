@@ -17,13 +17,9 @@
             <TextBlock Text="Sign in to continue" HorizontalAlignment="Center"
                        Theme="{StaticResource SubtitleTextStyle}" />
 
-            <TextBox Watermark="Enter your username" Loaded="UsernameBox_Loaded"
-                     KeyDown="MoveFocusOnEnter"
-                     />
+            <TextBox Watermark="Enter your username" Loaded="UsernameBox_Loaded"/>
 
-            <TextBox Watermark="Enter your password" PasswordChar="*" 
-                     KeyDown="MoveFocusOnEnter"
-                     />
+            <TextBox Watermark="Enter your password" PasswordChar="*"/>
 
             <!-- Login Button -->
             <Button Content="Login" />

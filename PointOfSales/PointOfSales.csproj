@@ -37,7 +37,4 @@
 	  <ProjectReference Include="..\PointOfSales.Globalization\PointOfSales.Globalization.csproj" />
 	  <ProjectReference Include="..\PointOfSales.PostgressProvider\PointOfSales.PostgressProvider.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="KeyBehaviors\" />
-	</ItemGroup>
 </Project>

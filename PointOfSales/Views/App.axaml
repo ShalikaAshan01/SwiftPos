@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:utils="clr-namespace:PointOfSales.Utils"
+             xmlns:global="clr-namespace:"
              x:Class="PointOfSales.Views.App"
              RequestedThemeVariant="Default">
     <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -56,6 +57,7 @@
             <Setter Property="CornerRadius" Value="{StaticResource BorderRadius}" />
             <Setter Property="Padding" Value="10 15"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="global:EnterToMoveFocusBehavior.IsEnabled" Value="True"/>
 
         </Style>
         <Style Selector="TextBox:pointerover /template/ Border">
