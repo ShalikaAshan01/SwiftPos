@@ -1,9 +1,11 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 using PointOfSales.Views.Shared;
 
 namespace PointOfSales.KeyBehaviors;
@@ -40,17 +42,13 @@ public static class VirtualKeyboardHelper
 
         public void OnNext(AvaloniaPropertyChangedEventArgs<bool> e)
         {
-            if (e.Sender is TextBox textBox)
-            {
-                textBox.GotFocus -= OnGotFocus;
-                textBox.LostFocus -= OnLostFocus;
+            if (e.Sender is not TextBox textBox) return;
+            textBox.GotFocus -= OnGotFocus;
+            textBox.LostFocus -= OnLostFocus;
 
-                if (e.NewValue.Value)
-                {
-                    textBox.GotFocus += OnGotFocus;
-                    textBox.LostFocus += OnLostFocus;
-                }
-            }
+            if (!e.NewValue.Value) return;
+            textBox.GotFocus += OnGotFocus;
+            textBox.LostFocus += OnLostFocus;
         }
 
         private void OnGotFocus(object? sender, RoutedEventArgs e)
@@ -58,20 +56,29 @@ public static class VirtualKeyboardHelper
             if (sender is not TextBox textBox) return;
 
             var existingKeyboard = textBox.GetValue(KeyboardWindowProperty);
-            if (existingKeyboard == null || !existingKeyboard.IsVisible)
+            if (existingKeyboard != null && existingKeyboard.IsVisible) return;
+            var keyboard = new VirtualKeyboard();
+
+            void OnKeyboardOnKeyPressed(object? _, string key)
             {
-                var keyboard = new VirtualKeyboard();
-                keyboard.KeyPressed += (_, key) =>
+                textBox.Text ??= "";
+                var caretIndex = textBox.CaretIndex;
+                textBox.Text = textBox.Text.Insert(caretIndex, key);
+                textBox.CaretIndex = caretIndex + key.Length;
+                if (key == "Q") // Check if the key is 'q'
                 {
-                    textBox.Text += key;
-                };
-                keyboard.Closed += (_, _) =>
-                {
-                    textBox.SetValue(KeyboardWindowProperty, null);
-                };
-                textBox.SetValue(KeyboardWindowProperty, keyboard);
-                keyboard.Show();
+                    MoveFocusToNextTextBox(textBox); // Move focus after pressing 'q'
+                }
             }
+
+            keyboard.KeyPressed += OnKeyboardOnKeyPressed;
+            keyboard.Closed += (_, _) =>
+            {
+                keyboard.KeyPressed -= OnKeyboardOnKeyPressed;
+                textBox.SetValue(KeyboardWindowProperty, null);
+            };
+            textBox.SetValue(KeyboardWindowProperty, keyboard);
+            keyboard.Show();
         }
 
         private void OnLostFocus(object? sender, RoutedEventArgs e)
@@ -91,6 +98,27 @@ public static class VirtualKeyboardHelper
                     }
                 });
             });
+        }
+
+        // Move focus to the next TextBox in the visual tree
+        private void MoveFocusToNextTextBox(TextBox currentTextBox)
+        {
+            var root = currentTextBox.GetVisualRoot();
+            if (root is not Visual visualRoot) return;
+
+            // Find all focusable TextBoxes in the visual tree
+            var textBoxes = visualRoot
+                .GetVisualDescendants()
+                .OfType<TextBox>()
+                .Where(x => x.Focusable && x.IsEffectivelyEnabled && x.IsVisible)
+                .ToList();
+
+            var currentIndex = textBoxes.IndexOf(currentTextBox);
+            if (currentIndex >= 0 && currentIndex < textBoxes.Count - 1)
+            {
+                // Focus on the next TextBox
+                textBoxes[currentIndex + 1].Focus();
+            }
         }
     }
 }
