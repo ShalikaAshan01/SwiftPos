@@ -4,9 +4,11 @@
     x:Class="PointOfSales.Views.Shared.VirtualKeyboard"
     Width="800" Height="300"
     CanResize="False"
+    Focusable="False"
     Title="Virtual Keyboard">
 
     <Grid Name="KeyboardGrid" Margin="5" 
+          Focusable="False"
           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
     
 </Window>

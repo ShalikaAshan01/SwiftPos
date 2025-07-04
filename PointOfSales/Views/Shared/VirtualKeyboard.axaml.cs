@@ -115,7 +115,8 @@ namespace PointOfSales.Views.Shared
                         Background = new SolidColorBrush(Color.FromRgb(keyBgColor.Item1, keyBgColor.Item2, keyBgColor.Item3)),
                         BorderBrush = new SolidColorBrush(Color.FromRgb(keyBorderColor.Item1, keyBorderColor.Item2, keyBorderColor.Item3)),
                         BorderThickness = new Thickness(1),
-                        Tag = key
+                        Tag = key,
+                        Focusable = false
                     };
 
                     // Show text depends on caps lock state
@@ -131,7 +132,8 @@ namespace PointOfSales.Views.Shared
                             HorizontalAlignment = HorizontalAlignment.Center,
                             VerticalAlignment = VerticalAlignment.Center,
                             TextAlignment = TextAlignment.Center,
-                            FontWeight = FontWeight.SemiBold
+                            FontWeight = FontWeight.SemiBold,
+                            Focusable = false
                         }
                     };
 
