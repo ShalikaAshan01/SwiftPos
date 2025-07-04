@@ -1,9 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "l0HgZOXdAeg=",
+  "dgSpecHash": "Gck6AXa1BZo=",
   "success": true,
   "projectFilePath": "/Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/PointOfSales.Engine.csproj",
   "expectedPackageFiles": [
+    "/Users/shalika/.nuget/packages/avalonia/11.2.7/avalonia.11.2.7.nupkg.sha512",
+    "/Users/shalika/.nuget/packages/avalonia.buildservices/0.0.31/avalonia.buildservices.0.0.31.nupkg.sha512",
+    "/Users/shalika/.nuget/packages/avalonia.remote.protocol/11.2.7/avalonia.remote.protocol.11.2.7.nupkg.sha512",
+    "/Users/shalika/.nuget/packages/microcom.runtime/0.11.0/microcom.runtime.0.11.0.nupkg.sha512",
     "/Users/shalika/.nuget/packages/microsoft.entityframeworkcore/8.0.0/microsoft.entityframeworkcore.8.0.0.nupkg.sha512",
     "/Users/shalika/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.0/microsoft.entityframeworkcore.abstractions.8.0.0.nupkg.sha512",
     "/Users/shalika/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.0/microsoft.entityframeworkcore.analyzers.8.0.0.nupkg.sha512",

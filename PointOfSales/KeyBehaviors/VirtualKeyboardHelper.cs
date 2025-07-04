@@ -12,6 +12,13 @@ namespace PointOfSales.KeyBehaviors;
 
 public static class VirtualKeyboardHelper
 {
+    public static VirtualKeyboard? KeyboardWindow;
+    public static TextBox? CurrentTextBox;
+    private static bool _keyboardManuallyClosed = false;
+    private static bool _isKeyboardOpening = false;
+
+
+    
     public static readonly AttachedProperty<bool> IsEnabledProperty =
         AvaloniaProperty.RegisterAttached<Control, bool>(
             "IsEnabled",
@@ -55,31 +62,95 @@ public static class VirtualKeyboardHelper
         {
             if (sender is not TextBox textBox) return;
 
-            var existingKeyboard = textBox.GetValue(KeyboardWindowProperty);
-            if (existingKeyboard != null && existingKeyboard.IsVisible) return;
-            var keyboard = new VirtualKeyboard();
-
-            void OnKeyboardOnKeyPressed(object? _, string key)
+            if (_keyboardManuallyClosed && (KeyboardWindow == null || !KeyboardWindow.IsVisible))
             {
-                textBox.Text ??= "";
-                var caretIndex = textBox.CaretIndex;
-                textBox.Text = textBox.Text.Insert(caretIndex, key);
-                textBox.CaretIndex = caretIndex + key.Length;
-                if (key == "Q") // Check if the key is 'q'
-                {
-                    MoveFocusToNextTextBox(textBox); // Move focus after pressing 'q'
-                }
+                _keyboardManuallyClosed = false;
             }
 
-            keyboard.KeyPressed += OnKeyboardOnKeyPressed;
-            keyboard.Closed += (_, _) =>
+            if (_keyboardManuallyClosed)
+                return;
+
+            if (KeyboardWindow != null && KeyboardWindow.IsVisible)
             {
-                keyboard.KeyPressed -= OnKeyboardOnKeyPressed;
-                textBox.SetValue(KeyboardWindowProperty, null);
-            };
-            textBox.SetValue(KeyboardWindowProperty, keyboard);
-            keyboard.Show();
+                CurrentTextBox = textBox;
+                return;
+            }
+
+            if (_isKeyboardOpening)
+                return;
+
+            _isKeyboardOpening = true;
+
+            Dispatcher.UIThread.Post(() =>
+            {
+                if (KeyboardWindow == null || !KeyboardWindow.IsVisible)
+                {
+                    KeyboardWindow = new VirtualKeyboard();
+                    KeyboardWindow.KeyPressed += OnKeyboardKeyPressed;
+                    KeyboardWindow.Closed += (_, _) =>
+                    {
+                        _keyboardManuallyClosed = true;
+                        KeyboardWindow = null;
+                        CurrentTextBox = null;
+                        _isKeyboardOpening = true;
+                        Task.Run(async () =>
+                        {
+                            await Task.Delay(300); // Adjust as needed — 100-300ms is usually safe
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                _isKeyboardOpening = false;
+                            });
+                        });
+                    };
+                    KeyboardWindow.Show();
+                }
+                _isKeyboardOpening = false;
+            });
+
+            CurrentTextBox = textBox;
+            // if (sender is not TextBox textBox) return;
+            //
+            // var existingKeyboard = textBox.GetValue(KeyboardWindowProperty);
+            // if (existingKeyboard != null && existingKeyboard.IsVisible) return;
+            // var keyboard = new VirtualKeyboard();
+            //
+            // void OnKeyboardOnKeyPressed(object? _, string key)
+            // {
+            //     textBox.Text ??= "";
+            //     var caretIndex = textBox.CaretIndex;
+            //     textBox.Text = textBox.Text.Insert(caretIndex, key);
+            //     textBox.CaretIndex = caretIndex + key.Length;
+            //     if (key == "Q") // Check if the key is 'q'
+            //     {
+            //         MoveFocusToNextTextBox(textBox); // Move focus after pressing 'q'
+            //     }
+            // }
+            //
+            // keyboard.KeyPressed += OnKeyboardOnKeyPressed;
+            // keyboard.Closed += (_, _) =>
+            // {
+            //     keyboard.KeyPressed -= OnKeyboardOnKeyPressed;
+            //     textBox.SetValue(KeyboardWindowProperty, null);
+            // };
+            // textBox.SetValue(KeyboardWindowProperty, keyboard);
+            // keyboard.Show();
         }
+        
+        private void OnKeyboardKeyPressed(object? sender, string key)
+        {
+            if (CurrentTextBox == null) return;
+
+            CurrentTextBox.Text ??= "";
+            var caretIndex = CurrentTextBox.CaretIndex;
+            CurrentTextBox.Text = CurrentTextBox.Text.Insert(caretIndex, key);
+            CurrentTextBox.CaretIndex = caretIndex + key.Length;
+
+            if (key == "\n" || key.Equals("q", StringComparison.OrdinalIgnoreCase))
+            {
+                MoveFocusToNextTextBox(CurrentTextBox);
+            }
+        }
+
 
         private void OnLostFocus(object? sender, RoutedEventArgs e)
         {

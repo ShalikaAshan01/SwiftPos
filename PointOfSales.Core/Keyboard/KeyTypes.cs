@@ -19,5 +19,6 @@ public enum KeyTypes
     F9,
     F10,
     F11,
-    F12
+    F12,
+    Normal
 }

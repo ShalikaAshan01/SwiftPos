@@ -33,3 +33,4 @@ C:/Users/shali/source/repos/PointOfSales/PointOfSales.Engine/obj/Debug/net8.0/Po
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/refint/PointOfSales.Engine.dll
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/PointOfSales.Engine.pdb
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/ref/PointOfSales.Engine.dll
+/Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache

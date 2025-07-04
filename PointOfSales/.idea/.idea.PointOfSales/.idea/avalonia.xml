@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Views/App.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/LandingScreen.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/MainWindow.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/Shared/CompancyLogo.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/Shared/CompanyLogo.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/Shared/Login.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/Shared/LoginPopUp.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/Shared/Logo.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/Shared/OnScreenKeyboardView.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/Shared/PoweredBy.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/Shared/VirtualKeyboard.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/UserControls/Onboarding.axaml" value="PointOfSales.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
