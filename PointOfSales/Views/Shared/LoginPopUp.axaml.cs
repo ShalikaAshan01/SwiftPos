@@ -1,8 +1,12 @@
+using System;
 using System.ComponentModel;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using PointOfSales.KeyBehaviors;
 using PointOfSales.Utils;
+using PointOfSales.ViewModels;
 
 namespace PointOfSales.Views.Shared;
 
@@ -29,56 +33,17 @@ public partial class LoginPopUp : UserControl
         InitializeComponent();
         _permissionCode = permissionCode;
     }
-    private void Login_Click(object? sender, RoutedEventArgs e)
+    private void PasswordTextBoxKeyDown(object? sender, KeyEventArgs e)
     {
-        Utils.Common.Logger.LogInfo("Login Clicked: Username: {0}, Password:<PASSWORD>", "");
-        GlobalAuthenticator.IsAuthenticated = true;
-        // _authService.Login(UsernameBox.Text, PasswordBox.Text);
     }
-    
-    private void UsernameBox_Loaded(object? sender, RoutedEventArgs e)
+
+    private void OnPasswordKeyDown(object? sender, KeyEventArgs e)
     {
-        if (sender is Control control)
+        if (e.Key != Key.Enter) return;
+        if (DataContext is LoginPopUpViewModel vm)
         {
-            control.Focus();
-            OpenVirtualKeyboard();
+            vm.LoginCommand.Execute(null);
         }
+        e.Handled = true;
     }
-    
-    
-    
-    private void OpenVirtualKeyboard()
-    {
-        // var virtualKeyboard = new VirtualKeyboard();
-        // virtualKeyboard.KeyPressed += OnKeyPressed;
-        // virtualKeyboard.Show();
-        // virtualKeyboard.Closing += OnKeyBoardClosing;
-
-    }
-    
-    
-    private void OnKeyPressed(object? sender, string key)
-    {
-        return;
-        var s = this.FindControl<TextBox>("UsernameBox"); // Bind to your TextBox here
-
-        s.Text += key;
-    }
-    
-    private void OnKeyBoardClosing(object? sender, CancelEventArgs e)
-    {
-        // virtualKeyboard.KeyPressed -= OnKeyPressed;  // Unsubscribe from the event
-    }
-    
-    
-    //
-    // private void MoveFocusOnEnter(object? sender, KeyEventArgs e)
-    // {
-    //     if (e.Key == Key.Enter && sender is IInputElement current)
-    //     {
-    //         var next = KeyboardNavigationHandler.GetNext(current, NavigationDirection.Next);
-    //         next?.Focus();
-    //         e.Handled = true;
-    //     }
-    // }
 }

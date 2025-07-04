@@ -14,9 +14,6 @@
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Update="Resources\SqlQueries.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SqlQueries.Designer.cs</LastGenOutput>

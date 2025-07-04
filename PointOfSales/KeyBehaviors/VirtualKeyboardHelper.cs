@@ -13,6 +13,7 @@ namespace PointOfSales.KeyBehaviors;
 
 public static class VirtualKeyboardHelper
 {
+    public static event EventHandler? SubmitTriggered;
     private static VirtualKeyboard? _keyboardWindow;
     private static TextBox? _currentTextBox;
     private static bool _keyboardManuallyClosed = false;
@@ -202,25 +203,42 @@ public static class VirtualKeyboardHelper
             });
         }
 
-        // Move focus to the next TextBox in the visual tree
         private void MoveFocusToNextTextBox(TextBox currentTextBox)
         {
             var root = currentTextBox.GetVisualRoot();
             if (root is not Visual visualRoot) return;
 
-            // Find all focusable TextBoxes in the visual tree
             var textBoxes = visualRoot
                 .GetVisualDescendants()
                 .OfType<TextBox>()
                 .Where(x => x.Focusable && x.IsEffectivelyEnabled && x.IsVisible)
+                .OrderBy(x => x.Bounds.Top)
                 .ToList();
 
             var currentIndex = textBoxes.IndexOf(currentTextBox);
+
             if (currentIndex >= 0 && currentIndex < textBoxes.Count - 1)
             {
-                // Focus on the next TextBox
+                // Move focus to next TextBox
                 textBoxes[currentIndex + 1].Focus();
             }
+            else
+            {
+                // LAST textbox: raise submit event
+                SubmitTriggered?.Invoke(null, EventArgs.Empty);
+            }
+        }
+
+    }
+    public static void CloseKeyboard()
+    {
+        if (_keyboardWindow != null)
+        {
+            _keyboardWindow.Close();
+            _keyboardWindow = null;
+            _currentTextBox = null;
+            _keyboardManuallyClosed = true;
+            _isKeyboardOpening = false;
         }
     }
 }

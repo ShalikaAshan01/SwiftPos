@@ -5,7 +5,14 @@
              xmlns:shared="clr-namespace:PointOfSales.Views.Shared"
              xmlns:keyBehaviors="clr-namespace:PointOfSales.KeyBehaviors"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
-             x:Class="PointOfSales.Views.Shared.LoginPopUp">
+             xmlns:viewModels="clr-namespace:PointOfSales.ViewModels"
+             x:Class="PointOfSales.Views.Shared.LoginPopUp"
+             x:DataType="viewModels:LoginPopUpViewModel"
+             >
+    
+    <UserControl.DataContext>
+        <viewModels:LoginPopUpViewModel/>
+    </UserControl.DataContext>
     <Border Margin="{StaticResource Margin}" Padding="{StaticResource Padding}"
             CornerRadius="{StaticResource BorderRadius}" HorizontalAlignment="Stretch" VerticalAlignment="Center">
         <StackPanel Spacing="{StaticResource Spacing}">
@@ -18,20 +25,19 @@
             <TextBlock Text="Sign in to continue" HorizontalAlignment="Center"
                        Theme="{StaticResource SubtitleTextStyle}" />
 
-            <TextBox x:Name="UsernameBox"  Watermark="Enter your username" Loaded="UsernameBox_Loaded">
-                <!-- <Interaction.Behaviors> -->
-                <!--     <keyBehaviors:VirtualKeyboardBehavior /> -->
-                <!-- </Interaction.Behaviors> -->
+            <TextBox x:Name="UsernameBox"  Watermark="Enter your username"
+                     
+                     Text="{Binding Username, Mode=TwoWay}">
             </TextBox>
 
-            <TextBox Watermark="Enter your password" PasswordChar="*">
-                <!-- <Interaction.Behaviors> -->
-                <!--     <keyBehaviors:VirtualKeyboardBehavior /> -->
-                <!-- </Interaction.Behaviors> -->
+            <TextBox Watermark="Enter your password" PasswordChar="*"                    
+                     Text="{Binding Password, Mode=TwoWay}" Name="PasswordTextBox"
+                     KeyDown="OnPasswordKeyDown"
+                     >
             </TextBox>
 
             <!-- Login Button -->
-            <Button Content="Login" />
+            <Button Content="Login" Name="LoginButton" Command="{Binding LoginCommand}"/>
             <shared:PoweredBy />
         </StackPanel>
     </Border>
