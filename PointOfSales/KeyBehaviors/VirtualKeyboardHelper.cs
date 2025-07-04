@@ -6,16 +6,18 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
+using PointOfSales.Core.Keyboard;
 using PointOfSales.Views.Shared;
 
 namespace PointOfSales.KeyBehaviors;
 
 public static class VirtualKeyboardHelper
 {
-    public static VirtualKeyboard? KeyboardWindow;
-    public static TextBox? CurrentTextBox;
+    private static VirtualKeyboard? _keyboardWindow;
+    private static TextBox? _currentTextBox;
     private static bool _keyboardManuallyClosed = false;
     private static bool _isKeyboardOpening = false;
+    public static bool CapsLock { get; set; } = false;
 
 
     
@@ -62,7 +64,7 @@ public static class VirtualKeyboardHelper
         {
             if (sender is not TextBox textBox) return;
 
-            if (_keyboardManuallyClosed && (KeyboardWindow == null || !KeyboardWindow.IsVisible))
+            if (_keyboardManuallyClosed && (_keyboardWindow == null || !_keyboardWindow.IsVisible))
             {
                 _keyboardManuallyClosed = false;
             }
@@ -70,9 +72,9 @@ public static class VirtualKeyboardHelper
             if (_keyboardManuallyClosed)
                 return;
 
-            if (KeyboardWindow != null && KeyboardWindow.IsVisible)
+            if (_keyboardWindow != null && _keyboardWindow.IsVisible)
             {
-                CurrentTextBox = textBox;
+                _currentTextBox = textBox;
                 return;
             }
 
@@ -83,15 +85,15 @@ public static class VirtualKeyboardHelper
 
             Dispatcher.UIThread.Post(() =>
             {
-                if (KeyboardWindow == null || !KeyboardWindow.IsVisible)
+                if (_keyboardWindow == null || !_keyboardWindow.IsVisible)
                 {
-                    KeyboardWindow = new VirtualKeyboard();
-                    KeyboardWindow.KeyPressed += OnKeyboardKeyPressed;
-                    KeyboardWindow.Closed += (_, _) =>
+                    _keyboardWindow = new VirtualKeyboard();
+                    _keyboardWindow.KeyPressed += OnKeyboardKeyPressed;
+                    _keyboardWindow.Closed += (_, _) =>
                     {
                         _keyboardManuallyClosed = true;
-                        KeyboardWindow = null;
-                        CurrentTextBox = null;
+                        _keyboardWindow = null;
+                        _currentTextBox = null;
                         _isKeyboardOpening = true;
                         Task.Run(async () =>
                         {
@@ -102,12 +104,12 @@ public static class VirtualKeyboardHelper
                             });
                         });
                     };
-                    KeyboardWindow.Show();
+                    _keyboardWindow.Show();
                 }
                 _isKeyboardOpening = false;
             });
 
-            CurrentTextBox = textBox;
+            _currentTextBox = textBox;
             // if (sender is not TextBox textBox) return;
             //
             // var existingKeyboard = textBox.GetValue(KeyboardWindowProperty);
@@ -136,20 +138,49 @@ public static class VirtualKeyboardHelper
             // keyboard.Show();
         }
         
-        private void OnKeyboardKeyPressed(object? sender, string key)
+        private void OnKeyboardKeyPressed(object? sender, VirtualKey key)
         {
-            if (CurrentTextBox == null) return;
+            if (_currentTextBox == null) return;
 
-            CurrentTextBox.Text ??= "";
-            var caretIndex = CurrentTextBox.CaretIndex;
-            CurrentTextBox.Text = CurrentTextBox.Text.Insert(caretIndex, key);
-            CurrentTextBox.CaretIndex = caretIndex + key.Length;
-
-            if (key == "\n" || key.Equals("q", StringComparison.OrdinalIgnoreCase))
+            switch (key.KeyType)
             {
-                MoveFocusToNextTextBox(CurrentTextBox);
+                case KeyTypes.Enter:
+                    MoveFocusToNextTextBox(_currentTextBox);
+                    return;
+
+                case KeyTypes.Backspace:
+                    if (!string.IsNullOrEmpty(_currentTextBox.Text) && _currentTextBox.CaretIndex > 0)
+                    {
+                        var caretIndex = _currentTextBox.CaretIndex;
+                        _currentTextBox.Text = _currentTextBox.Text.Remove(caretIndex - 1, 1);
+                        _currentTextBox.CaretIndex = caretIndex - 1;
+                    }
+                    return;
+
+                case KeyTypes.Space:
+                    InsertText(" ");
+                    return;
+
+                case KeyTypes.Normal:
+                    string value = CapsLock ? key.Caps.Value : key.Normal.Value;
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        InsertText(value);
+                    }
+                    break;
             }
         }
+
+        private void InsertText(string text)
+        {
+            if (_currentTextBox == null) return;
+
+            _currentTextBox.Text ??= "";
+            var insertIndex = _currentTextBox.CaretIndex;
+            _currentTextBox.Text = _currentTextBox.Text.Insert(insertIndex, text);
+            _currentTextBox.CaretIndex = insertIndex + text.Length;
+        }
+
 
 
         private void OnLostFocus(object? sender, RoutedEventArgs e)

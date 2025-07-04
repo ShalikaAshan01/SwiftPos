@@ -49,11 +49,10 @@ public partial class LoginPopUp : UserControl
     
     private void OpenVirtualKeyboard()
     {
-        return;
-        var virtualKeyboard = new VirtualKeyboard();
-        virtualKeyboard.KeyPressed += OnKeyPressed;
-        virtualKeyboard.Show();
-        virtualKeyboard.Closing += OnKeyBoardClosing;
+        // var virtualKeyboard = new VirtualKeyboard();
+        // virtualKeyboard.KeyPressed += OnKeyPressed;
+        // virtualKeyboard.Show();
+        // virtualKeyboard.Closing += OnKeyBoardClosing;
 
     }
     

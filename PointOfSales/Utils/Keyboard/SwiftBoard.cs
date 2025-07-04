@@ -49,7 +49,7 @@ public class SwiftBoard : IKeyboardLayout
                 new(("j", "j"), ("J", "J")),
                 new(("k", "k"), ("K", "K")),
                 new(("l", "l"), ("L", "L")),
-                new(("⏎", "⏎"), ("⏎", "⏎"), 1.5, KeyTypes.Normal),
+                new(("⏎", "⏎"), ("⏎", "⏎"), 1.5, KeyTypes.Enter),
             },
 
             new List<VirtualKey>
