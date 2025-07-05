@@ -21,6 +21,7 @@ namespace PointOfSales.Utils
             collection.AddTransient<ISystemInformation, SystemInformation>();
             collection.AddTransient<IDeviceEngine, DeviceEngine>();
             collection.AddTransient<ILocationEngine, LocationEngine>();
+            collection.AddTransient<IShiftEngine, ShiftEngine>();
         }
     }
 }

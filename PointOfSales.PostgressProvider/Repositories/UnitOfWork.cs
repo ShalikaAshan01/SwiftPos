@@ -12,7 +12,10 @@ public class UnitOfWork(
     IGroupPermissionRepository groupPermissionRepository,
     IAuditLogRepository auditLogRepository,
     IDeviceRepository deviceRepository,
-    ILocationRepository locationRepository)
+    ILocationRepository locationRepository,
+    IBusinessDayRepository businessDayRepository,
+    IShiftRepository shiftRepository,
+    IUserShiftRepository userShiftRepository)
     : IUnitOfWork
 {
     public IPermissionRepository PermissionRepository { get; } = permissionRepository;
@@ -23,6 +26,9 @@ public class UnitOfWork(
     public IAuditLogRepository AuditLogRepository { get; } = auditLogRepository;
     public IDeviceRepository DeviceRepository { get; } = deviceRepository;
     public ILocationRepository LocationRepository { get; } = locationRepository;
+    public IBusinessDayRepository BusinessDayRepository { get; } = businessDayRepository;
+    public IShiftRepository ShiftRepository { get; } = shiftRepository;
+    public IUserShiftRepository UserShiftRepository { get; } = userShiftRepository;
 
     public Task SaveChangesAsync()
     {

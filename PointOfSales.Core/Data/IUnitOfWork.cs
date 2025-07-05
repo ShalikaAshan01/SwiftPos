@@ -1,3 +1,4 @@
+using PointOfSales.Core.Entities.pos;
 using PointOfSales.Core.IRepositories;
 
 namespace PointOfSales.Core.Data;
@@ -12,5 +13,8 @@ public interface IUnitOfWork
     public IAuditLogRepository AuditLogRepository { get; }
     public IDeviceRepository DeviceRepository { get; }
     public ILocationRepository LocationRepository { get; }
+    public IBusinessDayRepository BusinessDayRepository { get; }
+    public IUserShiftRepository UserShiftRepository { get; }
+    public IShiftRepository ShiftRepository { get; }
     Task SaveChangesAsync();
 }
