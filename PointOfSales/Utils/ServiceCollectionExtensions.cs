@@ -20,6 +20,7 @@ namespace PointOfSales.Utils
             collection.AddSingleton<IAuthenticationEngine, AuthenticationEngine>();
             collection.AddTransient<ISystemInformation, SystemInformation>();
             collection.AddTransient<IDeviceEngine, DeviceEngine>();
+            collection.AddTransient<ILocationEngine, LocationEngine>();
         }
     }
 }

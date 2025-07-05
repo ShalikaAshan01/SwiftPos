@@ -18,4 +18,5 @@ public class MyDbContext: DbContext
     public DbSet<UserPermission> UserPermissions { get; set; }
     public DbSet<ActivityLog> ActivityLogs { get; set; }
     public DbSet<Device> Devices { get; set; }
+    public DbSet<Location> Locations { get; set; }
 }

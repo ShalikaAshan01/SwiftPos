@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using PointOfSales.Common.Resources;
 using PointOfSales.Core.Constants;
 using PointOfSales.Core.Data;
+using PointOfSales.Core.Entities.Infrastructure;
 using PointOfSales.Core.Entities.Security;
 using PointOfSales.Core.Exceptions;
 using PointOfSales.Core.IEngines;
@@ -48,88 +49,60 @@ namespace PointOfSales.ViewModels
 
         private async Task Login()
         {
-            string machineUniqueCode = GetEngine<ISystemInformation>().GetMachineUniqueCode();
             if (string.IsNullOrWhiteSpace(Username))
             {
-                ErrorMessage = Common.Resources.ApplicationErrors.UsernameRequired;
+                ErrorMessage = ApplicationErrors.UsernameRequired;
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(Password))
             {
-                ErrorMessage = Common.Resources.ApplicationErrors.PasswordRequired;
-                ;
+                ErrorMessage = ApplicationErrors.PasswordRequired;
                 return;
             }
 
             try
             {
+                if (Configurations.StoreId == short.MinValue)
+                {
+                    throw new SwiftException(ApplicationErrors.LocationNotAvailable, "");
+                }
+
+                //check the location
+                var location = await GetEngine<ILocationEngine>().GetLocationById(Configurations.StoreId);
+                if (location == null || location.IsDeleted)
+                {
+                    throw new SwiftException(ApplicationErrors.LocationNotAvailable, Configurations.StoreId);
+                }
+
+                if (!location.IsActive)
+                {
+                    throw new SwiftException(ApplicationErrors.LocationNotActive, location.LocationName);
+                }
+
+                var device = await HandleDevice();
+
                 var permission = PermissionCodes.GetPermissionId(PermissionCodes.LoginToSystem);
                 var engine = GetEngine<IAuthenticationEngine>();
                 var user = await engine.AuthenticateUserAsync(_username, _password);
-                bool rewriteIni = false;
-                //validate machine
-                if (string.IsNullOrEmpty(Configurations.StoreCode))
+                var activityLog = new ActivityLog
                 {
-                    // this is a first time setup
-                }
-
-                var deviceEngine = GetEngine<IDeviceEngine>();
-                if (Configurations.MachineCode == short.MinValue)
+                    PermissionId = permission,
+                    LocationId = Configurations.StoreId,
+                    DeviceId = Configurations.MachineId,
+                    Message = $"User {Username} attempt logged  in",
+                    AccessedAt = DateTime.UtcNow,
+                    IsSuccess = true,
+                    UserId = user.UserId
+                };
+                await GetEngine<IUnitOfWork>().AuditLogRepository.WriteToLogAsync(activityLog);
+                if (device != null)
                 {
-                    //register the machine
-                    await deviceEngine.RegisterDeviceAsync(machineUniqueCode);
-                    rewriteIni = true;
-                }
-                else
-                {
-                    //validate the machine ids
-                    var device = await deviceEngine.GetDeviceByUniqueCode(machineUniqueCode);
-                    if (device == null || device.IsDeleted)
-                    {
-                        throw new SwiftException(ApplicationErrors.DeviceNotFound, machineUniqueCode);
-                    }
-
-                    if (!device.IsActive)
-                    {
-                        throw new SwiftException(ApplicationErrors.DeviceNotActive, machineUniqueCode);
-                    }
-
-                    if (device.DeviceId != Configurations.MachineCode)
-                    {
-                        throw new SwiftException(ApplicationErrors.DeviceMismatch, machineUniqueCode);
-                    }
-                }
-
-                //save in ini file
-                if (rewriteIni)
-                {
-                    await GetEngine<IUnitOfWork>().SaveChangesAsync();
-                    var device = await deviceEngine.GetDeviceByUniqueCode(machineUniqueCode);
-                    var deviceId = device?.DeviceId ?? short.MinValue;
-                    var iniEngine = GetEngine<IIniEngine>();
-                    await iniEngine.UpdateAsync(nameof(Configurations.MachineCode), deviceId);
-                    await iniEngine.InitAsync();
-                    Configurations.IniEngine = iniEngine;
-                }
-
-                if (Configurations.MachineCode != short.MinValue && Configurations.StoreCode != string.Empty)
-                {
-                    var activityLog = new ActivityLog
-                    {
-                        PermissionId = permission,
-                        // LocationId = Configurations.LocationId,
-                        DeviceId = Configurations.MachineCode,
-                        Message = $"User {Username} attempt logged  in",
-                        AccessedAt = DateTime.UtcNow
-                    };
-                    await GetEngine<IUnitOfWork>().AuditLogRepository.WriteToLogAsync(activityLog);
+                    device.LastActiveTime = DateTime.UtcNow;
                 }
 
                 await GetEngine<IUnitOfWork>().SaveChangesAsync();
-
-
-                // GlobalAuthenticator.Authenticate(user);
+                GlobalAuthenticator.Authenticate(user);
             }
             catch (Exception e)
             {
@@ -149,6 +122,54 @@ namespace PointOfSales.ViewModels
         public void Dispose()
         {
             VirtualKeyboardHelper.SubmitTriggered -= OnKeyboardSubmit;
+        }
+
+        private async Task<Device?> HandleDevice()
+        {
+            Device? device = null;
+            string machineUniqueCode = GetEngine<ISystemInformation>().GetMachineUniqueCode();
+            var deviceEngine = GetEngine<IDeviceEngine>();
+            bool rewriteIni = false;
+            if (Configurations.MachineId == short.MinValue)
+            {
+                //register the machine
+                await deviceEngine.RegisterDeviceAsync(machineUniqueCode, Configurations.StoreId);
+                rewriteIni = true;
+            }
+            else
+            {
+                //validate the machine ids
+                device = await deviceEngine.GetDeviceByUniqueCode(machineUniqueCode);
+                if (device == null || device.IsDeleted)
+                {
+                    throw new SwiftException(ApplicationErrors.DeviceNotFound, machineUniqueCode);
+                }
+
+                if (!device.IsActive)
+                {
+                    throw new SwiftException(ApplicationErrors.DeviceNotActive, machineUniqueCode);
+                }
+
+                if (device.DeviceId != Configurations.MachineId)
+                {
+                    throw new SwiftException(ApplicationErrors.DeviceMismatch, machineUniqueCode);
+                }
+            }
+
+            //save in ini file
+            if (rewriteIni)
+            {
+                await GetEngine<IUnitOfWork>().SaveChangesAsync();
+                device = await deviceEngine.GetDeviceByUniqueCode(machineUniqueCode);
+                var deviceId = device?.DeviceId ?? short.MinValue;
+                var iniEngine = GetEngine<IIniEngine>();
+                await iniEngine.UpdateAsync(nameof(Configurations.MachineId), deviceId);
+                await iniEngine.InitAsync();
+                Configurations.IniEngine = iniEngine;
+                throw new SwiftException(ApplicationErrors.DeviceNotActive, machineUniqueCode);
+            }
+
+            return device;
         }
     }
 }

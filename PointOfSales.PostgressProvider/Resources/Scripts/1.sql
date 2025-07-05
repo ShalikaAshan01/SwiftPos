@@ -29,9 +29,9 @@ CREATE TABLE IF NOT EXISTS "Infrastructure"."Location"
     "CompanyCode" INTEGER,
     "IsSyncStarted" BOOLEAN NOT NULL DEFAULT FALSE,
     "IsSyncEnd" BOOLEAN NOT NULL DEFAULT FALSE,
-    FOREIGN KEY ("CompanyCode") REFERENCES "Infrastructure"."Company" ("CompanyId")
+    "CompanyId" smallint default null,
+    CONSTRAINT fk_companyid FOREIGN KEY ("CompanyId") REFERENCES "Infrastructure"."Company" ("CompanyId")
 );
-
 
 CREATE TABLE IF NOT EXISTS "Security"."Permission"
 (

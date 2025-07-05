@@ -46,4 +46,10 @@ Please try again after {0}</value>
     <data name="DeviceMismatch" xml:space="preserve">
         <value>Device mismatch detected. Access denied for device ({0}).</value>
     </data>
+    <data name="LocationNotAvailable" xml:space="preserve">
+        <value>Location ID ({0}) is not available. Please verify the configuration.</value>
+    </data>
+    <data name="LocationNotActive" xml:space="preserve">
+        <value>The location ({0}) is not active. Please contact the system administrator for assistance.</value>
+    </data>
 </root>

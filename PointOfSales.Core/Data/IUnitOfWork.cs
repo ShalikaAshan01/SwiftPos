@@ -11,5 +11,6 @@ public interface IUnitOfWork
     public IGroupPermissionRepository GroupPermissionRepository { get; }
     public IAuditLogRepository AuditLogRepository { get; }
     public IDeviceRepository DeviceRepository { get; }
+    public ILocationRepository LocationRepository { get; }
     Task SaveChangesAsync();
 }

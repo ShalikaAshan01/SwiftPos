@@ -8,6 +8,6 @@ public class Location : BaseEntity
 {
     public new short LocationId { get; set; }
     public string LocationName { get; set; }
-    public new string LocationCode { get; set; }
-    public byte CompanyId { get; set; }
+    public string LocationCode { get; set; }
+    public byte? CompanyId { get; set; }
 }

@@ -92,5 +92,8 @@ namespace PointOfSales.Common.Resources {
 
         public static string DeviceMismatch =>
             ResourceManager.GetString("DeviceMismatch", resourceCulture);
+
+        public static string LocationNotAvailable => ResourceManager.GetString("LocationNotAvailable", resourceCulture);
+        public static string LocationNotActive => ResourceManager.GetString("LocationNotActive", resourceCulture);
     }
 }

@@ -18,8 +18,8 @@ public static class Configurations
     public static string StoreAddress => GetNotNullValue(nameof(StoreAddress), string.Empty);
     public static string StoreAddress2 => GetNotNullValue(nameof(StoreAddress2), string.Empty);
     public static string StoreAddress3 => GetNotNullValue(nameof(StoreAddress3), string.Empty);
-    public static string StoreCode => GetNotNullValue(nameof(StoreCode), string.Empty);
-    public static short MachineCode => GetNotNullValue(nameof(MachineCode), short.MinValue);
+    public static short StoreId => GetNotNullValue(nameof(StoreId), short.MinValue);
+    public static short MachineId => GetNotNullValue(nameof(MachineId), short.MinValue);
 
     private static T GetNotNullValue<T>(string key, T defaultValue, string section = "default")
     {
