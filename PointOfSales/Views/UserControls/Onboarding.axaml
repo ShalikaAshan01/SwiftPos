@@ -2,7 +2,92 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="PointOfSales.Views.UserControls.Onboarding">
-    Welcome to Avalonia Onboardind!
+             xmlns:viewModels="clr-namespace:PointOfSales.ViewModels"
+             xmlns:shared="clr-namespace:PointOfSales.Views.Shared"
+             mc:Ignorable="d"
+             d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PointOfSales.Views.UserControls.Onboarding"
+             x:DataType="viewModels:OnboardingViewModel">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="24">
+            <!-- Company Logo -->
+            <Border Margin="0,24,0,0" Width="150" HorizontalAlignment="Center" CornerRadius="12">
+                <shared:CompanyLogo />
+            </Border>
+            <!-- User Info -->
+            <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <!-- User Image Placeholder -->
+                <Border Width="64" Height="64" CornerRadius="32" Background="#DDD" ClipToBounds="True" >
+                    <shared:Logo Width="64" Height="64"/>
+                </Border>
+
+                <!-- Username -->
+                <StackPanel VerticalAlignment="Center" Spacing="4">
+                    <TextBlock Text="Welcome back," 
+                               FontSize="16" 
+                               Foreground="#666"
+                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="John Doe" 
+                               FontSize="20" 
+                               FontWeight="Bold" 
+                               Foreground="#333"
+                               HorizontalAlignment="Left"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Instruction Text -->
+            <TextBlock Text="Please choose an action to continue"
+                       FontSize="14"
+                       Foreground="#666"
+                       HorizontalAlignment="Center" />
+
+            <!-- Primary Actions -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="16">
+                <Button Content="POS"
+                        MinWidth="120"
+                        Background="#007BFF"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        CornerRadius="8"
+                        HorizontalContentAlignment="Center"/>
+
+                <Button Content="Back Office"
+                        MinWidth="140"
+                        Background="#28A745"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        CornerRadius="8"
+                        HorizontalContentAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Secondary Actions -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
+                <Button Content="Start Shift"
+                        MinWidth="110"
+                        Background="#17A2B8"
+                        Foreground="White"
+                        FontSize="13"
+                        CornerRadius="6"
+                        HorizontalContentAlignment="Center"/>
+
+                <Button Content="End Shift"
+                        MinWidth="110"
+                        Background="#FFC107"
+                        Foreground="White"
+                        FontSize="13"
+                        CornerRadius="6"
+                        HorizontalContentAlignment="Center"/>
+
+                <Button Content="Sign Off"
+                        MinWidth="110"
+                        Background="#DC3545"
+                        Foreground="White"
+                        FontSize="13"
+                        CornerRadius="6"
+                        HorizontalContentAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
 </UserControl>
