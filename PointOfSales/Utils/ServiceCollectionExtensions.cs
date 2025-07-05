@@ -3,6 +3,7 @@ using PointOfSales.Core.Data;
 using PointOfSales.Core.IEngines;
 using PointOfSales.Core.Utils;
 using PointOfSales.Engine;
+using PointOfSales.ViewModels;
 
 namespace PointOfSales.Utils
 {
@@ -16,6 +17,8 @@ namespace PointOfSales.Utils
             // collection.AddSingleton<IPluginLoader, PluginLoader>();
             collection.AddSingleton<IDatabaseProvider, PostgressProvider.PostgressProvider>();
             collection.AddSingleton<StartupHandler>();
+            collection.AddSingleton<IAuthenticationEngine, AuthenticationEngine>();
+            collection.AddTransient<LoginPopUpViewModel>();
         }
     }
 }

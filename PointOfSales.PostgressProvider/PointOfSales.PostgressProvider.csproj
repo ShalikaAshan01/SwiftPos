@@ -31,6 +31,9 @@
       <DependentUpon>SqlQueries.resx</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
   <Target Name="PostBuildCopyToAppData" AfterTargets="Build">
     <PropertyGroup>
       <!-- This resolves to: /Users/shalika/Library/Application Support/SwiftPos -->

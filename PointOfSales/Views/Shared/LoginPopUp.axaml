@@ -6,6 +6,7 @@
              xmlns:keyBehaviors="clr-namespace:PointOfSales.KeyBehaviors"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              xmlns:viewModels="clr-namespace:PointOfSales.ViewModels"
+             xmlns:converters="clr-namespace:PointOfSales.Utils.Converters"
              x:Class="PointOfSales.Views.Shared.LoginPopUp"
              x:DataType="viewModels:LoginPopUpViewModel"
              >
@@ -13,6 +14,9 @@
     <UserControl.DataContext>
         <viewModels:LoginPopUpViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <converters:StringNotEmptyToBoolConverter x:Key="StringNotEmptyToBoolConverter"/>
+    </UserControl.Resources>
     <Border Margin="{StaticResource Margin}" Padding="{StaticResource Padding}"
             CornerRadius="{StaticResource BorderRadius}" HorizontalAlignment="Stretch" VerticalAlignment="Center">
         <StackPanel Spacing="{StaticResource Spacing}">
@@ -24,6 +28,13 @@
                        HorizontalAlignment="Center" />
             <TextBlock Text="Sign in to continue" HorizontalAlignment="Center"
                        Theme="{StaticResource SubtitleTextStyle}" />
+
+            <TextBlock Text="{Binding ErrorMessage}" 
+                       Foreground="Red" 
+                       FontWeight="Bold" 
+                       HorizontalAlignment="Center"
+                       Margin="0,4,0,0"
+                       IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyToBoolConverter}}"/>
 
             <TextBox x:Name="UsernameBox"  Watermark="Enter your username"
                      

@@ -8,16 +8,12 @@ using PointOfSales.Core.Constants;
 using System.IO;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using PointOfSales.Core.Commands;
 using PointOfSales.Core.Data;
 using PointOfSales.Core.Entities.Security;
 using PointOfSales.Core.IEngines;
 using PointOfSales.Core.Utils;
 using PointOfSales.Engine.Utils;
-using PointOfSales.PostgressProvider.Commands;
 using PointOfSales.Utils;
-using PointOfSales.ViewModels;
-using PointOfSales.Views.Shared;
 
 namespace PointOfSales
 {
@@ -63,8 +59,7 @@ namespace PointOfSales
                 // var assemblies = await _pluginLoader.LoadPluginsAsync();
                 // var plugins = await _pluginLoader.InjectPluginsAsync(collection, assemblies);
                 // collection.AddSingleton(typeof(IEnumerable<IPlugin>),plugins);
-                collection.AddTransient<ILoginCommand, LoginCommand>();
-                collection.AddTransient<LoginPopUpViewModel>();
+                
                 await _DatabaseProvider.OnInitAsync(collection);
                 
                 _logger.LogInfo("Applying permissions...");

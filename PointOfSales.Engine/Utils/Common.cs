@@ -1,6 +1,6 @@
 using PointOfSales.Core.Utils;
 
-namespace PointOfSales.Utils;
+namespace PointOfSales.Engine.Utils;
 
 public class Common
 {

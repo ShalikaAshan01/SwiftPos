@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Microsoft.Extensions.DependencyInjection;
 using PointOfSales.KeyBehaviors;
 using PointOfSales.Utils;
 using PointOfSales.ViewModels;
@@ -20,21 +21,16 @@ public partial class LoginPopUp : UserControl
 
     public LoginPopUp()
     {
+        InitializeComponent();
         this.AttachedToVisualTree += (_, __) =>
         {
             UsernameBox.Focus();
         };
-        InitializeComponent();
-        
-
     }
     public LoginPopUp(string? permissionCode)
     {
         InitializeComponent();
         _permissionCode = permissionCode;
-    }
-    private void PasswordTextBoxKeyDown(object? sender, KeyEventArgs e)
-    {
     }
 
     private void OnPasswordKeyDown(object? sender, KeyEventArgs e)

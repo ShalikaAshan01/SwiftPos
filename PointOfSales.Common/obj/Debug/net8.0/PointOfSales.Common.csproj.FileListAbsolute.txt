@@ -27,3 +27,4 @@ C:/Users/shali/source/repos/PointOfSales/PointOfSales.Common/obj/Debug/net8.0/re
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Common/obj/Debug/net8.0/ref/PointOfSales.Common.dll
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Common/obj/Debug/net8.0/PointOfSales.Common.csproj.AssemblyReference.cache
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Common/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache
+/Users/shalika/RiderProjects/SwiftPos/PointOfSales.Common/obj/Debug/net8.0/PointOfSales.Common.Resources.ApplicationErrors.resources

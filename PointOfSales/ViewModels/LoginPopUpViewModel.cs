@@ -1,52 +1,77 @@
 using System;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using PointOfSales.Core.Commands;
+using PointOfSales.Core.IEngines;
 using PointOfSales.KeyBehaviors;
 using PointOfSales.Utils;
 
-namespace PointOfSales.ViewModels;
-
-public partial class LoginPopUpViewModel : ViewModelBase
+namespace PointOfSales.ViewModels
 {
-    private string _username = "";
-    private string _password = "";
-    private readonly ILoginCommand _loginCommand;
-    
-    public string Username
+    public class LoginPopUpViewModel : ViewModelBase, IDisposable
     {
-        get => _username;
-        set => this.SetProperty(ref _username, value);
-    }
 
-    public string Password
-    {
-        get => _password;
-        set => this.SetProperty(ref _password, value);
-    }
-    
-    public LoginPopUpViewModel(ILoginCommand loginCommand)
-    {
-        VirtualKeyboardHelper.SubmitTriggered += OnKeyboardSubmit;
-        _loginCommand = loginCommand;
-    }    
-    [RelayCommand]
-    private async Task Login()
-    {
-        Utils.Common.Logger.LogInfo("Login Clicked: Username: {0}, Password:<PASSWORD>", _username);
-        await _loginCommand.CheckUserNameAsync(_username);
-        GlobalAuthenticator.IsAuthenticated = true;
-        VirtualKeyboardHelper.CloseKeyboard();
-    }
+        private string _username = string.Empty;
+        private string _password = string.Empty;
+        private string _errorMessage = string.Empty;
+        public LoginPopUpViewModel()
+        {
+            VirtualKeyboardHelper.SubmitTriggered += OnKeyboardSubmit;
+            LoginCommand = new AsyncRelayCommand(Login);
+        }
 
-    private void OnKeyboardSubmit(object? sender, EventArgs e)
-    {
-        VirtualKeyboardHelper.SubmitTriggered -= OnKeyboardSubmit;
-        LoginCommand.Execute(null);
-    }
-    public void Dispose()
-    {
-        VirtualKeyboardHelper.SubmitTriggered -= OnKeyboardSubmit;
+        public string Username
+        {
+            get => _username;
+            set => SetProperty(ref _username, value);
+        }
+
+        public string Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
+        }
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set => SetProperty(ref _errorMessage, value);
+        }
+        public IAsyncCommand LoginCommand { get; }
+
+        private async Task Login()
+        {
+            if (string.IsNullOrWhiteSpace(Username))
+            {
+                ErrorMessage = Common.Resources.ApplicationErrors.UsernameRequired;
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                ErrorMessage = Common.Resources.ApplicationErrors.PasswordRequired;;
+                return;
+            }
+            
+            try
+            {
+                var engine = GetEngine<IAuthenticationEngine>();
+                var user = await engine.AuthenticateUserAsync(_username, _password);
+                GlobalAuthenticator.Authenticate(user);
+            }
+            catch (Exception e)
+            {
+                Engine.Utils.Common.Logger.LogError(e, e.ToString());
+            }
+            VirtualKeyboardHelper.CloseKeyboard();
+        }
+
+        private void OnKeyboardSubmit(object? sender, EventArgs e)
+        {
+            if (LoginCommand.CanExecute(null))
+                LoginCommand.Execute(null);
+        }
+
+        public void Dispose()
+        {
+            VirtualKeyboardHelper.SubmitTriggered -= OnKeyboardSubmit;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -16,6 +17,7 @@ namespace PointOfSales.Views
 {
     public partial class App : Application
     {
+        public static IServiceProvider ServiceProvider { get; private set; }
         public static MainWindow MainWindowInstance { get; private set; }
         public override void Initialize()
         {
@@ -36,7 +38,8 @@ namespace PointOfSales.Views
                 {
                     desktop.Shutdown();
                 }
-                Utils.Common.Logger = collection.BuildServiceProvider().GetRequiredService<IApplicationLogger>();
+                Engine.Utils.Common.Logger = collection.BuildServiceProvider().GetRequiredService<IApplicationLogger>();
+                ServiceProvider = collection.BuildServiceProvider();
                 MainWindowInstance = new MainWindow();
                 MainWindowInstance.Width = LocalConfigurations.MainScreenWidth;
                 MainWindowInstance.Height = LocalConfigurations.MainScreenHeight;
