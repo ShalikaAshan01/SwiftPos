@@ -123,4 +123,19 @@
   <data name="LoadingLabel" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="WelcomeMessage" xml:space="preserve">
+    <value>Welcome to SwiftPOS™</value>
+  </data>
+  <data name="SignInMessage" xml:space="preserve">
+    <value>Sign in to continue</value>
+  </data>
+  <data name="EnterYourUserName" xml:space="preserve">
+    <value>Enter your username</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>Enter your password</value>
+  </data>
+  <data name="LoginLabel" xml:space="preserve">
+    <value>Login</value>
+  </data>
 </root>

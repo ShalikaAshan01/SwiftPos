@@ -7,6 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              xmlns:viewModels="clr-namespace:PointOfSales.ViewModels"
              xmlns:converters="clr-namespace:PointOfSales.Utils.Converters"
+             xmlns:lang="clr-namespace:PointOfSales.Globalization.Resources;assembly=PointOfSales.Globalization"
              x:Class="PointOfSales.Views.Shared.LoginPopUp"
              x:DataType="viewModels:LoginPopUpViewModel"
              >
@@ -24,9 +25,9 @@
                 <shared:CompanyLogo />
             </Border>
 
-            <TextBlock Text="Welcome to SwiftPOS™" Theme="{StaticResource TitleTextStyle}"
+            <TextBlock Text="{x:Static lang:Translations.WelcomeMessage}" Theme="{StaticResource TitleTextStyle}"
                        HorizontalAlignment="Center" />
-            <TextBlock Text="Sign in to continue" HorizontalAlignment="Center"
+            <TextBlock Text="{x:Static lang:Translations.SignInMessage}" HorizontalAlignment="Center"
                        Theme="{StaticResource SubtitleTextStyle}" />
 
             <TextBlock Text="{Binding ErrorMessage}" 
@@ -36,19 +37,19 @@
                        Margin="0,4,0,0"
                        IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyToBoolConverter}}"/>
 
-            <TextBox x:Name="UsernameBox"  Watermark="Enter your username"
+            <TextBox x:Name="UsernameBox"  Watermark="{x:Static lang:Translations.EnterYourUserName}"
                      
                      Text="{Binding Username, Mode=TwoWay}">
             </TextBox>
 
-            <TextBox Watermark="Enter your password" PasswordChar="*"                    
+            <TextBox Watermark="{x:Static lang:Translations.EnterYourPassword}" PasswordChar="*"                    
                      Text="{Binding Password, Mode=TwoWay}" Name="PasswordTextBox"
                      KeyDown="OnPasswordKeyDown"
                      >
             </TextBox>
 
             <!-- Login Button -->
-            <Button Content="Login" Name="LoginButton" Command="{Binding LoginCommand}"/>
+            <Button Content="{x:Static lang:Translations.LoginLabel}" Name="LoginButton" Command="{Binding LoginCommand}"/>
             <shared:PoweredBy />
         </StackPanel>
     </Border>
