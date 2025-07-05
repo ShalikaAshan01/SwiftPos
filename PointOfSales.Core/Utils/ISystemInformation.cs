@@ -2,5 +2,5 @@ namespace PointOfSales.Core.Utils;
 
 public interface ISystemInformation
 {
-    public string GetMachineUniqueCodeAsync();
+    public string GetMachineUniqueCode();
 }

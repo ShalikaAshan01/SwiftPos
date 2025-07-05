@@ -37,4 +37,13 @@ Please try again after {0}</value>
     <data name="PasswordRequired" xml:space="preserve">
         <value>Please enter your password.</value>
     </data>
+    <data name="DeviceNotFound" xml:space="preserve">
+        <value>The specified Device ({0}) does not exist. Contact support if the issue persists.</value>
+    </data>
+    <data name="DeviceNotActive" xml:space="preserve">
+        <value>The device ({0}) is inactive. Please contact the system administrator for further assistance.</value>
+    </data>
+    <data name="DeviceMismatch" xml:space="preserve">
+        <value>Device mismatch detected. Access denied for device ({0}).</value>
+    </data>
 </root>

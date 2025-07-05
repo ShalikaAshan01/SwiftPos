@@ -3,12 +3,15 @@ using PointOfSales.Core.IRepositories;
 
 namespace PointOfSales.PostgressProvider.Repositories;
 
-public class UnitOfWork(MyDbContext context, 
+public class UnitOfWork(
+    MyDbContext context,
     IPermissionRepository permissionRepository,
     IUserRepository userRepository,
     IGroupRepository groupRepository,
     IUserGroupRepository userGroupRepository,
-    IGroupPermissionRepository groupPermissionRepository)
+    IGroupPermissionRepository groupPermissionRepository,
+    IAuditLogRepository auditLogRepository,
+    IDeviceRepository deviceRepository)
     : IUnitOfWork
 {
     public IPermissionRepository PermissionRepository { get; } = permissionRepository;
@@ -16,6 +19,8 @@ public class UnitOfWork(MyDbContext context,
     public IGroupRepository GroupRepository { get; } = groupRepository;
     public IUserGroupRepository UserGroupRepository { get; } = userGroupRepository;
     public IGroupPermissionRepository GroupPermissionRepository { get; } = groupPermissionRepository;
+    public IAuditLogRepository AuditLogRepository { get; } = auditLogRepository;
+    public IDeviceRepository DeviceRepository { get; } = deviceRepository;
 
     public Task SaveChangesAsync()
     {

@@ -20,7 +20,7 @@ public class AuthenticationEngine(IUnitOfWork unitOfWork, IEncryptionService enc
 
         if (!user.IsActive)
         {
-            throw new SwiftException(Common.Resources.ApplicationErrors.UserNotFound);
+            throw new SwiftException(Common.Resources.ApplicationErrors.UserInactive, username);
         }
 
         Utils.Common.Logger.LogInfo("User({0}) found with the given username: {1}", user.UserId, username);
@@ -40,7 +40,6 @@ public class AuthenticationEngine(IUnitOfWork unitOfWork, IEncryptionService enc
         {
             throw new SwiftException(Common.Resources.ApplicationErrors.InvalidPassword);
         }
-
         return user;
     }
 }

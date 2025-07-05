@@ -19,13 +19,13 @@ public static class Configurations
     public static string StoreAddress2 => GetNotNullValue(nameof(StoreAddress2), string.Empty);
     public static string StoreAddress3 => GetNotNullValue(nameof(StoreAddress3), string.Empty);
     public static string StoreCode => GetNotNullValue(nameof(StoreCode), string.Empty);
-    public static string MachineCode => GetNotNullValue(nameof(MachineCode), string.Empty);
+    public static short MachineCode => GetNotNullValue(nameof(MachineCode), short.MinValue);
 
     private static T GetNotNullValue<T>(string key, T defaultValue, string section = "default")
     {
         return GetValue(key, defaultValue, section) ?? defaultValue;
     }
-    
+
     private static T? GetValue<T>(string key, T? defaultValue, string section = "default")
     {
         try
@@ -37,12 +37,5 @@ public static class Configurations
         {
             return defaultValue;
         }
-    }
-
-    public static bool DoesAppInit()
-    {
-        return IsServer != null && IsLocationServer != null && EnablePos != null && EnableBackOffice != null
-            && AutoAssignNewPermissionToAdmin != null && !string.IsNullOrWhiteSpace(StoreName) && !string.IsNullOrWhiteSpace(StoreAddress)
-            && !string.IsNullOrWhiteSpace(StoreCode) && !string.IsNullOrWhiteSpace(MachineCode); 
     }
 }

@@ -34,6 +34,9 @@
                        Foreground="Red" 
                        FontWeight="Bold" 
                        HorizontalAlignment="Center"
+                       FontSize="12"
+                         TextWrapping="Wrap"
+                       TextAlignment="Center"
                        Margin="0,4,0,0"
                        IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyToBoolConverter}}"/>
 

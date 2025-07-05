@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PointOfSales.Core.Entities.Infrastructure;
 using PointOfSales.Core.Entities.Security;
 
 namespace PointOfSales.PostgressProvider;
@@ -15,4 +16,6 @@ public class MyDbContext: DbContext
     public DbSet<GroupPermission> GroupPermissions { get; set; }
     public DbSet<UserGroup> UserGroups { get; set; }
     public DbSet<UserPermission> UserPermissions { get; set; }
+    public DbSet<ActivityLog> ActivityLogs { get; set; }
+    public DbSet<Device> Devices { get; set; }
 }

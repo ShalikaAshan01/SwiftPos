@@ -9,5 +9,7 @@ public interface IUnitOfWork
     public IGroupRepository GroupRepository { get; }
     public IUserGroupRepository UserGroupRepository { get; }
     public IGroupPermissionRepository GroupPermissionRepository { get; }
+    public IAuditLogRepository AuditLogRepository { get; }
+    public IDeviceRepository DeviceRepository { get; }
     Task SaveChangesAsync();
 }

@@ -18,7 +18,8 @@ namespace PointOfSales.Utils
             collection.AddSingleton<IDatabaseProvider, PostgressProvider.PostgressProvider>();
             collection.AddSingleton<StartupHandler>();
             collection.AddSingleton<IAuthenticationEngine, AuthenticationEngine>();
-            collection.AddTransient<LoginPopUpViewModel>();
+            collection.AddTransient<ISystemInformation, SystemInformation>();
+            collection.AddTransient<IDeviceEngine, DeviceEngine>();
         }
     }
 }

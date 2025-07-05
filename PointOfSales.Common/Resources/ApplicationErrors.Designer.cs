@@ -80,5 +80,17 @@ namespace PointOfSales.Common.Resources {
                 return ResourceManager.GetString("PasswordRequired", resourceCulture);
             }
         }
+
+        public static string DeviceNotFound {          
+            get { 
+                return ResourceManager.GetString("DeviceNotFound", resourceCulture); 
+            } 
+        }
+
+        public static string DeviceNotActive =>
+            ResourceManager.GetString("DeviceNotActive", resourceCulture);
+
+        public static string DeviceMismatch =>
+            ResourceManager.GetString("DeviceMismatch", resourceCulture);
     }
 }

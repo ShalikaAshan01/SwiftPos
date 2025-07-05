@@ -5,7 +5,7 @@ namespace PointOfSales.Utils;
 
 public class SystemInformation: ISystemInformation
 {
-    public string GetMachineUniqueCodeAsync()
+    public string GetMachineUniqueCode()
     {
         string deviceId = new DeviceIdBuilder()
             .AddMachineName()

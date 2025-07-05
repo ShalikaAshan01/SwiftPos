@@ -60,6 +60,8 @@ namespace PointOfSales.PostgressProvider
                 services.AddTransient<IGroupRepository, GroupRepository>();
                 services.AddTransient<IUserGroupRepository, UserGroupRepository>();
                 services.AddTransient<IGroupPermissionRepository, GroupPermissionRepository>();
+                services.AddTransient<IAuditLogRepository, AuditLogRepository>();
+                services.AddTransient<IDeviceRepository, DeviceRepository>();
                 services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             }catch (Exception ex)
