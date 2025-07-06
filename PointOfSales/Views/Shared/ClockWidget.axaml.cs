@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Avalonia.Controls;
 using Avalonia.Threading;
 
@@ -20,8 +21,8 @@ namespace PointOfSales.Views.Shared
             _timer.Tick += (_, _) =>
             {
                 var now = DateTime.Now;
-                TimeText.Text = now.ToString("hh:mm:ss tt");
-                DateText.Text = now.ToString("dddd, MMMM d, yyyy");
+                TimeText.Text = now.ToString("hh:mm:ss", CultureInfo.CurrentCulture);
+                DateText.Text = now.ToString("dddd, MMMM d, yyyy", CultureInfo.CurrentCulture);
             };
 
             _timer.Start();

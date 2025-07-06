@@ -9,6 +9,11 @@
       "PointOfSales.Globalization/1.0.0": {
         "runtime": {
           "PointOfSales.Globalization.dll": {}
+        },
+        "resources": {
+          "ru/PointOfSales.Globalization.resources.dll": {
+            "locale": "ru"
+          }
         }
       }
     }

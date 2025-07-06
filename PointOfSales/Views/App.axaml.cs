@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -21,6 +23,8 @@ namespace PointOfSales.Views
         public static MainWindow MainWindowInstance { get; private set; }
         public override void Initialize()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("ru-RU");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
             AvaloniaXamlLoader.Load(this);
         }
 

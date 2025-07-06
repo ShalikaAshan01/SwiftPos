@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PointOfSales.Globalization")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19f60f42122c083e8c7543c53f28426542896124")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b61501a588df7073f8a97661cdfad7d346042ac")]
 [assembly: System.Reflection.AssemblyProductAttribute("PointOfSales.Globalization")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PointOfSales.Globalization")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
