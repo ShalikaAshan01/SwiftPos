@@ -86,5 +86,35 @@ namespace PointOfSales.Globalization.Resources {
                 return ResourceManager.GetString("LoginLabel", resourceCulture);
             }
         }
+        
+        public static string Location {
+            get {
+                return ResourceManager.GetString("Location", resourceCulture);
+            }
+        }
+        
+        public static string LocationCodeLabel {
+            get {
+                return ResourceManager.GetString("LocationCodeLabel", resourceCulture);
+            }
+        }
+        
+        public static string ConnectivityLabel {
+            get {
+                return ResourceManager.GetString("ConnectivityLabel", resourceCulture);
+            }
+        }
+        
+        public static string ConnectedLabel {
+            get {
+                return ResourceManager.GetString("ConnectedLabel", resourceCulture);
+            }
+        }
+        
+        public static string DisconnectedLabel {
+            get {
+                return ResourceManager.GetString("DisconnectedLabel", resourceCulture);
+            }
+        }
     }
 }

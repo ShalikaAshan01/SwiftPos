@@ -21,6 +21,7 @@ namespace PointOfSales.Utils
             collection.AddTransient<ISystemInformation, SystemInformation>();
             collection.AddTransient<IInfrastructureEngine, InfrastructureEngine>();
             collection.AddTransient<IShiftEngine, ShiftEngine>();
+            collection.AddSingleton<ConnectivityHelper>();
         }
     }
 }

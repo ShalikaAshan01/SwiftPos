@@ -138,4 +138,19 @@
   <data name="LoginLabel" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="LocationCodeLabel" xml:space="preserve">
+    <value>Location Code:</value>
+  </data>
+  <data name="ConnectivityLabel" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="ConnectedLabel" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="DisconnectedLabel" xml:space="preserve">
+    <value>Disconnected</value>
+  </data>
 </root>

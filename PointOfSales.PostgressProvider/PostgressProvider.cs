@@ -68,7 +68,7 @@ namespace PointOfSales.PostgressProvider
                 services.AddTransient<IUserShiftRepository, UserShiftRepository>();
                 services.AddTransient<ICompanyRepository, CompanyRepository>();
                 services.AddTransient<IUnitOfWork, UnitOfWork>();
-
+                services.AddSingleton<ILocalConnectivity, LocalDbConnectivity>(x => new LocalDbConnectivity(localDb));
             }catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to create or verify the database.");
