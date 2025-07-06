@@ -12,6 +12,7 @@ public static class Configurations
     public static bool? IsServer => GetValue<bool?>(nameof(IsServer), null);
     public static bool? IsLocationServer => GetValue<bool?>(nameof(IsLocationServer), null);
     public static bool EnablePos => GetValue<bool>(nameof(EnablePos), false);
+    public static bool VirtualKeyboardEnabled => GetValue<bool>(nameof(VirtualKeyboardEnabled), true);
     public static bool EnableBackOffice => GetValue<bool>(nameof(EnableBackOffice), false);
     public static bool? AutoAssignNewPermissionToAdmin => GetValue<bool?>(nameof(AutoAssignNewPermissionToAdmin), null);
     public static string StoreName => GetNotNullValue(nameof(StoreName), string.Empty);

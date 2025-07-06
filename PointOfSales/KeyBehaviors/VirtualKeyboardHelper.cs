@@ -7,6 +7,7 @@ using Avalonia.Interactivity;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 using PointOfSales.Core.Keyboard;
+using PointOfSales.Engine.Utils;
 using PointOfSales.Views.Shared;
 
 namespace PointOfSales.KeyBehaviors;
@@ -18,6 +19,7 @@ public static class VirtualKeyboardHelper
     private static TextBox? _currentTextBox;
     private static bool _keyboardManuallyClosed = false;
     private static bool _isKeyboardOpening = false;
+    public static bool IsGloballyEnabled { get; set; } = true;
     public static bool CapsLock { get; set; } = false;
 
 
@@ -63,6 +65,8 @@ public static class VirtualKeyboardHelper
 
         private void OnGotFocus(object? sender, RoutedEventArgs e)
         {
+            if (!IsGloballyEnabled || !Configurations.VirtualKeyboardEnabled)
+                return;
             if (sender is not TextBox textBox) return;
 
             if (_keyboardManuallyClosed && (_keyboardWindow == null || !_keyboardWindow.IsVisible))
