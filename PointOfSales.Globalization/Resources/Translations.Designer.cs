@@ -116,5 +116,17 @@ namespace PointOfSales.Globalization.Resources {
                 return ResourceManager.GetString("DisconnectedLabel", resourceCulture);
             }
         }
+        
+        public static string WelcomeBackLabel {
+            get {
+                return ResourceManager.GetString("WelcomeBackLabel", resourceCulture);
+            }
+        }
+        
+        public static string PleaseChooseAnActionToContinue {
+            get {
+                return ResourceManager.GetString("PleaseChooseAnActionToContinue", resourceCulture);
+            }
+        }
     }
 }

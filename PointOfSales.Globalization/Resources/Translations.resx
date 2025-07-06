@@ -153,4 +153,10 @@
   <data name="DisconnectedLabel" xml:space="preserve">
     <value>Disconnected</value>
   </data>
+  <data name="WelcomeBackLabel" xml:space="preserve">
+    <value>Welcome back,</value>
+  </data>
+  <data name="PleaseChooseAnActionToContinue" xml:space="preserve">
+    <value>Please choose an action to continue</value>
+  </data>
 </root>

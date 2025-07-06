@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:PointOfSales.ViewModels"
              xmlns:shared="clr-namespace:PointOfSales.Views.Shared"
+             xmlns:lang="clr-namespace:PointOfSales.Globalization.Resources;assembly=PointOfSales.Globalization"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PointOfSales.Views.UserControls.Onboarding"
@@ -58,7 +59,7 @@
 
                 <!-- Username -->
                 <StackPanel VerticalAlignment="Center" Spacing="4">
-                    <TextBlock Text="Welcome back," 
+                    <TextBlock Text="{x:Static lang:Translations.WelcomeBackLabel}" 
                                FontSize="16" 
                                Foreground="#666"
                                HorizontalAlignment="Left"/>
@@ -71,7 +72,7 @@
             </StackPanel>
 
             <!-- Instruction -->
-            <TextBlock Text="Please choose an action to continue"
+            <TextBlock Text="{x:Static lang:Translations.PleaseChooseAnActionToContinue}"
                        FontSize="14"
                        Foreground="#666"
                        HorizontalAlignment="Center" />
