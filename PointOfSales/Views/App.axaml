@@ -64,6 +64,7 @@
             <Setter Property="CornerRadius" Value="8" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Cursor">Hand</Setter>
         </ControlTheme>
 
         <Thickness x:Key="Padding">5</Thickness>
@@ -81,6 +82,7 @@
             <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
             <Setter Property="FontSize" Value="{StaticResource TxtMd}" />
             <Setter Property="Padding" Value="30 15" />
+            <Setter Property="Cursor">Hand</Setter>
         </Style>
         <Style Selector="Button:pressed /template/ ContentPresenter">
             <Setter Property="Background" Value="{StaticResource PrimaryColorPressed}"/>
