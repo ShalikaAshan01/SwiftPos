@@ -105,6 +105,13 @@ namespace PointOfSales.ViewModels
                 var permission = PermissionCodes.GetPermissionId(PermissionCodes.LoginToSystem);
                 var engine = GetEngine<IAuthenticationEngine>();
                 var user = await engine.AuthenticateUserAsync(_username, _password);
+                var permissions = await engine.GetPermissionsAsync(user.UserId);
+
+                if (!permissions.ContainsKey(PermissionCodes.GetPermissionId(PermissionCodes.LoginToSystem)))
+                {
+                    throw new SwiftException(ApplicationErrors.PermissionDenied);
+                }
+                
                 var activityLog = new ActivityLog
                 {
                     PermissionId = permission,
@@ -119,7 +126,7 @@ namespace PointOfSales.ViewModels
                 device.LastActiveTime = DateTime.UtcNow;
 
                 await GetEngine<IUnitOfWork>().SaveChangesAsync();
-                GlobalAuthenticator.Authenticate(user, company, location, device);
+                GlobalAuthenticator.Authenticate(user,permissions, company, location, device);
             }
             catch (Exception e)
             {

@@ -61,4 +61,7 @@ Please try again after {0}</value>
     <data name="CompanyNotActive" xml:space="preserve">
         <value>Company ({0}) is currently inactive. Access is not allowed.</value>
     </data>
+    <data name="PermissionDenied" xml:space="preserve">
+        <value>You are not authorized to use this feature. Please contact your system administrator if you believe this is an error.</value>
+    </data>
 </root>

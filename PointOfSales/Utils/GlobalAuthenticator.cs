@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PointOfSales.Core.Entities.Infrastructure;
 using PointOfSales.Core.Entities.Security;
 
@@ -13,6 +14,7 @@ namespace PointOfSales.Utils
         private static Company? _company;
         private static Location? _location;
         private static Device? _device;
+        private static Dictionary<short, bool> _userPermissions = new();
 
         public static bool IsAuthenticated
         {
@@ -99,13 +101,27 @@ namespace PointOfSales.Utils
             }
         }
 
+        public static Dictionary<short, bool> UserPermissions
+        {
+            get
+            {
+                lock (Lock) return _userPermissions;
+            }
+            set
+            {
+                _userPermissions = value;
+                OnPermissionChanged?.Invoke(_userPermissions);
+            }
+        }
+
         public static event Action<bool>? AuthChanged;
         public static event Action<User>? AuthChangedUser;
         public static event Action<Company>? OnChangedCompany;
         public static event Action<Location>? OnChangedLocation;
         public static event Action<Device>? OnChangedDevice;
+        public static event Action<Dictionary<short ,bool>>? OnPermissionChanged;
 
-        public static void Authenticate(User user, Company company, Location location, Device device)
+        public static void Authenticate(User user, Dictionary<short, bool> userPermissions,Company company, Location location, Device device)
         {
             lock (Lock)
             {
@@ -113,6 +129,7 @@ namespace PointOfSales.Utils
                 CurrentCompany = company;
                 CurrentLocation = location;
                 CurrentDevice = device;
+                UserPermissions = userPermissions;
                 IsAuthenticated = true;
             }
         }

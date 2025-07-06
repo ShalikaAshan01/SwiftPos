@@ -42,4 +42,10 @@ public class AuthenticationEngine(IUnitOfWork unitOfWork, IEncryptionService enc
         }
         return user;
     }
+
+    public async Task<Dictionary<short, bool>> GetPermissionsAsync(int userId)
+    {
+        var groupPermissions = await unitOfWork.UserGroupRepository.GetUserGroupPermissionsByUserId(userId);
+        return groupPermissions.ToDictionary(d => d.permissionId, v => v.isMfaRequred);
+    }
 }
