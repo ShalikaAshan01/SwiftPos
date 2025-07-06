@@ -12,12 +12,12 @@
             Margin="8">
         <StackPanel Spacing="4" VerticalAlignment="Center">
             <TextBlock x:Name="TimeText"
-                       FontSize="24"
-                       FontWeight="Bold"
-                       Foreground="White"/>
+                       Theme="{StaticResource TitleTextStyle}"
+                       Foreground="{StaticResource InvertTextColor}"
+                       />
             <TextBlock x:Name="DateText"
-                       FontSize="13"
-                       Foreground="#CCCCCC"/>
+                       Theme="{StaticResource SubtitleTextStyleS1}"
+                       />
         </StackPanel>
     </Border>
 </UserControl>

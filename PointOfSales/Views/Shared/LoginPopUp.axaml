@@ -31,13 +31,7 @@
                        Theme="{StaticResource SubtitleTextStyle}" />
 
             <TextBlock Text="{Binding ErrorMessage}" 
-                       Foreground="Red" 
-                       FontWeight="Bold" 
-                       HorizontalAlignment="Center"
-                       FontSize="12"
-                         TextWrapping="Wrap"
-                       TextAlignment="Center"
-                       Margin="0,4,0,0"
+                       Theme="{StaticResource ErrorTextStyle}"
                        IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyToBoolConverter}}"/>
 
             <TextBox x:Name="UsernameBox"  Watermark="{x:Static lang:Translations.EnterYourUserName}"

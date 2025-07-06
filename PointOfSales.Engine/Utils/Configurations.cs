@@ -11,8 +11,8 @@ public static class Configurations
     public static int SplashScreenTime => GetValue(nameof(SplashScreenTime), 0);
     public static bool? IsServer => GetValue<bool?>(nameof(IsServer), null);
     public static bool? IsLocationServer => GetValue<bool?>(nameof(IsLocationServer), null);
-    public static bool? EnablePos => GetValue<bool?>(nameof(EnablePos), null);
-    public static bool? EnableBackOffice => GetValue<bool?>(nameof(EnableBackOffice), null);
+    public static bool EnablePos => GetValue<bool>(nameof(EnablePos), false);
+    public static bool EnableBackOffice => GetValue<bool>(nameof(EnableBackOffice), false);
     public static bool? AutoAssignNewPermissionToAdmin => GetValue<bool?>(nameof(AutoAssignNewPermissionToAdmin), null);
     public static string StoreName => GetNotNullValue(nameof(StoreName), string.Empty);
     public static string StoreAddress => GetNotNullValue(nameof(StoreAddress), string.Empty);

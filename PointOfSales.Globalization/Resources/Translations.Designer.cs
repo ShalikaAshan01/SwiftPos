@@ -128,5 +128,35 @@ namespace PointOfSales.Globalization.Resources {
                 return ResourceManager.GetString("PleaseChooseAnActionToContinue", resourceCulture);
             }
         }
+        
+        public static string InvoicingLabel {
+            get {
+                return ResourceManager.GetString("InvoicingLabel", resourceCulture);
+            }
+        }
+        
+        public static string BackOfficeLabel {
+            get {
+                return ResourceManager.GetString("BackOfficeLabel", resourceCulture);
+            }
+        }
+        
+        public static string StartShiftLabel {
+            get {
+                return ResourceManager.GetString("StartShiftLabel", resourceCulture);
+            }
+        }
+        
+        public static string ENdShiftLabel {
+            get {
+                return ResourceManager.GetString("ENdShiftLabel", resourceCulture);
+            }
+        }
+        
+        public static string ExitLabel {
+            get {
+                return ResourceManager.GetString("ExitLabel", resourceCulture);
+            }
+        }
     }
 }

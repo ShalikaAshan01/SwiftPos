@@ -12,10 +12,17 @@
         <Color x:Key="PrimaryColor">#006FEF</Color>
         <Color x:Key="PrimaryColorHover">#1a84ff</Color>
         <Color x:Key="PrimaryColorPressed">#0056bc</Color>
+        <Color x:Key="OnboardingPosButton">#006FEF</Color>
+        <Color x:Key="OnboardingExitButton">#DC3545</Color>
+        <Color x:Key="OnboardingEndShiftButton">#FFC107</Color>
+        <Color x:Key="OnboardingStartButton">#17A2B8</Color>
+        <Color x:Key="OnboardingBackOfficeButton">#28A745</Color>
 
         <Color x:Key="PrimaryColorForeground">White</Color>
+        <Color x:Key="InvertTextColor">White</Color>
         <Color x:Key="MutedColor">Gray</Color>
         <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+        <system:Double x:Key="TxtSm">14</system:Double>
         <system:Double x:Key="TxtMd">16</system:Double>
         <system:Double x:Key="TxtLg">22</system:Double>
         <CornerRadius x:Key="BorderRadius">8</CornerRadius>
@@ -24,10 +31,41 @@
             <Setter Property="FontSize" Value="{StaticResource TxtLg}"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </ControlTheme>
+        
         <ControlTheme x:Key="SubtitleTextStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="{StaticResource TxtMd}"/>
             <Setter Property="Foreground" Value="{StaticResource MutedColor}"></Setter>
         </ControlTheme>
+        
+        <ControlTheme x:Key="SubtitleTextStyleS1" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="{StaticResource TxtSm}"/>
+            <Setter Property="Foreground" Value="{StaticResource MutedColor}"></Setter>
+        </ControlTheme>
+        <ControlTheme x:Key="BodyTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="{StaticResource TxtMd}"/>
+        </ControlTheme>
+        <ControlTheme x:Key="BodyTextStyle2" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="{StaticResource TxtLg}"/>
+        </ControlTheme>
+
+        <ControlTheme x:Key="ErrorTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource SystemErrorTextColor}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,4,0,0"/>
+        </ControlTheme>
+        <ControlTheme x:Key="OnboardingButtonStyle" TargetType="Button">
+            <Setter Property="MinWidth" Value="120" />
+            <Setter Property="Foreground" Value="{StaticResource PrimaryColorForeground}" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </ControlTheme>
+
         <Thickness x:Key="Padding">5</Thickness>
         <Thickness x:Key="Margin">8</Thickness>
         <system:Double x:Key="Spacing">16</system:Double>

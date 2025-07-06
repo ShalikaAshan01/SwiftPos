@@ -159,4 +159,19 @@
   <data name="PleaseChooseAnActionToContinue" xml:space="preserve">
     <value>Please choose an action to continue</value>
   </data>
+  <data name="InvoicingLabel" xml:space="preserve">
+    <value>Invoicing</value>
+  </data>
+  <data name="BackOfficeLabel" xml:space="preserve">
+    <value>Back Office</value>
+  </data>
+  <data name="StartShiftLabel" xml:space="preserve">
+    <value>Start Shift</value>
+  </data>
+  <data name="ENdShiftLabel" xml:space="preserve">
+    <value>End Shift</value>
+  </data>
+  <data name="ExitLabel" xml:space="preserve">
+    <value>Exit</value>
+  </data>
 </root>

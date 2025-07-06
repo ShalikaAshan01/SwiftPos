@@ -13,22 +13,22 @@
     <Grid Margin="8">
         <!-- Define rows: first for toolbar/clock, second for main content -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Toolbar + Clock on top row -->
         <Grid Grid.Row="0" Height="110">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <!-- ToolbarStatusWidget on the left -->
-            <shared:ToolbarStatusWidget Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <shared:ToolbarStatusWidget Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
-            <shared:ClockWidget Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            <shared:ClockWidget Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" />
         </Grid>
 
         <!-- Main content stack below -->
@@ -40,82 +40,69 @@
 
             <!-- Company Name -->
             <TextBlock Text="{Binding Path=CompanyName}"
-                       FontSize="18"
                        FontWeight="SemiBold"
                        HorizontalAlignment="Center"
-                       Foreground="#444"/>
-            
+                       Theme="{StaticResource TitleTextStyle}" />
+
             <!-- Location Address -->
             <TextBlock Text="{Binding Address}"
-                       FontSize="14"
                        FontWeight="Normal"
                        HorizontalAlignment="Center"
-                       Foreground="#666"/>
+                       Theme="{StaticResource SubtitleTextStyle}" />
 
             <!-- User Info -->
             <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <!-- User Image Placeholder -->
-                <shared:UserImage/>
+                <shared:UserImage />
 
                 <!-- Username -->
                 <StackPanel VerticalAlignment="Center" Spacing="4">
-                    <TextBlock Text="{x:Static lang:Translations.WelcomeBackLabel}" 
-                               FontSize="16" 
-                               Foreground="#666"
-                               HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding DisplayName}" 
-                               FontSize="20" 
-                               FontWeight="Bold" 
-                               Foreground="#333"
-                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="{x:Static lang:Translations.WelcomeBackLabel}"
+                               Theme="{StaticResource BodyTextStyle}"
+                               HorizontalAlignment="Left" />
+                    <TextBlock Text="{Binding DisplayName}"
+                               Theme="{StaticResource BodyTextStyle2}"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Left" />
                 </StackPanel>
             </StackPanel>
 
             <!-- Instruction -->
             <TextBlock Text="{x:Static lang:Translations.PleaseChooseAnActionToContinue}"
-                       FontSize="14"
-                       Foreground="#666"
+                       Theme="{StaticResource SubtitleTextStyleS1}"
                        HorizontalAlignment="Center" />
 
             <!-- Primary Actions -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="16">
-                <Button Content="POS"
-                        MinWidth="120"
-                        Background="#007BFF"
-                        Foreground="White"
-                        FontWeight="Bold"
-                        CornerRadius="8"/>
+                <Button Content="{x:Static lang:Translations.InvoicingLabel}"
+                        Background="{StaticResource OnboardingPosButton}"
+                        Theme="{StaticResource OnboardingButtonStyle}"
+                        IsEnabled="{Binding CanInvoice}" />
 
-                <Button Content="Back Office"
-                        MinWidth="140"
-                        Background="#28A745"
-                        Foreground="White"
-                        FontWeight="Bold"
-                        CornerRadius="8"/>
+                <Button Content="{x:Static lang:Translations.BackOfficeLabel}"
+                        Background="{StaticResource OnboardingBackOfficeButton}"
+                        Theme="{StaticResource OnboardingButtonStyle}"
+                        IsEnabled="{Binding CanBackOffice}" />
             </StackPanel>
 
             <!-- Secondary Actions -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
-                <Button Content="Start Shift"
-                        MinWidth="110"
-                        Background="#17A2B8"
-                        Foreground="White"
-                        FontSize="13"
-                        CornerRadius="6"/>
+                <Button Content="{x:Static lang:Translations.StartShiftLabel}"
+                        Background="{StaticResource OnboardingStartButton}"
+                        Theme="{StaticResource OnboardingButtonStyle}"
+                        IsEnabled="{Binding CanStartShift}"
+                        />
 
-                <Button Content="End Shift"
-                        MinWidth="110"
-                        Background="#FFC107"
-                        Foreground="White"
-                        FontSize="13"
-                        CornerRadius="6"/>
+                <Button Content="{x:Static lang:Translations.ENdShiftLabel}"
+                        Background="{StaticResource OnboardingEndShiftButton}"
+                        IsEnabled="{Binding CanEndShift}"
+                        Theme="{StaticResource OnboardingButtonStyle}"
+                        />
 
-                <Button Content="Sign Off"
-                        MinWidth="110"
-                        Background="#DC3545"
-                        Foreground="White"
-                        FontSize="13"
-                        CornerRadius="6"/>
+                <Button Content="{x:Static lang:Translations.ExitLabel}"
+                        Background="{StaticResource OnboardingExitButton}"
+                        Theme="{StaticResource OnboardingButtonStyle}"
+                        />
             </StackPanel>
         </StackPanel>
     </Grid>
