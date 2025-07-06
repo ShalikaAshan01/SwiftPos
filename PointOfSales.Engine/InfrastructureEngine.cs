@@ -4,7 +4,7 @@ using PointOfSales.Core.IEngines;
 
 namespace PointOfSales.Engine;
 
-public class DeviceEngine(IUnitOfWork unitOfWork) : IDeviceEngine
+public class InfrastructureEngine(IUnitOfWork unitOfWork) : IInfrastructureEngine
 {
     public async Task<Device> RegisterDeviceAsync(string uniqueCode, short locationId)
     {
@@ -20,5 +20,15 @@ public class DeviceEngine(IUnitOfWork unitOfWork) : IDeviceEngine
     public Task<Device?> GetDeviceByUniqueCode(string uniqueCode)
     {
         return unitOfWork.DeviceRepository.GetByUniqueCode(uniqueCode);
+    }
+
+    public Task<Company?> GetCompanyById(byte id)
+    {
+        return unitOfWork.CompanyRepository.GetByIdAsync(id);
+    }
+
+    public Task<Location?> GetLocationById(short id)
+    {
+        return unitOfWork.LocationRepository.GetByIdAsync(id);
     }
 }

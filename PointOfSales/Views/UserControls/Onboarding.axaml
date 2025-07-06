@@ -10,16 +10,26 @@
              x:DataType="viewModels:OnboardingViewModel">
 
     <Grid>
+        
+        <shared:ClockWidget HorizontalAlignment="Right" VerticalAlignment="Top"/>
+
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="24">
             <!-- Company Logo -->
             <Border Margin="0,24,0,0" Width="150" HorizontalAlignment="Center" CornerRadius="12">
                 <shared:CompanyLogo />
             </Border>
+
+            <!-- Company Name -->
+            <TextBlock Text="Swift Technologies (Pvt) Ltd"
+                       FontSize="18"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
+                       Foreground="#444"/>
+
             <!-- User Info -->
             <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Center">
-
                 <!-- User Image Placeholder -->
-                <Border Width="64" Height="64" CornerRadius="32" Background="#DDD" ClipToBounds="True" >
+                <Border Width="64" Height="64" CornerRadius="32" Background="#DDD" ClipToBounds="True">
                     <shared:Logo Width="64" Height="64"/>
                 </Border>
 
@@ -29,7 +39,7 @@
                                FontSize="16" 
                                Foreground="#666"
                                HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding Path=DisplayName}" 
+                    <TextBlock Text="{Binding DisplayName}" 
                                FontSize="20" 
                                FontWeight="Bold" 
                                Foreground="#333"
@@ -37,7 +47,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <!-- Instruction Text -->
+            <!-- Instruction -->
             <TextBlock Text="Please choose an action to continue"
                        FontSize="14"
                        Foreground="#666"
@@ -50,16 +60,14 @@
                         Background="#007BFF"
                         Foreground="White"
                         FontWeight="Bold"
-                        CornerRadius="8"
-                        HorizontalContentAlignment="Center"/>
+                        CornerRadius="8"/>
 
                 <Button Content="Back Office"
                         MinWidth="140"
                         Background="#28A745"
                         Foreground="White"
                         FontWeight="Bold"
-                        CornerRadius="8"
-                        HorizontalContentAlignment="Center"/>
+                        CornerRadius="8"/>
             </StackPanel>
 
             <!-- Secondary Actions -->
@@ -69,24 +77,21 @@
                         Background="#17A2B8"
                         Foreground="White"
                         FontSize="13"
-                        CornerRadius="6"
-                        HorizontalContentAlignment="Center"/>
+                        CornerRadius="6"/>
 
                 <Button Content="End Shift"
                         MinWidth="110"
                         Background="#FFC107"
                         Foreground="White"
                         FontSize="13"
-                        CornerRadius="6"
-                        HorizontalContentAlignment="Center"/>
+                        CornerRadius="6"/>
 
                 <Button Content="Sign Off"
                         MinWidth="110"
                         Background="#DC3545"
                         Foreground="White"
                         FontSize="13"
-                        CornerRadius="6"
-                        HorizontalContentAlignment="Center"/>
+                        CornerRadius="6"/>
             </StackPanel>
         </StackPanel>
     </Grid>

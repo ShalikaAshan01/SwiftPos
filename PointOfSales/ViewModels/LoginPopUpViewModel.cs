@@ -69,7 +69,8 @@ namespace PointOfSales.ViewModels
                 }
 
                 //check the location
-                var location = await GetEngine<ILocationEngine>().GetLocationById(Configurations.StoreId);
+                var infrastructureEngine = GetEngine<IInfrastructureEngine>();
+                var location = await infrastructureEngine.GetLocationById(Configurations.StoreId);
                 if (location == null || location.IsDeleted)
                 {
                     throw new SwiftException(ApplicationErrors.LocationNotAvailable, Configurations.StoreId);
@@ -80,7 +81,26 @@ namespace PointOfSales.ViewModels
                     throw new SwiftException(ApplicationErrors.LocationNotActive, location.LocationName);
                 }
 
+                if (!location.CompanyId.HasValue)
+                {
+                    throw new SwiftException(ApplicationErrors.CompanyIdNull);
+                }
+                var company = await infrastructureEngine.GetCompanyById(location.CompanyId.Value);
+                if (company == null || company.IsDeleted)
+                {
+                    throw new SwiftException(ApplicationErrors.CompanyNotFound, location.CompanyId.Value);
+                }
+
+                if (!company.IsActive)
+                {
+                    throw new SwiftException(ApplicationErrors.CompanyNotActive, company.CompanyName);
+                }
+
                 var device = await HandleDevice();
+                if (device == null)
+                {
+                    throw new SwiftException(ApplicationErrors.DeviceNotFound);
+                }
 
                 var permission = PermissionCodes.GetPermissionId(PermissionCodes.LoginToSystem);
                 var engine = GetEngine<IAuthenticationEngine>();
@@ -96,13 +116,10 @@ namespace PointOfSales.ViewModels
                     UserId = user.UserId
                 };
                 await GetEngine<IUnitOfWork>().AuditLogRepository.WriteToLogAsync(activityLog);
-                if (device != null)
-                {
-                    device.LastActiveTime = DateTime.UtcNow;
-                }
+                device.LastActiveTime = DateTime.UtcNow;
 
                 await GetEngine<IUnitOfWork>().SaveChangesAsync();
-                GlobalAuthenticator.Authenticate(user);
+                GlobalAuthenticator.Authenticate(user, new Company(), location, device);
             }
             catch (Exception e)
             {
@@ -128,7 +145,7 @@ namespace PointOfSales.ViewModels
         {
             Device? device = null;
             string machineUniqueCode = GetEngine<ISystemInformation>().GetMachineUniqueCode();
-            var deviceEngine = GetEngine<IDeviceEngine>();
+            var deviceEngine = GetEngine<IInfrastructureEngine>();
             bool rewriteIni = false;
             if (Configurations.MachineId == short.MinValue)
             {

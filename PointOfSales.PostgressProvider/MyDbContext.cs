@@ -24,4 +24,5 @@ public class MyDbContext : DbContext
     public DbSet<BusinessDay> BusinessDays { get; set; }
     public DbSet<Shift> Shifts { get; set; }
     public DbSet<UserShift> UserShifts { get; set; }
+    public DbSet<Company> Companies { get; set; }
 }

@@ -6,6 +6,7 @@
         <entry key="Views/App.axaml" value="PointOfSales.csproj" />
         <entry key="Views/LandingScreen.axaml" value="PointOfSales.csproj" />
         <entry key="Views/MainWindow.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/Shared/ClockWidget.axaml" value="PointOfSales.csproj" />
         <entry key="Views/Shared/CompancyLogo.axaml" value="PointOfSales.csproj" />
         <entry key="Views/Shared/CompanyLogo.axaml" value="PointOfSales.csproj" />
         <entry key="Views/Shared/Login.axaml" value="PointOfSales.csproj" />

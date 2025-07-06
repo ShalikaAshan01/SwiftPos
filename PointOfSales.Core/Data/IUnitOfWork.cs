@@ -16,5 +16,6 @@ public interface IUnitOfWork
     public IBusinessDayRepository BusinessDayRepository { get; }
     public IUserShiftRepository UserShiftRepository { get; }
     public IShiftRepository ShiftRepository { get; }
+    public ICompanyRepository CompanyRepository { get; }
     Task SaveChangesAsync();
 }

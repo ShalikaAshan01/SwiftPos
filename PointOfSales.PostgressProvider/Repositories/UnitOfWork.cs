@@ -15,7 +15,8 @@ public class UnitOfWork(
     ILocationRepository locationRepository,
     IBusinessDayRepository businessDayRepository,
     IShiftRepository shiftRepository,
-    IUserShiftRepository userShiftRepository)
+    IUserShiftRepository userShiftRepository,
+    ICompanyRepository companyRepository)
     : IUnitOfWork
 {
     public IPermissionRepository PermissionRepository { get; } = permissionRepository;
@@ -29,6 +30,7 @@ public class UnitOfWork(
     public IBusinessDayRepository BusinessDayRepository { get; } = businessDayRepository;
     public IShiftRepository ShiftRepository { get; } = shiftRepository;
     public IUserShiftRepository UserShiftRepository { get; } = userShiftRepository;
+    public ICompanyRepository CompanyRepository { get; } = companyRepository;
 
     public Task SaveChangesAsync()
     {

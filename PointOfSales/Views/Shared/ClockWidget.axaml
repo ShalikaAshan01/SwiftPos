@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="PointOfSales.Views.Shared.ClockWidget"
+             Width="250" Height="90">
+
+    <Border Background="#1E1E1E"
+            CornerRadius="12"
+            Padding="12"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Right"
+            Width="240"
+            Margin="8">
+        <StackPanel Spacing="4" VerticalAlignment="Center">
+            <TextBlock x:Name="TimeText"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="White"/>
+            <TextBlock x:Name="DateText"
+                       FontSize="13"
+                       Foreground="#CCCCCC"/>
+        </StackPanel>
+    </Border>
+</UserControl>

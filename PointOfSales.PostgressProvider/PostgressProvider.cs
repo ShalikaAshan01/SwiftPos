@@ -66,6 +66,7 @@ namespace PointOfSales.PostgressProvider
                 services.AddTransient<IBusinessDayRepository, BusinessDayRepository>();
                 services.AddTransient<IShiftRepository, ShiftRepository>();
                 services.AddTransient<IUserShiftRepository, UserShiftRepository>();
+                services.AddTransient<ICompanyRepository, CompanyRepository>();
                 services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             }catch (Exception ex)

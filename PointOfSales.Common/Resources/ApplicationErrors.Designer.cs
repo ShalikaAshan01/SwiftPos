@@ -95,5 +95,8 @@ namespace PointOfSales.Common.Resources {
 
         public static string LocationNotAvailable => ResourceManager.GetString("LocationNotAvailable", resourceCulture);
         public static string LocationNotActive => ResourceManager.GetString("LocationNotActive", resourceCulture);
+        public static string CompanyIdNull => ResourceManager.GetString("CompanyIdNull", resourceCulture);
+        public static string CompanyNotActive => ResourceManager.GetString("CompanyNotActive", resourceCulture);
+        public static string CompanyNotFound => ResourceManager.GetString("CompanyNotFound", resourceCulture);
     }
 }

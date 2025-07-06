@@ -1,60 +1,132 @@
 using System;
+using PointOfSales.Core.Entities.Infrastructure;
 using PointOfSales.Core.Entities.Security;
 
-namespace PointOfSales.Utils;
-
-public static class GlobalAuthenticator
+namespace PointOfSales.Utils
 {
-    private static readonly object Lock = new();
-    private static bool _isAuthenticated;
-    private static User? _user;
-
-    public static bool IsAuthenticated
+    public static class GlobalAuthenticator
     {
-        get
+        private static readonly object Lock = new();
+
+        private static bool _isAuthenticated;
+        private static User? _user;
+        private static Company? _company;
+        private static Location? _location;
+        private static Device? _device;
+
+        public static bool IsAuthenticated
         {
-            lock (Lock) return _isAuthenticated;
+            get
+            {
+                lock (Lock) return _isAuthenticated;
+            }
+            set
+            {
+                lock (Lock)
+                {
+                    if (_isAuthenticated == value) return;
+                    _isAuthenticated = value;
+                    AuthChanged?.Invoke(_isAuthenticated);
+                }
+            }
         }
-        set
+
+        public static User? CurrentUser
+        {
+            get
+            {
+                lock (Lock) return _user;
+            }
+            set
+            {
+                lock (Lock)
+                {
+                    _user = value;
+                    if (_user != null)
+                        AuthChangedUser?.Invoke(_user);
+                }
+            }
+        }
+
+        public static Company? CurrentCompany
+        {
+            get
+            {
+                lock (Lock) return _company;
+            }
+            set
+            {
+                lock (Lock)
+                {
+                    _company = value;
+                    if (_company != null)
+                        OnChangedCompany?.Invoke(_company);
+                }
+            }
+        }
+
+        public static Location? CurrentLocation
+        {
+            get
+            {
+                lock (Lock) return _location;
+            }
+            set
+            {
+                lock (Lock)
+                {
+                    _location = value;
+                    if (_location != null)
+                        OnChangedLocation?.Invoke(_location);
+                }
+            }
+        }
+
+        public static Device? CurrentDevice
+        {
+            get
+            {
+                lock (Lock) return _device;
+            }
+            set
+            {
+                lock (Lock)
+                {
+                    _device = value;
+                    if (_device != null)
+                        OnChangedDevice?.Invoke(_device);
+                }
+            }
+        }
+
+        public static event Action<bool>? AuthChanged;
+        public static event Action<User>? AuthChangedUser;
+        public static event Action<Company>? OnChangedCompany;
+        public static event Action<Location>? OnChangedLocation;
+        public static event Action<Device>? OnChangedDevice;
+
+        public static void Authenticate(User user, Company company, Location location, Device device)
         {
             lock (Lock)
             {
-                if (_isAuthenticated == value) return;
-                _isAuthenticated = value;
-                AuthChanged?.Invoke(_isAuthenticated);
+                CurrentUser = user;
+                CurrentCompany = company;
+                CurrentLocation = location;
+                CurrentDevice = device;
+                IsAuthenticated = true;
             }
         }
-    }
 
-    public static User? CurrentUser
-    {
-        get
+        public static void Logout()
         {
-            lock (Lock) return _user;
-        }
-        set
-        {
-            lock (Lock) { _user = value; }
-        }
-    }
-
-    public static event Action<bool>? AuthChanged;
-
-    public static void Authenticate(User user)
-    {
-        lock (Lock)
-        {
-            _user = user ?? throw new ArgumentNullException(nameof(user));
-            IsAuthenticated = true;
-        }
-    }
-
-    public static void Logout()
-    {
-        lock (Lock)
-        {
-            _user = null;
-            IsAuthenticated = false;
+            lock (Lock)
+            {
+                _user = null;
+                _company = null;
+                _location = null;
+                _device = null;
+                IsAuthenticated = false;
+            }
         }
     }
 }

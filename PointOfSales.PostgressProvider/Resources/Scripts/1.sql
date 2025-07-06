@@ -217,8 +217,8 @@ CREATE TABLE IF NOT EXISTS "pos"."Shift"
     "EndTime"       TIMESTAMPTZ,
     "OpenedBy"      INTEGER REFERENCES "Security"."User" ("UserId"),
     "ClosedBy"      INTEGER REFERENCES "Security"."User" ("UserId"),
-    "Status"        TEXT,
-
+    "OpeningBalance" NUMERIC(12, 2),
+    "ClosingBalance" NUMERIC(12, 2),
     -- BaseEntity fields
     "IsActive"      BOOLEAN     DEFAULT TRUE,
     "IsDeleted"     BOOLEAN     DEFAULT FALSE,
@@ -252,3 +252,41 @@ CREATE TABLE IF NOT EXISTS "pos"."UserShift"
     "IsSyncStarted"       BOOLEAN     DEFAULT FALSE,
     "IsSyncEnd"           BOOLEAN     DEFAULT FALSE
 );
+
+DO $$
+    BEGIN
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure' AND table_name = 'Company' AND column_name = 'CompanyCode'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Company" ADD COLUMN "CompanyCode" VARCHAR(5);
+        END IF;
+
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure' AND table_name = 'Company' AND column_name = 'CompanyAddress'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Company" ADD COLUMN "CompanyAddress" VARCHAR(255);
+        END IF;
+
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure' AND table_name = 'Company' AND column_name = 'CompanyPhone'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Company" ADD COLUMN "CompanyPhone" VARCHAR(255);
+        END IF;
+
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure' AND table_name = 'Company' AND column_name = 'CompanyEmail'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Company" ADD COLUMN "CompanyEmail" VARCHAR(255);
+        END IF;
+
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure' AND table_name = 'Company' AND column_name = 'CompanyWebsite'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Company" ADD COLUMN "CompanyWebsite" VARCHAR(255);
+        END IF;
+    END $$;

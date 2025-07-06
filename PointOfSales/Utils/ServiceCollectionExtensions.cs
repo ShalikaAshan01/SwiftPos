@@ -19,8 +19,7 @@ namespace PointOfSales.Utils
             collection.AddSingleton<StartupHandler>();
             collection.AddSingleton<IAuthenticationEngine, AuthenticationEngine>();
             collection.AddTransient<ISystemInformation, SystemInformation>();
-            collection.AddTransient<IDeviceEngine, DeviceEngine>();
-            collection.AddTransient<ILocationEngine, LocationEngine>();
+            collection.AddTransient<IInfrastructureEngine, InfrastructureEngine>();
             collection.AddTransient<IShiftEngine, ShiftEngine>();
         }
     }

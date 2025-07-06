@@ -11,32 +11,50 @@ namespace PointOfSales.Views;
 public partial class MainWindow : Window
 {
     private string? _permissionCode;
+    private Window? _loginWindow;
+    private AuthorizedUserControl _currentView;
+
     public MainWindow()
     {
         InitializeComponent();
+
+        // Subscribe to auth changes
         GlobalAuthenticator.AuthChanged += OnAuthChanged;
-        // Opened += (_, _) => UpdateAuthUi();
-        // MainContent.Content = new Onboarding(); // Swap views here
+
+        // Optionally you can trigger UI update here if needed:
+        // UpdateAuthUi();
     }
-    
+
+    /// <summary>
+    /// Navigate to a specific authorized view and force login.
+    /// </summary>
     public void NavigateTo(AuthorizedUserControl view)
     {
-        // Add auth false
         _permissionCode = view.PermissionCode;
-        GlobalAuthenticator.IsAuthenticated = false;
-        UpdateAuthUi();
-        MainContent.Content = view;
-    }
-    
-    
-    private Window? _loginWindow;
 
+        // Reset auth status, so login popup triggers
+        GlobalAuthenticator.IsAuthenticated = false;
+
+        // Update UI and show login
+        UpdateAuthUi();
+
+        // Show the requested content after successful login only
+        _currentView = view;
+        MainContent.Content = _currentView;
+    }
+
+    /// <summary>
+    /// Update UI based on authentication status.
+    /// Show login popup if not authenticated.
+    /// </summary>
     private void UpdateAuthUi()
     {
         if (!GlobalAuthenticator.IsAuthenticated)
         {
+            // Login window already open? No action.
             if (_loginWindow != null) return;
-            ApplyBlurEffectToMainWindow(this);
+
+            ApplyBlurEffect();
 
             _loginWindow = new Window
             {
@@ -49,51 +67,65 @@ public partial class MainWindow : Window
                 ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome,
                 ExtendClientAreaToDecorationsHint = true,
             };
+
             _loginWindow.Closing += OnLoginWindowClosing;
 
+            // Show login modally; this blocks until closed
             _loginWindow.ShowDialog(this);
             return;
         }
-        
-        RemoveBlurEffectFromMainWindow(this);
-        _loginWindow?.Close(); // 🔐 This ensures it closes from any UI
-        _loginWindow = null;
+
+        // Authenticated: remove blur and close login window if open
+        RemoveBlurEffect();
+
+        if (_loginWindow != null)
+        {
+            // Unsubscribe event before close to avoid recursion or leaks
+            _loginWindow.Close();
+            // _loginWindow.Closing -= OnLoginWindowClosing;
+            _loginWindow = null;
+        }
     }
-    
-    
+
+    /// <summary>
+    /// Prevent login window closing if not authenticated.
+    /// </summary>
     private void OnLoginWindowClosing(object? sender, CancelEventArgs e)
     {
         if (!GlobalAuthenticator.IsAuthenticated)
         {
-            e.Cancel = true;
-            return;
+            e.Cancel = true; // Block closing login window
         }
-
-        _loginWindow = null;
-        RemoveBlurEffectFromMainWindow(this);
+        else
+        {
+            _loginWindow = null;
+            _currentView.Reload();
+            RemoveBlurEffect();
+        }
     }
-    
+
+    /// <summary>
+    /// Called when authentication state changes.
+    /// Ensures UpdateAuthUi runs on the UI thread.
+    /// </summary>
     private void OnAuthChanged(bool isAuthenticated)
     {
-        Dispatcher.UIThread.Post(UpdateAuthUi); // Ensure runs on UI thread
+        Dispatcher.UIThread.Post(UpdateAuthUi);
     }
-    private void ApplyBlurEffectToMainWindow(Window mainWindow)
+
+    private void ApplyBlurEffect()
     {
-        if (mainWindow.Content is Control content)
+        if (Content is Control content)
         {
-            content.Effect = new BlurEffect
-            {
-                Radius = 5
-            };
+            content.Effect = new BlurEffect { Radius = 5 };
         }
     }
 
-    private void RemoveBlurEffectFromMainWindow(Window mainWindow)
+    private void RemoveBlurEffect()
     {
-        if (mainWindow.Content is Control content)
+        if (Content is Control content)
         {
             content.Effect = null;
         }
     }
-    
 }
