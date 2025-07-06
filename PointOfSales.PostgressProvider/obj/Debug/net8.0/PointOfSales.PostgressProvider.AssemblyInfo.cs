@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PointOfSales.PostgressProvider")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19f60f42122c083e8c7543c53f28426542896124")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72cf31683c8637d78f00439d0e82638bcd31a17d")]
 [assembly: System.Reflection.AssemblyProductAttribute("PointOfSales.PostgressProvider")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PointOfSales.PostgressProvider")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

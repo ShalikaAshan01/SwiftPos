@@ -6,6 +6,7 @@ namespace PointOfSales.Core.Constants
     {
         public const string CreateUser = "U0001";
         public const string LoginToSystem = "AU001";
+        public const string AccessBackOffice = "B0001";
 
         public static Dictionary<string, Permission> Permissions { get; private set; } = new();
 
@@ -21,6 +22,7 @@ namespace PointOfSales.Core.Constants
         {
             { "Create User", CreateUser },
             { "Login to System", LoginToSystem },
+            { "Access Back Office", AccessBackOffice }
         };
 
         public static short GetPermissionId(string permissionCode)

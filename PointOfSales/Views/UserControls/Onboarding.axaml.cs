@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using PointOfSales.Utils;
 using PointOfSales.ViewModels;
@@ -15,4 +16,9 @@ public partial class Onboarding : AuthorizedUserControl
     }
 
     public override string PermissionCode => string.Empty;
+
+    private void NavigateToBackOffice(object? sender, RoutedEventArgs e)
+    {
+        App.MainWindowInstance.NavigateTo(new BackOffice.BackOffice());
+    }
 }

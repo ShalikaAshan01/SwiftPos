@@ -82,6 +82,7 @@
                 <Button Content="{x:Static lang:Translations.BackOfficeLabel}"
                         Background="{StaticResource OnboardingBackOfficeButton}"
                         Theme="{StaticResource OnboardingButtonStyle}"
+                        Click="NavigateToBackOffice"
                         IsEnabled="{Binding CanBackOffice}" />
             </StackPanel>
 

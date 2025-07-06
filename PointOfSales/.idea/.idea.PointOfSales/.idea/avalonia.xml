@@ -18,6 +18,7 @@
         <entry key="Views/Shared/UserImage.axaml" value="PointOfSales.csproj" />
         <entry key="Views/Shared/VirtualKeyboard.axaml" value="PointOfSales.csproj" />
         <entry key="Views/SplashScreen.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/UserControls/BackOffice/BackOffice.axaml" value="PointOfSales.csproj" />
         <entry key="Views/UserControls/Onboarding.axaml" value="PointOfSales.csproj" />
       </map>
     </option>
