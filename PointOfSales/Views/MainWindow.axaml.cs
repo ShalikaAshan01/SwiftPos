@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Threading;
+using PointOfSales.Core.Constants;
 using PointOfSales.Utils;
 using PointOfSales.Views.Shared;
 
@@ -33,7 +34,14 @@ public partial class MainWindow : Window
         _permissionCode = view.PermissionCode;
 
         // Reset auth status, so login popup triggers
-        GlobalAuthenticator.IsAuthenticated = false;
+        var hasPermission =
+            GlobalAuthenticator.UserPermissions.TryGetValue(PermissionCodes.GetPermissionId(_permissionCode),
+                out var isMfa);
+        if (!hasPermission || isMfa)
+        {
+            GlobalAuthenticator.IsAuthenticated = false;
+        }
+
 
         // Update UI and show login
         UpdateAuthUi();
