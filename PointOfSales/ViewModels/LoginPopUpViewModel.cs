@@ -119,7 +119,7 @@ namespace PointOfSales.ViewModels
                 device.LastActiveTime = DateTime.UtcNow;
 
                 await GetEngine<IUnitOfWork>().SaveChangesAsync();
-                GlobalAuthenticator.Authenticate(user, new Company(), location, device);
+                GlobalAuthenticator.Authenticate(user, company, location, device);
             }
             catch (Exception e)
             {

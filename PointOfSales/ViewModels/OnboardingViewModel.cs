@@ -3,29 +3,31 @@ using System.IO;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using PointOfSales.Core.Constants;
+using PointOfSales.Core.Entities.Infrastructure;
 using PointOfSales.Core.Entities.Security;
 using PointOfSales.Utils;
 
 namespace PointOfSales.ViewModels;
 
-public class OnboardingViewModel : ViewModelBase
+public class OnboardingViewModel : ViewModelBase, IDisposable
 {
     public OnboardingViewModel()
     {
         GlobalAuthenticator.AuthChangedUser += OnAuthChanged;
-        var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-        timer.Tick += (_, _) =>
-        {
-            CurrentTime = DateTime.Now.ToString("HH:mm:ss");
-        };
-        timer.Start();
+        GlobalAuthenticator.OnChangedCompany += OnCompanyNameChanged;
+        GlobalAuthenticator.OnChangedLocation += OnLocationChanged;
     }
-    
-    public string CurrentTime { get => _currentTime; set => SetProperty(ref _currentTime, value); }
-    private string _currentTime = DateTime.Now.ToString("HH:mm:ss");
 
+    private void OnLocationChanged(Location location)
+    {
+        LocationCode = location.LocationCode;
+        Address = location.GetFullAddress();
+    }
 
     private string _displayName = string.Empty;
+    private string _companyName = string.Empty;
+    public string _address = string.Empty;
+    public string _locationCode = string.Empty;
 
     public string DisplayName
     {
@@ -33,17 +35,42 @@ public class OnboardingViewModel : ViewModelBase
         set => SetProperty(ref _displayName, value);
     }
 
+    public string CompanyName
+    {
+        get => _companyName;
+        set => SetProperty(ref _companyName, value);
+    }
+    
+    public string Address
+    {
+        get => _address;
+        set => SetProperty(ref _address, value);
+    }
+    public string LocationCode
+    {
+        get => _locationCode;
+        set => SetProperty(ref _locationCode, value);
+    }
+
     private void OnAuthChanged(User? user)
     {
         if (user != null)
         {
-            UpdateUserInfo(user);
+            DisplayName = user.UserName;
         }
     }
 
-    private void UpdateUserInfo(User user)
+    private void OnCompanyNameChanged(Company? company)
     {
-        DisplayName = user.UserName;
-        Engine.Utils.Common.Logger.LogInfo($"User loaded: {DisplayName}");
+        if (company != null)
+        {
+            CompanyName = company.CompanyName;
+        }
+    }
+
+    public void Dispose()
+    {
+        GlobalAuthenticator.AuthChangedUser -= OnAuthChanged;
+        GlobalAuthenticator.OnChangedCompany -= OnCompanyNameChanged;
     }
 }

@@ -290,3 +290,93 @@ DO $$
             ALTER TABLE "Infrastructure"."Company" ADD COLUMN "CompanyWebsite" VARCHAR(255);
         END IF;
     END $$;
+DO $$
+    BEGIN
+        -- LocationAddress1 column
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure'
+              AND table_name = 'Location'
+              AND column_name = 'LocationAddress1'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Location"
+                ADD COLUMN "LocationAddress1" varchar(255);
+        END IF;
+
+        -- LocationAddress2 column
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure'
+              AND table_name = 'Location'
+              AND column_name = 'LocationAddress2'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Location"
+                ADD COLUMN "LocationAddress2" varchar(255);
+        END IF;
+
+        -- LocationCity column
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure'
+              AND table_name = 'Location'
+              AND column_name = 'LocationCity'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Location"
+                ADD COLUMN "LocationCity" varchar(255);
+        END IF;
+
+        -- LocationState column
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure'
+              AND table_name = 'Location'
+              AND column_name = 'LocationState'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Location"
+                ADD COLUMN "LocationState" varchar(255);
+        END IF;
+
+        -- LocationZipCode column
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure'
+              AND table_name = 'Location'
+              AND column_name = 'LocationZipCode'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Location"
+                ADD COLUMN "LocationZipCode" varchar(255);
+        END IF;
+
+        -- LocationCountry column
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure'
+              AND table_name = 'Location'
+              AND column_name = 'LocationCountry'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Location"
+                ADD COLUMN "LocationCountry" varchar(255);
+        END IF;
+
+        -- LocationPhone column
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure'
+              AND table_name = 'Location'
+              AND column_name = 'LocationPhone'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Location"
+                ADD COLUMN "LocationPhone" varchar(255);
+        END IF;
+
+        -- LocationEmail column
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'Infrastructure'
+              AND table_name = 'Location'
+              AND column_name = 'LocationEmail'
+        ) THEN
+            ALTER TABLE "Infrastructure"."Location"
+                ADD COLUMN "LocationEmail" varchar(255);
+        END IF;
+    END $$;
