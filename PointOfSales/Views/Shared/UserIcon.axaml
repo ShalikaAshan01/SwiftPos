@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PointOfSales.Views.Shared"
+             x:Class="PointOfSales.Views.Shared.UserIcon"
+             x:DataType="local:UserIcon">
+    <Border
+        Background="{Binding BackgroundBrush}"
+        CornerRadius="8"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+        <TextBlock Text="{Binding Initials}"
+                   Foreground="White"
+                   FontSize="{StaticResource TxtMd1}"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center" />
+    </Border>
+
+</UserControl>
