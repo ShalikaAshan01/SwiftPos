@@ -70,6 +70,9 @@
         <Thickness x:Key="Padding">5</Thickness>
         <Thickness x:Key="Margin">8</Thickness>
         <system:Double x:Key="Spacing">16</system:Double>
+        <DropShadowEffect x:Key="DefaultShadow"
+                          BlurRadius="12"
+                          Color="#20000000" />
     </Application.Resources>
     <Application.Styles>
         <FluentTheme />

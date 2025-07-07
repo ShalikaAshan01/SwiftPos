@@ -10,6 +10,6 @@
     <backOffice:BackOfficeSideBar/>
     <!-- Main Content -->
     <!-- <user:UserListView Grid.Column="1"/> -->
-    <logs:LogViewer Grid.Column="1" />
+    <logs:ActivityLogViewer Grid.Column="1" />
   </Grid>
 </UserControl>

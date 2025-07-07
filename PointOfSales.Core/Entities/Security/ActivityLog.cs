@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using PointOfSales.Core.Constants;
+using PointOfSales.Core.Entities.Infrastructure;
 
 namespace PointOfSales.Core.Entities.Security;
 
@@ -17,4 +18,9 @@ public class ActivityLog
     public string? Message { get; set; }
     public short LocationId { get; set; }
     public short DeviceId { get; set; }
+    
+    public virtual Permission? Permission { get; set; }
+    public virtual User? User { get; set; }
+    public virtual Location? Location { get; set; }
+    public virtual Device? Device { get; set; }
 }
