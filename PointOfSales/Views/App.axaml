@@ -22,6 +22,7 @@
         <Color x:Key="InvertTextColor">White</Color>
         <Color x:Key="MutedColor">Gray</Color>
         <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+        <system:Double x:Key="TxtXs">12</system:Double>
         <system:Double x:Key="TxtSm">14</system:Double>
         <system:Double x:Key="TxtMd">16</system:Double>
         <system:Double x:Key="TxtLg">22</system:Double>

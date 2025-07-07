@@ -19,7 +19,7 @@
 
             <TextBlock Text="{Binding Title}"
                        VerticalAlignment="Center"
-                       FontSize="14"
+                       FontSize="{StaticResource TxtSm}"
                        FontWeight="{Binding TitleFontWeight}"
                        Foreground="{DynamicResource TextForeground}" />
 
@@ -28,7 +28,7 @@
                     CornerRadius="12" Padding="4 0" MinWidth="20" Height="20"
                     HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding HasNotification}">
                 <TextBlock Text="{Binding NotificationCount}"
-                           FontSize="12"
+                           FontSize="{StaticResource TxtXs}"
                            FontWeight="Bold"
                            Foreground="{DynamicResource NotificationBadgeForegroundBrush}"
                            HorizontalAlignment="Center"

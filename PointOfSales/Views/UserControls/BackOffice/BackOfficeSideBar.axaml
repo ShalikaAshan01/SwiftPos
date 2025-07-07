@@ -12,14 +12,14 @@
         <StackPanel>
 
             <TextBlock Text="GENERAL"
-                       FontSize="12"
+                       FontSize="{StaticResource TxtXs}"
                        Foreground="#A0A0A0"
                        FontWeight="SemiBold"
-                       Margin="0 0 0 12"/>
+                       Margin="0 0 0 12" />
 
             <!-- General Section -->
             <StackPanel>
-                <backOffice:SideBarItem Icon="fa-solid fa-chart-line" Title="Dashboard" IsActive="True"/>
+                <backOffice:SideBarItem Icon="fa-solid fa-chart-line" Title="Dashboard" IsActive="True" />
                 <backOffice:SideBarItem Icon="fa-solid fa-palette" Title="Appearance" />
                 <backOffice:SideBarItem Icon="fa-solid fa-database" Title="Database" />
                 <backOffice:SideBarItem Icon="fa-solid fa-project-diagram" Title="Connections" />
@@ -27,13 +27,13 @@
                 <backOffice:SideBarItem Icon="fa-solid fa-bell" Title="Notifications" NotificationCount="4" />
             </StackPanel>
 
-            <Border Height="1" Background="#E5E7EB" Margin="0 16"/>
+            <Border Height="1" Background="#E5E7EB" Margin="0 16" />
 
             <TextBlock Text="SISYPHUS VENTURES"
-                       FontSize="12"
+                       FontSize="{StaticResource TxtXs}"
                        Foreground="#A0A0A0"
                        FontWeight="SemiBold"
-                       Margin="0 0 0 8"/>
+                       Margin="0 0 0 8" />
 
             <StackPanel>
                 <backOffice:SideBarItem Icon="fa-solid fa-users-cog" Title="User management" IsActive="True" />
