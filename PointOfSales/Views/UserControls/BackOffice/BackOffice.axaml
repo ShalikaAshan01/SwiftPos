@@ -9,10 +9,49 @@
         <backOffice:BackOfficeSideBar Grid.Column="0"/>
 
         <!-- Divider -->
-        <Border Grid.Column="1" Background="{DynamicResource ThemeBorderBrush}" Width="0.7"/>
+        <Border Grid.Column="1"
+                Background="{DynamicResource ThemeBorderBrush}"
+                Width="0.7"/>
 
-        <!-- Main Content -->
-        <!-- <user:UserListView Grid.Column="2"/> -->
-        <logs:ActivityLogViewer Grid.Column="2" />
+        <!-- Main Content Area -->
+        <Grid Grid.Column="2" RowDefinitions="Auto,*" Margin="12">
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="0,12,12,0"
+                        Spacing="10">
+
+                <!-- Rounded Rectangle with "U" -->
+                <Border Width="40"
+                        Height="40"
+                        Background="#888"
+                        CornerRadius="8"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                    <TextBlock Text="U"
+                               Foreground="White"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center" />
+                </Border>
+
+                <!-- User Info -->
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Admin User"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource ThemeForegroundBrush}" />
+                    <TextBlock Text="Administrator"
+                               FontSize="12"
+                               Foreground="{DynamicResource ThemeForegroundBrush}" />
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Main Content -->
+            <logs:ActivityLogViewer Grid.Row="1" />
+        </Grid>
     </Grid>
 </UserControl>
