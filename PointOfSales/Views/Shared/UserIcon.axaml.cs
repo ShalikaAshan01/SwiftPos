@@ -63,27 +63,36 @@ public partial class UserIcon : UserControl, INotifyPropertyChanged
     public string FullName
     {
         get => GetValue(FullNameProperty);
-        set
-        {
-            SetValue(FullNameProperty, value);
-            UpdateInitials();
-        }
+        set => SetValue(FullNameProperty, value);
     }
 
     public bool Randomize
     {
         get => GetValue(RandomizeProperty);
-        set
-        {
-            SetValue(RandomizeProperty, value);
-            UpdateBackground();
-        }
+        set => SetValue(RandomizeProperty, value);
     }
 
     public UserIcon()
     {
         InitializeComponent();
         DataContext = this;
+        UpdateInitials();
+        UpdateBackground();
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
+        if (change.Property == FullNameProperty)
+        {
+            UpdateInitials();
+            UpdateBackground();
+        }
+        else if (change.Property == RandomizeProperty)
+        {
+            UpdateBackground();
+        }
     }
 
     private void UpdateInitials()
@@ -104,7 +113,6 @@ public partial class UserIcon : UserControl, INotifyPropertyChanged
         }
 
         Initials = sb.ToString();
-        UpdateBackground(); // Refresh background when name changes
     }
 
     private void UpdateBackground()

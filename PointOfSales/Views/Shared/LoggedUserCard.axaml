@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:shared="clr-namespace:PointOfSales.Views.Shared"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="PointOfSales.Views.Shared.LoggedUserCard">
+             x:Class="PointOfSales.Views.Shared.LoggedUserCard"
+             x:DataType="shared:LoggedUserCard"
+             >
     <StackPanel Orientation="Horizontal"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
@@ -12,15 +14,15 @@
                 Spacing="10">
 
         <!-- Icon -->
-        <shared:UserIcon FullName="Admin User" Height="40" Width="40" Randomize="True"/>
+        <shared:UserIcon x:Name="UserIconControl" FullName="{Binding FullName}" Height="40" Width="40" Randomize="True"/>
 
         <!-- User Info -->
         <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="Admin User"
+            <TextBlock Text="{Binding FullName}"
                        FontSize="{StaticResource TxtSm}"
                        FontWeight="Bold"
                        Foreground="{DynamicResource ThemeForegroundBrush}" />
-            <TextBlock Text="Administrator"
+            <TextBlock Text="{Binding Location}"
                        FontSize="{StaticResource TxtXs}"
                        Foreground="{DynamicResource ThemeForegroundBrush}" />
         </StackPanel>
