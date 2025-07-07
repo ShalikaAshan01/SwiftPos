@@ -21,41 +21,41 @@
         <Color x:Key="PrimaryColorForeground">White</Color>
         <Color x:Key="InvertTextColor">White</Color>
         <Color x:Key="MutedColor">Gray</Color>
-        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
         <system:Double x:Key="TxtSm">14</system:Double>
         <system:Double x:Key="TxtMd">16</system:Double>
         <system:Double x:Key="TxtLg">22</system:Double>
         <CornerRadius x:Key="BorderRadius">8</CornerRadius>
-        
+
         <ControlTheme x:Key="TitleTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="{StaticResource TxtLg}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="{StaticResource TxtLg}" />
+            <Setter Property="FontWeight" Value="Bold" />
         </ControlTheme>
-        
+
         <ControlTheme x:Key="SubtitleTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="{StaticResource TxtMd}"/>
+            <Setter Property="FontSize" Value="{StaticResource TxtMd}" />
             <Setter Property="Foreground" Value="{StaticResource MutedColor}"></Setter>
         </ControlTheme>
-        
+
         <ControlTheme x:Key="SubtitleTextStyleS1" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="{StaticResource TxtSm}"/>
+            <Setter Property="FontSize" Value="{StaticResource TxtSm}" />
             <Setter Property="Foreground" Value="{StaticResource MutedColor}"></Setter>
         </ControlTheme>
         <ControlTheme x:Key="BodyTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="{StaticResource TxtMd}"/>
+            <Setter Property="FontSize" Value="{StaticResource TxtMd}" />
         </ControlTheme>
         <ControlTheme x:Key="BodyTextStyle2" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="{StaticResource TxtLg}"/>
+            <Setter Property="FontSize" Value="{StaticResource TxtLg}" />
         </ControlTheme>
 
         <ControlTheme x:Key="ErrorTextStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource SystemErrorTextColor}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,4,0,0"/>
+            <Setter Property="Foreground" Value="{StaticResource SystemErrorTextColor}" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,4,0,0" />
         </ControlTheme>
         <ControlTheme x:Key="OnboardingButtonStyle" TargetType="Button">
             <Setter Property="MinWidth" Value="120" />
@@ -73,10 +73,17 @@
         <DropShadowEffect x:Key="DefaultShadow"
                           BlurRadius="12"
                           Color="#20000000" />
+        <Color x:Key="BorderLightColor">#D1D5DB</Color> <!-- Light gray -->
+        <SolidColorBrush x:Key="ThemeBorderBrush" Color="{DynamicResource BorderLightColor}" />
+
+        <!-- Dark theme border color -->
+        <Color x:Key="BorderDarkColor">#4B5563</Color> <!-- Dark gray -->
+        <SolidColorBrush x:Key="ThemeBorderBrushDark" Color="{DynamicResource BorderDarkColor}" />
+
     </Application.Resources>
     <Application.Styles>
         <FluentTheme />
-        
+
         <Style Selector="Button">
             <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
             <Setter Property="Foreground" Value="{StaticResource PrimaryColorForeground}" />
@@ -88,25 +95,25 @@
             <Setter Property="Cursor">Hand</Setter>
         </Style>
         <Style Selector="Button:pressed /template/ ContentPresenter">
-            <Setter Property="Background" Value="{StaticResource PrimaryColorPressed}"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryColorPressed}" />
         </Style>
 
         <Style Selector="Button:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="{StaticResource PrimaryColorHover}"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryColorHover}" />
         </Style>
 
-        
+
         <Style Selector="TextBox">
-            <Setter Property="FontSize" Value="{StaticResource TxtMd}"/>
+            <Setter Property="FontSize" Value="{StaticResource TxtMd}" />
             <Setter Property="CornerRadius" Value="{StaticResource BorderRadius}" />
-            <Setter Property="Padding" Value="10 15"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="keyBehaviors:EnterToMoveFocusBehavior.IsEnabled" Value="True"/>
+            <Setter Property="Padding" Value="10 15" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="keyBehaviors:EnterToMoveFocusBehavior.IsEnabled" Value="True" />
             <Setter Property="keyBehaviors:VirtualKeyboardHelper.IsEnabled" Value="True" />
 
         </Style>
         <Style Selector="TextBox:pointerover /template/ Border">
-            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColorHover}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColorHover}" />
         </Style>
 
 

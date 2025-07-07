@@ -8,7 +8,7 @@
              d:DesignHeight="720"
              x:Class="PointOfSales.Views.UserControls.BackOffice.BackOfficeSideBar">
 
-    <Border Background="#FAFAFA" Padding="16">
+    <Border Background="{DynamicResource ThemeBackgroundBrush}" Padding="16">
         <StackPanel>
 
             <TextBlock Text="GENERAL"

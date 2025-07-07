@@ -2,7 +2,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 
 namespace PointOfSales.Views.UserControls.BackOffice;
@@ -55,25 +54,31 @@ public partial class SideBarItem : UserControl, INotifyPropertyChanged
             OnPropertyChanged(nameof(BackgroundBrush));
             OnPropertyChanged(nameof(IconForeground));
             OnPropertyChanged(nameof(TextForeground));
+            OnPropertyChanged(nameof(NotificationBadgeBackgroundBrush));
+            OnPropertyChanged(nameof(NotificationBadgeForegroundBrush));
         }
     }
 
-    // Helper properties for UI binding
     public bool HasNotification => NotificationCount > 0;
 
     public FontWeight TitleFontWeight => IsActive ? FontWeight.Bold : FontWeight.Normal;
 
-    public IBrush BackgroundBrush => IsActive
-        ? new SolidColorBrush(Color.Parse("#e5e5e5")) // light gray background for active (you can adjust if needed)
-        : Brushes.Transparent;
+    // Return resource keys for DynamicResource in XAML
+    public string BackgroundBrush => IsActive
+        ? "ThemeControlLowBrush"   // Light gray card background in FluentTheme
+        : "Transparent";
 
-    public IBrush IconForeground => IsActive
-        ? new SolidColorBrush(Color.Parse("#5c5c5c")) // darker gray for active
-        : new SolidColorBrush(Color.Parse("#c6c6c6")); // lighter gray for inactive
+    public string IconForeground => IsActive
+        ? "ThemeForegroundBrush"   // Use main foreground color when active
+        : "ThemeForegroundLowBrush"; // Use dimmer foreground color when inactive
 
-    public IBrush TextForeground => IsActive
-        ? new SolidColorBrush(Color.Parse("#5c5c5c")) // darker gray for active
-        : new SolidColorBrush(Color.Parse("#c6c6c6")); //
+    public string TextForeground => IsActive
+        ? "ThemeForegroundBrush"
+        : "ThemeForegroundLowBrush";
+
+    public string NotificationBadgeBackgroundBrush => "ThemeAccentBrush"; // Accent color
+
+    public string NotificationBadgeForegroundBrush => "SystemBaseHighColorBrush"; // Usually white in Fluent
 
     public SideBarItem()
     {

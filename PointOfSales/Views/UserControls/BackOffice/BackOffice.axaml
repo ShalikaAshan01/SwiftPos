@@ -5,11 +5,15 @@
              xmlns:logs="clr-namespace:PointOfSales.Views.UserControls.BackOffice.Logs"
              x:Class="PointOfSales.Views.UserControls.BackOffice.BackOffice">
 
-  <Grid ColumnDefinitions="250,*">
-    <!-- Sidebar -->
-    <backOffice:BackOfficeSideBar/>
-    <!-- Main Content -->
-    <!-- <user:UserListView Grid.Column="1"/> -->
-    <logs:ActivityLogViewer Grid.Column="1" />
-  </Grid>
+    <Grid Background="{DynamicResource ThemeBackgroundBrush}" ColumnDefinitions="250,2,*">
+        <!-- Sidebar -->
+        <backOffice:BackOfficeSideBar Grid.Column="0"/>
+
+        <!-- Divider -->
+        <Border Grid.Column="1" Background="{DynamicResource ThemeBorderBrush}" Width="0.7"/>
+
+        <!-- Main Content -->
+        <!-- <user:UserListView Grid.Column="2"/> -->
+        <logs:ActivityLogViewer Grid.Column="2" />
+    </Grid>
 </UserControl>
