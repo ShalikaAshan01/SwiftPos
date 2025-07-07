@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PointOfSales.Views.Shared.LoggedUserCard">
+    <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,0,10,0"
+                Spacing="10">
+
+        <!-- Icon -->
+        <Border Width="40"
+                Height="40"
+                Background="#888"
+                CornerRadius="8"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+            <TextBlock Text="U"
+                       Foreground="White"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" />
+        </Border>
+
+        <!-- User Info -->
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="Admin User"
+                       FontSize="{StaticResource TxtSm}"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource ThemeForegroundBrush}" />
+            <TextBlock Text="Administrator"
+                       FontSize="{StaticResource TxtXs}"
+                       Foreground="{DynamicResource ThemeForegroundBrush}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

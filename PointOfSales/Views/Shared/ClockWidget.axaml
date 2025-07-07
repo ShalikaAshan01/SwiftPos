@@ -1,23 +1,24 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="PointOfSales.Views.Shared.ClockWidget"
-             Width="250" Height="90">
+             >
 
-    <Border Background="#1E1E1E"
+    <Border Background="{DynamicResource ThemeControlLowBrush}"
             CornerRadius="12"
             Padding="12"
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
-            Width="240"
             Margin="8">
+
         <StackPanel Spacing="4" VerticalAlignment="Center">
             <TextBlock x:Name="TimeText"
-                       Theme="{StaticResource TitleTextStyle}"
-                       Foreground="{StaticResource InvertTextColor}"
-                       />
+                       FontSize="{StaticResource TxtLg}"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource ThemeForegroundBrush}" />
+
             <TextBlock x:Name="DateText"
-                       Theme="{StaticResource SubtitleTextStyleS1}"
-                       />
+                       FontSize="{StaticResource TxtSm}"
+                       Foreground="{DynamicResource ThemeForegroundBrush}" />
         </StackPanel>
     </Border>
 </UserControl>

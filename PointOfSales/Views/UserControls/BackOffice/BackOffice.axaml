@@ -2,56 +2,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:backOffice="clr-namespace:PointOfSales.Views.UserControls.BackOffice"
              xmlns:logs="clr-namespace:PointOfSales.Views.UserControls.BackOffice.Logs"
+             xmlns:shared="clr-namespace:PointOfSales.Views.Shared"
              x:Class="PointOfSales.Views.UserControls.BackOffice.BackOffice">
 
-    <Grid Background="{DynamicResource ThemeBackgroundBrush}" ColumnDefinitions="250,2,*">
+    <Grid Background="{DynamicResource ThemeBackgroundBrush}"
+          ColumnDefinitions="250,2,*">
+
         <!-- Sidebar -->
-        <backOffice:BackOfficeSideBar Grid.Column="0"/>
+        <backOffice:BackOfficeSideBar Grid.Column="0" />
 
         <!-- Divider -->
         <Border Grid.Column="1"
                 Background="{DynamicResource ThemeBorderBrush}"
-                Width="0.7"/>
+                Width="0.7" />
 
-        <!-- Main Content Area -->
-        <Grid Grid.Column="2" RowDefinitions="Auto,*" Margin="12">
+        <Grid Grid.Column="2"
+              Margin="2"
+              RowDefinitions="Auto,Auto,*">
 
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Margin="0,12,12,0"
-                        Spacing="10">
+            <!-- Top Bar -->
+            <Grid Grid.Row="0"
+                  ColumnDefinitions="*,Auto"
+                  Margin="0,0,0,0">
 
-                <!-- Rounded Rectangle with "U" -->
-                <Border Width="40"
-                        Height="40"
-                        Background="#888"
-                        CornerRadius="8"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                    <TextBlock Text="U"
-                               Foreground="White"
-                               FontSize="18"
-                               FontWeight="Bold"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               TextAlignment="Center" />
-                </Border>
+                <!-- Clock (Left-Aligned) -->
+                <shared:ClockWidget HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" />
+                <shared:LoggedUserCard Grid.Column="1" HorizontalAlignment="Right"
+                                       VerticalAlignment="Center" />
+            </Grid>
 
-                <!-- User Info -->
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Admin User"
-                               FontSize="14"
-                               FontWeight="Bold"
-                               Foreground="{DynamicResource ThemeForegroundBrush}" />
-                    <TextBlock Text="Administrator"
-                               FontSize="12"
-                               Foreground="{DynamicResource ThemeForegroundBrush}" />
-                </StackPanel>
-            </StackPanel>
+            <!-- Divider line below the top bar -->
+            <Border Grid.Row="1"
+                    Height="1"
+                    Background="{DynamicResource ThemeBorderBrush}"
+                    Margin="0,8,0,2" />
 
             <!-- Main Content -->
-            <logs:ActivityLogViewer Grid.Row="1" />
+            <logs:ActivityLogViewer Grid.Row="2" />
         </Grid>
+
+
     </Grid>
 </UserControl>

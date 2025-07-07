@@ -9,6 +9,7 @@
         <entry key="Views/Shared/ClockWidget.axaml" value="PointOfSales.csproj" />
         <entry key="Views/Shared/CompancyLogo.axaml" value="PointOfSales.csproj" />
         <entry key="Views/Shared/CompanyLogo.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/Shared/LoggedUserCard.axaml" value="PointOfSales.csproj" />
         <entry key="Views/Shared/Login.axaml" value="PointOfSales.csproj" />
         <entry key="Views/Shared/LoginPopUp.axaml" value="PointOfSales.csproj" />
         <entry key="Views/Shared/Logo.axaml" value="PointOfSales.csproj" />
