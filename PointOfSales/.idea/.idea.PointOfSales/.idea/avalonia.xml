@@ -19,6 +19,11 @@
         <entry key="Views/Shared/VirtualKeyboard.axaml" value="PointOfSales.csproj" />
         <entry key="Views/SplashScreen.axaml" value="PointOfSales.csproj" />
         <entry key="Views/UserControls/BackOffice/BackOffice.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/UserControls/BackOffice/BackOfficeSideBar.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/UserControls/BackOffice/BackOfficeSideBase.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/UserControls/BackOffice/Logs/LogViewer.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/UserControls/BackOffice/SideBarItem.axaml" value="PointOfSales.csproj" />
+        <entry key="Views/UserControls/BackOffice/User/UserListView.axaml" value="PointOfSales.csproj" />
         <entry key="Views/UserControls/Onboarding.axaml" value="PointOfSales.csproj" />
       </map>
     </option>

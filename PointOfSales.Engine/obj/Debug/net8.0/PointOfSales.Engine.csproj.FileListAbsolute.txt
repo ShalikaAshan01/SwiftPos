@@ -23,6 +23,7 @@ C:/Users/shali/source/repos/PointOfSales/PointOfSales.Engine/obj/Debug/net8.0/Po
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/bin/Debug/net8.0/PointOfSales.Common.pdb
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/bin/Debug/net8.0/PointOfSales.Core.pdb
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/PointOfSales.Engine.csproj.AssemblyReference.cache
+/Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/PointOfSales.Engine.GeneratedMSBuildEditorConfig.editorconfig
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/PointOfSales.Engine.AssemblyInfoInputs.cache
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/PointOfSales.Engine.AssemblyInfo.cs
@@ -33,4 +34,3 @@ C:/Users/shali/source/repos/PointOfSales/PointOfSales.Engine/obj/Debug/net8.0/Po
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/refint/PointOfSales.Engine.dll
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/PointOfSales.Engine.pdb
 /Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/ref/PointOfSales.Engine.dll
-/Users/shalika/RiderProjects/SwiftPos/PointOfSales.Engine/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache

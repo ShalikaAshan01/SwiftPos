@@ -1,6 +1,9 @@
 ﻿using Avalonia;
 using PointOfSales.Views;
 using System;
+using Projektanker.Icons.Avalonia;
+using Projektanker.Icons.Avalonia.FontAwesome;
+using Projektanker.Icons.Avalonia.MaterialDesign;
 
 namespace PointOfSales
 {
@@ -14,10 +17,22 @@ namespace PointOfSales
             .StartWithClassicDesktopLifetime(args);
 
         // Avalonia configuration, don't remove; also used by visual designer.
+        // public static AppBuilder BuildAvaloniaApp()
+        //     => AppBuilder.Configure<App>()
+        //         .UsePlatformDetect()
+        //         .WithInterFont()
+        //         .LogToTrace();
+        
         public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
+        {
+            IconProvider.Current
+                .Register<FontAwesomeIconProvider>()
+                .Register<MaterialDesignIconProvider>();
+
+            return AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .WithInterFont()
                 .LogToTrace();
+        }
     }
 }

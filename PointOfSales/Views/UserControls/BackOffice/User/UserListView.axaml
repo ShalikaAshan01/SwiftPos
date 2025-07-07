@@ -1,0 +1,75 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:PointOfSales.Views.Shared"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PointOfSales.Views.UserControls.BackOffice.User.UserListView">
+    <ScrollViewer Background="White">
+      <StackPanel >
+        <!-- Topbar -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <!-- <Image Source="avares://YourApp/Assets/logo.png" Width="32" Height="32" Margin="0,0,10,0"/> -->
+            <TextBlock Text="Florence Shaw" VerticalAlignment="Center" FontWeight="Bold"/>
+          </StackPanel>
+        </StackPanel>
+
+        <!-- Header -->
+        <TextBlock Text="User management" FontSize="24" FontWeight="Bold" Margin="0,20,0,4"/>
+        <TextBlock Text="Manage your team members and their account permissions here."
+                   FontSize="14" Foreground="Gray" Margin="0,0,0,20"/>
+
+        <!-- Search + Filter -->
+        <DockPanel Margin="0,0,0,10">
+          <TextBox Watermark="Search" Width="250" />
+          <Button Content="Filters" Margin="10,0"/>
+          <Button Content="+ Add user" HorizontalAlignment="Right" Background="Black" Foreground="White"/>
+        </DockPanel>
+
+        <!-- Table Header -->
+        <Grid ColumnDefinitions="40,*,200,150,150" Margin="0,10">
+          <CheckBox Grid.Column="0"/>
+          <TextBlock Grid.Column="1" Text="User name" FontWeight="Bold"/>
+          <TextBlock Grid.Column="2" Text="Access" FontWeight="Bold"/>
+          <TextBlock Grid.Column="3" Text="Last active" FontWeight="Bold"/>
+          <TextBlock Grid.Column="4" Text="Date added" FontWeight="Bold"/>
+        </Grid>
+
+        <!-- User Row -->
+        <Grid ColumnDefinitions="40,*,200,150,150" Margin="0,10">
+          <CheckBox Grid.Column="0"/>
+          <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <shared:Logo Width="40"/>
+            <StackPanel>
+              <TextBlock Text="Florence Shaw" FontWeight="Bold"/>
+              <TextBlock Text="florence@untitledui.com" FontSize="12" Foreground="Gray"/>
+            </StackPanel>
+          </StackPanel>
+          <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="4">
+            <Border Background="#00C49A" CornerRadius="4" Padding="6,2">
+              <TextBlock Text="Admin" Foreground="White" FontSize="12"/>
+            </Border>
+            <Border Background="#6A5ACD" CornerRadius="4" Padding="6,2">
+              <TextBlock Text="Data Export" Foreground="White" FontSize="12"/>
+            </Border>
+            <Border Background="#A64AC9" CornerRadius="4" Padding="6,2">
+              <TextBlock Text="Data Import" Foreground="White" FontSize="12"/>
+            </Border>
+          </StackPanel>
+          <TextBlock Grid.Column="3" Text="Mar 4, 2024" VerticalAlignment="Center"/>
+          <TextBlock Grid.Column="4" Text="July 4, 2022" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Pagination -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
+          <Button Content="1" Margin="2"/>
+          <Button Content="2" Margin="2"/>
+          <Button Content="3" Margin="2"/>
+          <Button Content="4" Margin="2"/>
+          <Button Content="5" Margin="2"/>
+          <Button Content="6" Margin="2"/>
+        </StackPanel>
+      </StackPanel>
+    </ScrollViewer>
+</UserControl>

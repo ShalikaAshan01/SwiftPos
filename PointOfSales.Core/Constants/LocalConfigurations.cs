@@ -13,6 +13,6 @@
         public static int SplashScreenWidth = 600;
         public static int SplashScreenHeight = 800;
         public static int MainScreenWidth = 1024;
-        public static int MainScreenHeight = 768;
+        public static int MainScreenHeight = 720;
     }
 }

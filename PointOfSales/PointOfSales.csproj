@@ -9,24 +9,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.2.7" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.2.7" />
-    <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.2.7" />
-    <PackageReference Include="Avalonia.Svg.Skia" Version="11.2.7.1" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.7" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.7" />
+    <PackageReference Include="Avalonia" Version="11.3.2" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.2" />
+    <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.3.2" />
+    <PackageReference Include="Avalonia.Svg.Skia" Version="11.3.0" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.2" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.2" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Include="Avalonia.Diagnostics" Version="11.2.7">
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.3.2">
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.2.7" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.3.0.6" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="DeviceId" Version="6.9.0" />
     <PackageReference Include="DeviceId.Linux" Version="6.9.0" />
     <PackageReference Include="DeviceId.Mac" Version="6.9.0" />
     <PackageReference Include="DeviceId.Windows.Wmi" Version="6.9.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0-preview.5.25277.114" />
+    <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="9.6.2" />
+    <PackageReference Include="Projektanker.Icons.Avalonia.MaterialDesign" Version="9.6.2" />
   </ItemGroup>
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />
