@@ -39,7 +39,14 @@
                     Margin="0,8,0,2" />
 
             <!-- Main Content -->
-            <logs:ActivityLogViewer Grid.Row="2" />
+            <StackPanel Grid.Row="2" Spacing="16" Margin="16">
+                <TextBlock Text="Activity Logs"
+                           FontSize="{DynamicResource TxtMd2}"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+                <logs:ActivityLogViewer />
+
+            </StackPanel>
         </Grid>
 
 

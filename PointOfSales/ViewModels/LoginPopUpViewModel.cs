@@ -25,6 +25,10 @@ namespace PointOfSales.ViewModels
         {
             VirtualKeyboardHelper.SubmitTriggered += OnKeyboardSubmit;
             LoginCommand = new AsyncRelayCommand(Login);
+#if DEBUG
+            Username = "admin";
+            Password = "Admin";
+#endif
         }
 
         public string Username
@@ -85,6 +89,7 @@ namespace PointOfSales.ViewModels
                 {
                     throw new SwiftException(ApplicationErrors.CompanyIdNull);
                 }
+
                 var company = await infrastructureEngine.GetCompanyById(location.CompanyId.Value);
                 if (company == null || company.IsDeleted)
                 {
@@ -111,7 +116,7 @@ namespace PointOfSales.ViewModels
                 {
                     throw new SwiftException(ApplicationErrors.PermissionDenied);
                 }
-                
+
                 var activityLog = new ActivityLog
                 {
                     PermissionId = permission,
@@ -126,7 +131,7 @@ namespace PointOfSales.ViewModels
                 device.LastActiveTime = DateTime.UtcNow;
 
                 await GetEngine<IUnitOfWork>().SaveChangesAsync();
-                GlobalAuthenticator.Authenticate(user,permissions, company, location, device);
+                GlobalAuthenticator.Authenticate(user, permissions, company, location, device);
             }
             catch (Exception e)
             {
