@@ -1,0 +1,74 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:"
+             x:Class="PointOfSales.Views.UserControls.BackOffice.Logs.LogViewer"
+             x:DataType="vm:LogViewerViewModel"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="600">
+
+    <Grid Background="{DynamicResource SystemBackground}">
+        <DockPanel LastChildFill="True">
+
+            <!-- Top filter/search bar -->
+            <StackPanel Orientation="Horizontal"
+                        Spacing="8"
+                        DockPanel.Dock="Top">
+                <TextBox Width="300"
+                         Watermark="Search logs..."
+                         Text="{Binding FilterText, Mode=TwoWay}" />
+                <Button Content="Reload"
+                        Command="{Binding ReloadCommand}" />
+            </StackPanel>
+
+            <!-- Main content -->
+            <Grid Margin="0,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Loading logs..."
+                           FontStyle="Italic"
+                           FontSize="{StaticResource TxtXs}"
+                           Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                           HorizontalAlignment="Center"
+                           IsVisible="{Binding IsLoading}" />
+
+                <ScrollViewer Grid.Row="1"
+                              x:Name="LogScrollViewer"
+                              VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding FilteredLogs}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:LogEntry">
+                                <Border
+                                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                                    BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{StaticResource CardBorderRadius}"
+                                    Padding="{StaticResource CardPadding}"
+                                    Margin="{StaticResource CardMargin}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Timestamp}"
+                                                   FontSize="{StaticResource TxtXs}"
+                                                   Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+                                        <TextBlock Text="{Binding Level}"
+                                                   FontWeight="Bold"
+                                                   FontSize="{StaticResource TxtSm}"
+                                                   Foreground="{Binding LevelColor}" />
+                                        <TextBlock Text="{Binding Message}"
+                                                   FontSize="{StaticResource TxtSm}"
+                                                   Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                                                   TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

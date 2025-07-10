@@ -1,0 +1,76 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:security="clr-namespace:PointOfSales.Core.Entities.Security;assembly=PointOfSales.Core"
+    xmlns:viewModels="clr-namespace:PointOfSales.ViewModels"
+    xmlns:converters="clr-namespace:PointOfSales.Utils.Converters"
+    x:Class="PointOfSales.Views.UserControls.BackOffice.Logs.ActivityLogViewer"
+    x:DataType="viewModels:ActivityLogViewerViewModel">
+
+    <UserControl.Resources>
+        <converters:BoolToRgBrushConverter x:Key="BoolToRgBrushConverter" />
+    </UserControl.Resources>
+
+    <Grid Background="{DynamicResource SystemBackground}">
+        <ScrollViewer>
+            <ItemsControl ItemsSource="{Binding Logs}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="security:ActivityLog">
+                        <Border
+                            Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{StaticResource CardBorderRadius}"
+                            Padding="{StaticResource CardPadding}"
+                            Margin="{StaticResource CardMargin}">
+
+                            <Grid ColumnDefinitions="Auto,*"
+                                  RowDefinitions="Auto,Auto"
+                                  ColumnSpacing="12"
+                                  RowSpacing="6">
+
+                                <!-- Status Dot -->
+                                <Ellipse Grid.Row="0" Width="{StaticResource TxtXs}"
+                                         Height="{StaticResource TxtXs}"
+                                         VerticalAlignment="Top"
+                                         Fill="{Binding IsSuccess, Converter={StaticResource BoolToRgBrushConverter}}" />
+
+                                <!-- Header -->
+                                <StackPanel Grid.Row="0" Grid.Column="1">
+                                    <TextBlock Text="{Binding AccessedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}'}"
+                                               FontSize="{StaticResource TxtXs}"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+                                    <TextBlock Text="{Binding Message}"
+                                               FontSize="{StaticResource TxtSm}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                                               TextWrapping="Wrap" />
+                                </StackPanel>
+
+                                <!-- Metadata -->
+                                <StackPanel Grid.Column="0" Grid.ColumnSpan="2"
+                                            Grid.Row="1"
+                                            Orientation="Horizontal"
+                                            Spacing="12"
+                                            Margin="0,4,0,0">
+                                    <TextBlock Text="{Binding PermissionId, StringFormat='Permission: {0}'}"
+                                               FontSize="{StaticResource TxtXs}"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+                                    <TextBlock Text="{Binding UserId, StringFormat='User: {0}'}"
+                                               FontSize="{StaticResource TxtXs}"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+                                    <TextBlock Text="{Binding LocationId, StringFormat='Location: {0}'}"
+                                               FontSize="{StaticResource TxtXs}"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+                                    <TextBlock Text="{Binding DeviceId, StringFormat='Device: {0}'}"
+                                               FontSize="{StaticResource TxtXs}"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
