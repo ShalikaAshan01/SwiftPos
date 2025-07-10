@@ -17,19 +17,19 @@
                            Foreground="{StaticResource InvertTextColor}"
                            Theme="{StaticResource SubtitleTextStyleS1}"
                            Margin="0,0,0,6" />
-                <TextBlock 
-                           Name="LocationCodeBlock"
-                           FontWeight="Bold"
-                           Foreground="{StaticResource PrimaryColor}"
-                           Theme="{StaticResource SubtitleTextStyleS1}"
-                           />
+                <TextBlock
+                    Name="LocationCodeBlock"
+                    FontWeight="Bold"
+                    Foreground="{StaticResource PrimaryColor}"
+                    Theme="{StaticResource SubtitleTextStyleS1}" />
             </StackPanel>
 
             <!-- Connectivity Status Items - horizontal StackPanel -->
             <StackPanel Orientation="Horizontal" Spacing="16">
                 <!-- Local DB -->
                 <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                    <Ellipse x:Name="ConnectivityEllipse" Width="12" Height="12" Fill="LimeGreen" VerticalAlignment="Center" />
+                    <Ellipse x:Name="ConnectivityEllipse" Width="{StaticResource TxtXs}"
+                             Height="{StaticResource TxtXs}" Fill="LimeGreen" VerticalAlignment="Center" />
                     <TextBlock x:Name="ConnectivityTextBlock"
                                Foreground="{StaticResource InvertTextColor}"
                                Theme="{StaticResource SubtitleTextStyleS1}"
