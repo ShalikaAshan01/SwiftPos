@@ -21,8 +21,8 @@
                                 <!-- Section Title -->
                                 <TextBlock Text="{Binding Key}"
                                            FontSize="{StaticResource TxtXs}"
-                                           FontWeight="SemiBold"
-                                           Foreground="#A0A0A0"
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
                                            Margin="0,12,0,12" />
 
                                 <!-- Section Items -->
@@ -44,7 +44,8 @@
                                                                VerticalAlignment="Center"
                                                                FontSize="{StaticResource TxtSm}"
                                                                FontWeight="{Binding TitleFontWeight}"
-                                                               Foreground="{DynamicResource TextForeground}" />
+                                                               Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                                                               />
 
                                                     <!-- Notification Badge -->
                                                     <Border
