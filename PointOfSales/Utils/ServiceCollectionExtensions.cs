@@ -3,7 +3,6 @@ using PointOfSales.Core.Data;
 using PointOfSales.Core.IEngines;
 using PointOfSales.Core.Utils;
 using PointOfSales.Engine;
-using PointOfSales.ViewModels;
 
 namespace PointOfSales.Utils
 {

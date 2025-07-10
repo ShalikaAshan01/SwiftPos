@@ -1,7 +1,5 @@
 using System;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using PointOfSales.Core.Constants;
 
 namespace PointOfSales.Views.Shared;

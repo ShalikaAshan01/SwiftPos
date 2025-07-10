@@ -13,7 +13,6 @@ using PointOfSales.Core.Entities.Security;
 using PointOfSales.Core.IEngines;
 using PointOfSales.Core.Utils;
 using PointOfSales.Engine.Utils;
-using PointOfSales.Utils;
 
 namespace PointOfSales
 {

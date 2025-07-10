@@ -1,12 +1,6 @@
-using System;
-using System.ComponentModel;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using Microsoft.Extensions.DependencyInjection;
-using PointOfSales.KeyBehaviors;
-using PointOfSales.Utils;
 using PointOfSales.ViewModels;
 
 namespace PointOfSales.Views.Shared;

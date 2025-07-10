@@ -1,6 +1,4 @@
 using System;
-using System.Globalization;
-using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -8,10 +6,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using PointOfSales.Core.Constants;
-using PointOfSales.Engine;
 using PointOfSales.Utils;
-using System.Threading.Tasks;
-using PointOfSales.Core.IEngines;
 using PointOfSales.Core.Utils;
 using PointOfSales.Views.UserControls;
 
@@ -19,7 +14,7 @@ namespace PointOfSales.Views
 {
     public partial class App : Application
     {
-        public static IServiceProvider ServiceProvider { get; private set; }
+        public static IServiceProvider? ServiceProvider { get; private set; }
         public static MainWindow? MainWindowInstance { get; private set; }
         public override void Initialize()
         {
