@@ -174,4 +174,31 @@
   <data name="ExitLabel" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="ErrorLabel" xml:space="preserve">
+    <value>ERROR</value>
+  </data>
+  <data name="WarningLabel" xml:space="preserve">
+    <value>WARNING</value>
+  </data>
+  <data name="InfoLabel" xml:space="preserve">
+    <value>INFO</value>
+  </data>
+  <data name="ReloadLogs" xml:space="preserve">
+    <value>Reload logs</value>
+  </data>
+  <data name="SearchLogs" xml:space="preserve">
+    <value>Search logs...</value>
+  </data>
+  <data name="ActivityLogs" xml:space="preserve">
+    <value>Activity Logs</value>
+  </data>
+  <data name="SystemLogs" xml:space="preserve">
+    <value>System Logs</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="UserManagement" xml:space="preserve">
+    <value>User management</value>
+  </data>
 </root>

@@ -18,18 +18,21 @@ public partial class BackOffice : AuthorizedUserControl
     {
         ["GENERAL"] =
         [
-            new SideBarItemModel("fa-solid fa-chart-line", "Dashboard", new UserControl()),
-            new SideBarItemModel("fa-solid fa-bell", "Notifications",new UserControl(), false, 4)
+            new SideBarItemModel("fa-solid fa-chart-line", Globalization.Resources.Translations.Dashboard,
+                new UserControl()),
+            new SideBarItemModel("fa-solid fa-bell", "Notifications", new UserControl(), false, 4)
         ],
         ["SISYPHUS VENTURES"] =
         [
-            new SideBarItemModel("fa-solid fa-users-cog", "User management", new UserControl(),true),
+            new SideBarItemModel("fa-solid fa-users-cog", Globalization.Resources.Translations.UserManagement,
+                new UserControl(), true),
         ],
         ["System"] = new List<SideBarItemModel>() // Footer
         {
-            new("fa-solid fa-cog", "Settings",new UserControl()),
-            new("fa-solid fa-clipboard-list", "Activity Logs",new ActivityLogViewer()),
-            new("fa-solid fa-bug", "System Logs",new LogViewer()),
+            new("fa-solid fa-cog", "Settings", new UserControl()),
+            new("fa-solid fa-clipboard-list", Globalization.Resources.Translations.ActivityLogs,
+                new ActivityLogViewer()),
+            new("fa-solid fa-bug", Globalization.Resources.Translations.SystemLogs, new LogViewer()),
         }
     };
 

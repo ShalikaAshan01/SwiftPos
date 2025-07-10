@@ -7,6 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:PointOfSales.ViewModels"
              xmlns:avalonia="https://github.com/projektanker/icons.avalonia"
+             xmlns:lang="clr-namespace:PointOfSales.Globalization.Resources;assembly=PointOfSales.Globalization"
              mc:Ignorable="d"
              d:DesignWidth="800"
              d:DesignHeight="600">
@@ -27,7 +28,7 @@
                     <!-- Search TextBox (fills remaining space) -->
                     <TextBox Grid.Column="0"
                              Height="40"
-                             Watermark="Search logs..."
+                             Watermark="{x:Static lang:Translations.SearchLogs}"
                              Text="{Binding FilterText, Mode=TwoWay}"
                              VerticalAlignment="Center"
                              VerticalContentAlignment="Center"
@@ -55,7 +56,7 @@
                             Width="40"
                             Height="40"
                             Command="{Binding ReloadCommand}"
-                            ToolTip.Tip="Reload logs"
+                            ToolTip.Tip="{x:Static lang:Translations.ReloadLogs}"
                             avalonia:Attached.Icon="fa-solid fa-rotate-right" />
                 </Grid>
             </DockPanel>
@@ -91,7 +92,7 @@
                                         <TextBlock Text="{Binding Timestamp}"
                                                    FontSize="{StaticResource TxtXs}"
                                                    Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
-                                        <TextBlock Text="{Binding Level}"
+                                        <TextBlock Text="{Binding DisplayLevel}"
                                                    FontWeight="Bold"
                                                    FontSize="{StaticResource TxtSm}"
                                                    Foreground="{Binding LevelColor}" />

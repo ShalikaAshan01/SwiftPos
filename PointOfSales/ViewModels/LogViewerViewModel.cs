@@ -10,6 +10,7 @@ using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PointOfSales.Core.Constants;
+using PointOfSales.Globalization.Resources;
 
 namespace PointOfSales.ViewModels;
 
@@ -106,7 +107,7 @@ public partial class LogViewerViewModel : ObservableObject
             ? logs
             : logs.Where(l =>
                 (l.Message.Contains(FilterText, StringComparison.OrdinalIgnoreCase)) ||
-                (l.Level.Contains(FilterText, StringComparison.OrdinalIgnoreCase)) ||
+                (l.DisplayLevel.Contains(FilterText, StringComparison.OrdinalIgnoreCase)) ||
                 (l.Timestamp.Contains(FilterText, StringComparison.OrdinalIgnoreCase)));
 
         foreach (var entry in filtered)
@@ -119,7 +120,8 @@ public partial class LogViewerViewModel : ObservableObject
 public class LogEntry
 {
     public string Timestamp { get; set; } = "";
-    public string Level { get; set; } = "";
+    public string DisplayLevel { get; set; } = "";
+    private string Level { get; set; } = "";
     public string Message { get; set; } = "";
 
     public IBrush LevelColor =>
@@ -144,12 +146,26 @@ public class LogEntry
         {
             timestamp = dt.ToString(CultureInfo.CurrentCulture);
         }
+        string englishLevel = level.ToUpper();
+        switch (level)
+        {
+            case "ERROR":
+                level = Translations.ErrorLabel;
+                break;
+            case "WARN":
+                level = Translations.WarningLabel;
+                break;
+            case "INFO":
+                level = Translations.InfoLabel;
+                break;
+        }
 
         return new LogEntry
         {
             Timestamp = timestamp,
-            Level = level,
-            Message = message
+            DisplayLevel = level,
+            Message = message,
+            Level = englishLevel
         };
     }
 }

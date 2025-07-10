@@ -53,4 +53,13 @@
     <data name="WelcomeMessage" xml:space="preserve">
         <value>Добро пожаловать в SwiftPOS™</value>
     </data>
+    <data name="InfoLabel" xml:space="preserve">
+        <value>информация</value>
+    </data>
+    <data name="WarningLabel" xml:space="preserve">
+        <value>предупреждение</value>
+    </data>
+    <data name="ErrorLabel" xml:space="preserve">
+        <value>ошибка</value>
+    </data>
 </root>

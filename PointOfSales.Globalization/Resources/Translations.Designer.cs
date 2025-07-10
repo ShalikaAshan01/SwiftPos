@@ -158,5 +158,59 @@ namespace PointOfSales.Globalization.Resources {
                 return ResourceManager.GetString("ExitLabel", resourceCulture);
             }
         }
+        
+        public static string ErrorLabel {
+            get {
+                return ResourceManager.GetString("ErrorLabel", resourceCulture);
+            }
+        }
+        
+        public static string WarningLabel {
+            get {
+                return ResourceManager.GetString("WarningLabel", resourceCulture);
+            }
+        }
+        
+        public static string InfoLabel {
+            get {
+                return ResourceManager.GetString("InfoLabel", resourceCulture);
+            }
+        }
+        
+        public static string ReloadLogs {
+            get {
+                return ResourceManager.GetString("ReloadLogs", resourceCulture);
+            }
+        }
+        
+        public static string SearchLogs {
+            get {
+                return ResourceManager.GetString("SearchLogs", resourceCulture);
+            }
+        }
+        
+        public static string ActivityLogs {
+            get {
+                return ResourceManager.GetString("ActivityLogs", resourceCulture);
+            }
+        }
+        
+        public static string SystemLogs {
+            get {
+                return ResourceManager.GetString("SystemLogs", resourceCulture);
+            }
+        }
+        
+        public static string Dashboard {
+            get {
+                return ResourceManager.GetString("Dashboard", resourceCulture);
+            }
+        }
+        
+        public static string UserManagement {
+            get {
+                return ResourceManager.GetString("UserManagement", resourceCulture);
+            }
+        }
     }
 }
