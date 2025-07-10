@@ -2,9 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:"
              x:Class="PointOfSales.Views.UserControls.BackOffice.Logs.LogViewer"
-             x:DataType="vm:LogViewerViewModel"
+             x:DataType="viewModels:LogViewerViewModel"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:PointOfSales.ViewModels"
+             xmlns:avalonia="https://github.com/projektanker/icons.avalonia"
              mc:Ignorable="d"
              d:DesignWidth="800"
              d:DesignHeight="600">
@@ -13,15 +15,50 @@
         <DockPanel LastChildFill="True">
 
             <!-- Top filter/search bar -->
-            <StackPanel Orientation="Horizontal"
-                        Spacing="8"
-                        DockPanel.Dock="Top">
-                <TextBox Width="300"
-                         Watermark="Search logs..."
-                         Text="{Binding FilterText, Mode=TwoWay}" />
-                <Button Content="Reload"
-                        Command="{Binding ReloadCommand}" />
-            </StackPanel>
+            <DockPanel
+                VerticalAlignment="Center"
+                HorizontalAlignment="Stretch"
+                DockPanel.Dock="Top">
+
+                <Grid ColumnDefinitions="*,Auto,Auto"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Stretch">
+
+                    <!-- Search TextBox (fills remaining space) -->
+                    <TextBox Grid.Column="0"
+                             Height="40"
+                             Watermark="Search logs..."
+                             Text="{Binding FilterText, Mode=TwoWay}"
+                             VerticalAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             Padding="10 0 0 0"
+                             Margin="0 0 0 4"
+                             CornerRadius="{StaticResource BorderRadius}"
+                             Background="{DynamicResource ThemeControlBackgroundBrush}"
+                             BorderBrush="{DynamicResource ThemeBorderBrush}" />
+                    <!-- Date Selector -->
+                    <ComboBox Grid.Column="1"
+                              Margin="4 0 0 4"
+                              Width="180"
+                              Height="40"
+                              Padding="8,4"
+                              CornerRadius="6"
+                              Background="{DynamicResource ThemeControlBackgroundBrush}"
+                              BorderBrush="{DynamicResource ThemeBorderBrush}"
+                              ItemsSource="{Binding AvailableDates}"
+                              SelectedItem="{Binding SelectedDate, Mode=TwoWay}" />
+
+                    <!-- Reload Icon Button -->
+                    <Button Grid.Column="2"
+                            Margin="4 0 0 4"
+                            Padding="0"
+                            Width="40"
+                            Height="40"
+                            Command="{Binding ReloadCommand}"
+                            ToolTip.Tip="Reload logs"
+                            avalonia:Attached.Icon="fa-solid fa-rotate-right" />
+                </Grid>
+            </DockPanel>
 
             <!-- Main content -->
             <Grid Margin="0,0,0,0">
@@ -42,7 +79,7 @@
                               VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding FilteredLogs}">
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate x:DataType="vm:LogEntry">
+                            <DataTemplate x:DataType="viewModels:LogEntry">
                                 <Border
                                     Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                                     BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"

@@ -1,7 +1,7 @@
-using Avalonia.Controls;
-using Avalonia.Data;
-using Avalonia.Threading;
 using System.Collections.Specialized;
+using Avalonia.Controls;
+using Avalonia.Threading;
+using PointOfSales.ViewModels;
 
 namespace PointOfSales.Views.UserControls.BackOffice.Logs
 {
@@ -12,9 +12,9 @@ namespace PointOfSales.Views.UserControls.BackOffice.Logs
             InitializeComponent();
             DataContext = new LogViewerViewModel();
 
-            this.DataContextChanged += LogViewer_DataContextChanged;
+            DataContextChanged += LogViewer_DataContextChanged;
 
-            if (this.DataContext is LogViewerViewModel vm)
+            if (DataContext is LogViewerViewModel vm)
             {
                 SubscribeToLogs(vm);
             }

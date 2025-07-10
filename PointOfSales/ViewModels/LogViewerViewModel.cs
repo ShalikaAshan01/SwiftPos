@@ -1,13 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Windows.Input;
-using Avalonia.Media;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,23 +11,25 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PointOfSales.Core.Constants;
 
+namespace PointOfSales.ViewModels;
+
 public partial class LogViewerViewModel : ObservableObject
 {
-    private const string LogFilePath = "logs/app.log";
+    [ObservableProperty] private string _filterText = string.Empty;
+    [ObservableProperty] private bool _isLoading = false;
+    [ObservableProperty] private string _selectedDate = string.Empty;
 
-    [ObservableProperty] private string filterText = string.Empty;
-
-    [ObservableProperty] private bool isLoading = false;
-
-    public ObservableCollection<LogEntry> AllLogs { get; } = new();
     public ObservableCollection<LogEntry> FilteredLogs { get; } = new();
+    public ObservableCollection<string> AvailableDates { get; } = new();
+
+    private readonly Dictionary<string, List<LogEntry>> _logsByDate = new();
 
     public ICommand ReloadCommand { get; }
 
     public LogViewerViewModel()
     {
         ReloadCommand = new AsyncRelayCommand(LoadLogsAsync);
-        _ = LoadLogsAsync(); // Initial load
+        _ = LoadLogsAsync();
     }
 
     partial void OnFilterTextChanged(string value)
@@ -41,50 +37,56 @@ public partial class LogViewerViewModel : ObservableObject
         ApplyFilter();
     }
 
+    partial void OnSelectedDateChanged(string value)
+    {
+        ApplyFilter();
+    }
+
     private async Task LoadLogsAsync()
     {
         IsLoading = true;
+        _logsByDate.Clear();
+        AvailableDates.Clear();
+        FilteredLogs.Clear();
 
-        try
+        string logsDir = Path.Combine(LocalConfigurations.LocalFolderPath, "Logs");
+
+        if (Directory.Exists(logsDir))
         {
-            AllLogs.Clear();
-
-            string logsDir = Path.Combine(LocalConfigurations.LocalFolderPath, "Logs");
-
-            if (Directory.Exists(logsDir))
+            var logFiles = Directory.GetFiles(logsDir, "*.log").OrderByDescending(x => x);
+            foreach (var file in logFiles)
             {
-                var logFiles = Directory.GetFiles(logsDir, "*.log", SearchOption.TopDirectoryOnly).Reverse();
-                foreach (var file in logFiles)
+                var lines = await File.ReadAllLinesAsync(file);
+                foreach (var line in lines)
                 {
-                    var lines = await File.ReadAllLinesAsync(file);
-                    foreach (var line in lines)
-                    {
-                        var entry = LogEntry.Parse(line);
-                        AllLogs.Add(entry);
-                    }
+                    var entry = LogEntry.Parse(line);
+                    if (!DateTime.TryParse(entry.Timestamp, out var dt)) continue;
+                    string key = dt.ToShortDateString();
+                    if (!_logsByDate.ContainsKey(key))
+                        _logsByDate[key] = new List<LogEntry>();
+
+                    _logsByDate[key].Add(entry);
                 }
+            }
+
+            foreach (var dateStr in _logsByDate.Keys
+                         .Select(s => DateTime.Parse(s, CultureInfo.CurrentCulture))
+                         .OrderByDescending(d => d))
+            {
+                AvailableDates.Add(dateStr.ToShortDateString());
+            }
+
+            // Default today if exists
+            var today = DateTime.Today.ToShortDateString();
+            if (AvailableDates.Contains(today))
+            {
+                SelectedDate = today;
             }
             else
             {
-                AllLogs.Add(new LogEntry
-                {
-                    Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    Level = "WARN",
-                    Message = $"Log directory not found: {logsDir}"
-                });
+                SelectedDate = AvailableDates.FirstOrDefault() ?? string.Empty;
             }
 
-            ApplyFilter();
-        }
-        catch (Exception ex)
-        {
-            AllLogs.Clear();
-            AllLogs.Add(new LogEntry
-            {
-                Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                Level = "ERROR",
-                Message = $"Failed to load logs: {ex.Message}"
-            });
             ApplyFilter();
         }
 
@@ -94,14 +96,18 @@ public partial class LogViewerViewModel : ObservableObject
     private void ApplyFilter()
     {
         FilteredLogs.Clear();
-        if(FilterText.Length < 3 && FilterText.Length != 0) return;
 
+        if (string.IsNullOrWhiteSpace(SelectedDate) || !_logsByDate.ContainsKey(SelectedDate))
+            return;
+
+        var logs = _logsByDate[SelectedDate];
+        logs.Reverse();
         var filtered = string.IsNullOrWhiteSpace(FilterText)
-            ? AllLogs
-            : AllLogs.Where(l =>
-                (l.Message?.Contains(FilterText, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                (l.Level?.Contains(FilterText, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                (l.Timestamp?.Contains(FilterText, StringComparison.OrdinalIgnoreCase) ?? false));
+            ? logs
+            : logs.Where(l =>
+                (l.Message.Contains(FilterText, StringComparison.OrdinalIgnoreCase)) ||
+                (l.Level.Contains(FilterText, StringComparison.OrdinalIgnoreCase)) ||
+                (l.Timestamp.Contains(FilterText, StringComparison.OrdinalIgnoreCase)));
 
         foreach (var entry in filtered)
         {
@@ -134,6 +140,10 @@ public class LogEntry
         var timestamp = parts[0].Trim('[', ']');
         var level = parts[1].Trim('[', ']');
         var message = string.Join("] ", parts.Skip(2));
+        if (DateTime.TryParse(timestamp, out var dt))
+        {
+            timestamp = dt.ToString(CultureInfo.CurrentCulture);
+        }
 
         return new LogEntry
         {

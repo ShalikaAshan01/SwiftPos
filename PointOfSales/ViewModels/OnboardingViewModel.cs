@@ -1,8 +1,4 @@
 using System;
-using System.IO;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using PointOfSales.Core.Constants;
 using PointOfSales.Core.Entities.Infrastructure;
 using PointOfSales.Core.Entities.Security;
 using PointOfSales.Engine.Utils;
