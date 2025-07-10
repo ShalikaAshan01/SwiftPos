@@ -29,6 +29,7 @@
         <system:Double x:Key="TxtMd2">20</system:Double>
         <system:Double x:Key="TxtLg">22</system:Double>
         <CornerRadius x:Key="BorderRadius">8</CornerRadius>
+        <CornerRadius x:Key="CardBorderRadius">8</CornerRadius>
 
         <ControlTheme x:Key="TitleTextStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="{StaticResource TxtLg}" />
@@ -82,6 +83,8 @@
         <!-- Dark theme border color -->
         <Color x:Key="BorderDarkColor">#4B5563</Color> <!-- Dark gray -->
         <SolidColorBrush x:Key="ThemeBorderBrushDark" Color="{DynamicResource BorderDarkColor}" />
+        <Thickness x:Key="CardPadding">16</Thickness>
+        <Thickness x:Key="CardMargin">0,4</Thickness>
 
     </Application.Resources>
     <Application.Styles>

@@ -106,16 +106,18 @@
                     Background="{DynamicResource ThemeBorderBrush}"
                     Margin="0,8,0,2" />
 
-            <!-- Main Content -->
-            <StackPanel Grid.Row="2" Spacing="16" Margin="16">
-                <TextBlock 
-                    x:Name="Title"
-                           FontSize="{DynamicResource TxtMd2}"
-                           FontWeight="Bold"
-                           Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-                <!-- <logs:ActivityLogViewer /> -->
-                <ContentControl Grid.Row="2" x:Name="MainContent" />
-            </StackPanel>
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="MainStack" Spacing="16" Margin="16">
+                    <TextBlock 
+                        x:Name="Title"
+                        FontSize="{DynamicResource TxtMd2}"
+                        FontWeight="Bold"
+                        Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+
+                    <!-- This is the dynamic view container -->
+                    <ContentControl x:Name="MainContent" />
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
 
 
