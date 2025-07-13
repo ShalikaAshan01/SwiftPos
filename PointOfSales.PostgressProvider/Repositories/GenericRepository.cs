@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using PointOfSales.Core.Entities;
 using PointOfSales.Core.IRepositories;
@@ -46,4 +47,49 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _dbSet.Update(entity);
         return Task.CompletedTask;
     }
+    public async Task<(List<T> result, int totalPages)> SearchAsync(
+        Dictionary<string, dynamic> parameters,
+        int pageNo = 1,
+        int pageSize = 10)
+    {
+        var query = _dbSet.AsQueryable();
+
+        // Apply filters from parameters
+        foreach (var parameter in parameters)
+        {
+            var propertyName = parameter.Key;
+            var value = parameter.Value;
+
+            // Create a parameter expression
+            var parameterExpression = Expression.Parameter(typeof(T), "x");
+            var property = Expression.Property(parameterExpression, propertyName);
+            var constant = Expression.Constant(value);
+        
+            // Create equality comparison
+            var equality = Expression.Equal(property, Expression.Convert(constant, property.Type));
+            var lambda = Expression.Lambda<Func<T, bool>>(equality, parameterExpression);
+
+            // Get the correct Where method
+            var whereMethod = typeof(Queryable)
+                .GetMethods()
+                .First(m => m.Name == "Where" && m.GetParameters().Length == 2)
+                .MakeGenericMethod(typeof(T));
+
+            // Apply the filter using Expression.Call
+            query = (IQueryable<T>)whereMethod.Invoke(null, new object[] { query, lambda });
+        }
+
+        // Get total count for pagination
+        var totalCount = await query.CountAsync();
+        var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+        // Apply pagination
+        var result = await query
+            .Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (result, totalPages);
+    }
+
 }

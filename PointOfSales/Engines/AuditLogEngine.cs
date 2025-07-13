@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using PointOfSales.Core.Data;
 using PointOfSales.Core.Entities.Security;
@@ -22,5 +23,10 @@ public class AuditLogEngine(IUnitOfWork unitOfWork):IAuditLogEngine
             UserId = userId
         };
         await unitOfWork.AuditLogRepository.WriteToLogAsync(activityLog);
+    }
+
+    public Task<(List<ActivityLog> results, int totalPages)> SearchLogAsync(Dictionary<string, object> filters, int page, int pageSize)
+    {
+        return unitOfWork.AuditLogRepository.SearchAsync(filters, page, pageSize);
     }
 }

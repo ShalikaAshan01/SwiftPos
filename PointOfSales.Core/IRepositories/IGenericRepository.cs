@@ -10,4 +10,6 @@ public interface IGenericRepository<T> where T : BaseEntity
     Task<List<T>> GetAllAsync();
     Task DeleteAsync(T entity);
     Task UpdateAsync(T entity);
+    
+    Task<(List<T> result, int totalPages)> SearchAsync(Dictionary<string, dynamic> parameters, int pageNo = 1, int pageSize = 10);
 }

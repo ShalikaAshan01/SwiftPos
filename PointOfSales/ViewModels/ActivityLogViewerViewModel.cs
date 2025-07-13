@@ -1,40 +1,42 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using PointOfSales.Core.Entities.Security;
+using PointOfSales.Core.IEngines;
 
 namespace PointOfSales.ViewModels;
 
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-public partial class ActivityLogViewerViewModel : ObservableObject
+public partial class ActivityLogViewerViewModel : ObservableObjectBase
 {
     public ObservableCollection<ActivityLog> Logs { get; } = new();
+    public ICommand ReloadCommand { get; }
+    [ObservableProperty] private bool _isLoading = false;
 
     public ActivityLogViewerViewModel()
     {
-        // Hardcoded sample
-        Logs.Add(new ActivityLog
-        {
-            ActivityLogId = Guid.NewGuid(),
-            UserId = 1,
-            AccessedAt = DateTime.Now,
-            IsSuccess = true,
-            Message = "User logged in successfully.",
-            PermissionId = 101,
-            LocationId = 1,
-            DeviceId = 1
-        });
+        ReloadCommand = new AsyncRelayCommand(LoadLogsAsync);
+        _ = DelayedInitialLoadAsync();
+    }
+    private async Task DelayedInitialLoadAsync()
+    {
+        await Task.Delay(100); 
+        await LoadLogsAsync();
+    }
 
-        Logs.Add(new ActivityLog
+    private async Task LoadLogsAsync()
+    {
+        var engine = GetEngine<IAuditLogEngine>();
+
+        (List<ActivityLog> res,int pages) = await engine.SearchLogAsync(new Dictionary<string, object>() { }, 1, 1000);
+        foreach (var log in res)
         {
-            ActivityLogId = Guid.NewGuid(),
-            UserId = 2,
-            AccessedAt = DateTime.Now.AddMinutes(-5),
-            IsSuccess = false,
-            Message = "Unauthorized attempt to access admin panel.",
-            PermissionId = 102,
-            LocationId = 1,
-            DeviceId = 1
-        });
+            Logs.Add(log);
+        }
     }
 }

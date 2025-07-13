@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
 using PointOfSales.Views;
 
@@ -81,5 +82,14 @@ namespace PointOfSales.ViewModels
             public void RaiseCanExecuteChanged()
                 => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    public abstract class ObservableObjectBase : ObservableObject
+    {
+        protected T GetEngine<T>() where T :class
+        {
+            return App.ServiceProvider.GetRequiredService<T>();
+        }
+
     }
 }
