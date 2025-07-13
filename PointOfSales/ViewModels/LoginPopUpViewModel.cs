@@ -116,17 +116,8 @@ namespace PointOfSales.ViewModels
                     throw new SwiftException(ApplicationErrors.PermissionDenied);
                 }
 
-                var activityLog = new ActivityLog
-                {
-                    PermissionId = permission,
-                    LocationId = Configurations.StoreId,
-                    DeviceId = Configurations.MachineId,
-                    Message = $"User {Username} attempt logged  in",
-                    AccessedAt = DateTime.UtcNow,
-                    IsSuccess = true,
-                    UserId = user.UserId
-                };
-                await GetEngine<IUnitOfWork>().AuditLogRepository.WriteToLogAsync(activityLog);
+                await GetEngine<IAuditLogEngine>()
+                    .AddLogAsync(permission, $"User {Username} attempt logged  in", user.UserId);
                 device.LastActiveTime = DateTime.UtcNow;
 
                 await GetEngine<IUnitOfWork>().SaveChangesAsync();

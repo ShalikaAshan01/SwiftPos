@@ -30,7 +30,12 @@ public partial class LogViewerViewModel : ObservableObject
     public LogViewerViewModel()
     {
         ReloadCommand = new AsyncRelayCommand(LoadLogsAsync);
-        _ = LoadLogsAsync();
+        _ = DelayedInitialLoadAsync();
+    }
+    private async Task DelayedInitialLoadAsync()
+    {
+        await Task.Delay(100); 
+        await LoadLogsAsync();
     }
 
     partial void OnFilterTextChanged(string value)

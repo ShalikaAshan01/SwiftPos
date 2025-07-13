@@ -3,6 +3,7 @@ using PointOfSales.Core.Data;
 using PointOfSales.Core.IEngines;
 using PointOfSales.Core.Utils;
 using PointOfSales.Engine;
+using PointOfSales.Engines;
 
 namespace PointOfSales.Utils
 {
@@ -20,6 +21,7 @@ namespace PointOfSales.Utils
             collection.AddTransient<ISystemInformation, SystemInformation>();
             collection.AddTransient<IInfrastructureEngine, InfrastructureEngine>();
             collection.AddTransient<IShiftEngine, ShiftEngine>();
+            collection.AddTransient<IAuditLogEngine, AuditLogEngine>();
             collection.AddSingleton<ConnectivityHelper>();
         }
     }
