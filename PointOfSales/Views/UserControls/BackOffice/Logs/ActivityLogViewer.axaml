@@ -4,6 +4,7 @@
     xmlns:security="clr-namespace:PointOfSales.Core.Entities.Security;assembly=PointOfSales.Core"
     xmlns:viewModels="clr-namespace:PointOfSales.ViewModels"
     xmlns:converters="clr-namespace:PointOfSales.Utils.Converters"
+    xmlns:avalonia="https://github.com/projektanker/icons.avalonia"
     x:Class="PointOfSales.Views.UserControls.BackOffice.Logs.ActivityLogViewer"
     x:DataType="viewModels:ActivityLogViewerViewModel">
 
@@ -12,6 +13,10 @@
     </UserControl.Resources>
 
     <Grid Background="{DynamicResource SystemBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <ScrollViewer>
             <ItemsControl ItemsSource="{Binding Logs}">
                 <ItemsControl.ItemTemplate>
@@ -72,5 +77,42 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="12"
+                    Spacing="12">
+
+            <Button Command="{Binding FirstPageCommand}"
+                    ToolTip.Tip="First Page"
+                    avalonia:Attached.Icon="fa-solid fa-angle-double-left"
+                    Classes="pagination-button" />
+
+            <Button Command="{Binding PrevPageCommand}"
+                    ToolTip.Tip="Previous Page"
+                    avalonia:Attached.Icon="fa-solid fa-angle-left"
+                    Classes="pagination-button" />
+
+            <TextBlock VerticalAlignment="Center"
+                       FontWeight="SemiBold"
+                       FontSize="14"
+                       Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}">
+                <Run Text="Page " />
+                <Run Text="{Binding CurrentPage}" />
+                <Run Text=" of " />
+                <Run Text="{Binding TotalPages}" />
+            </TextBlock>
+
+            <Button Command="{Binding NextPageCommand}"
+                    ToolTip.Tip="Next Page"
+                    avalonia:Attached.Icon="fa-solid fa-angle-right"
+                    Classes="pagination-button" />
+
+            <Button Command="{Binding LastPageCommand}"
+                    ToolTip.Tip="Last Page"
+                    avalonia:Attached.Icon="fa-solid fa-angle-double-right"
+                    Classes="pagination-button" />
+        </StackPanel>
     </Grid>
 </UserControl>

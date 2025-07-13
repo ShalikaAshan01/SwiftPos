@@ -121,6 +121,37 @@
         <Style Selector="TextBox:pointerover /template/ Border">
             <Setter Property="BorderBrush" Value="{StaticResource PrimaryColorHover}" />
         </Style>
+        <Style Selector="Button.pagination-button">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="MinWidth" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="FontSize" Value="{StaticResource TxtSm}" />
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+        </Style>
+
+        <Style Selector="Button.pagination-button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1}" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="Button.pagination-button:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorDark1}" />
+        </Style>
+
+        <Style Selector="Button.pagination-button:disabled /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseMediumLowColor}" />
+            <Setter Property="Foreground" Value="{DynamicResource SystemBaseMediumLowColor}" />
+        </Style>
 
 
     </Application.Styles>
